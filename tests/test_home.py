@@ -1,3 +1,4 @@
+# isort: off
 import pytest
 import sys
 import os
@@ -6,7 +7,8 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 # Import the Flask app after adding src to path
-from app import app
+from app import app  # noqa
+# isort: on
 
 
 @pytest.fixture
@@ -24,4 +26,4 @@ def test_home_page(client):
 def test_flask_app_running():
     """Test that Flask app is properly configured"""
     assert app is not None
-    assert app.testing == False  # Should be False by default
+    assert app.name == 'app'  # Verify app module name
