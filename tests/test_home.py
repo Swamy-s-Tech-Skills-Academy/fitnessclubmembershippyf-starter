@@ -1,4 +1,3 @@
-from app import app
 import pytest
 import sys
 import os
@@ -6,7 +5,8 @@ import os
 # Add the src directory to the Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-# Import the Flask app
+# Import the Flask app after adding src to path
+from app import app
 
 
 @pytest.fixture
