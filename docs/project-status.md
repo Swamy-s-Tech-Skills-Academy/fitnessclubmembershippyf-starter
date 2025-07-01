@@ -93,7 +93,7 @@ fitness-club-membership/
 
 - ✅ **PRE-SPRINT COMPLETE** - Environment and basic Flask app ready
 - ✅ **Virtual Environment** - Python 3.12.5 with 25 packages installed
-- ✅ **Basic Flask App** - Running successfully on http://127.0.0.1:5000
+- ✅ **Basic Flask App** - Running successfully on <http://127.0.0.1:5000>
 - ✅ **Tests Passing** - 2/2 validation tests passing (100% success rate)
 - 🚀 **Ready for Sprint 1** - Backend development (models, routes, database)
 
@@ -147,7 +147,29 @@ fitness-club-membership/
 4. ⏳ Sprint 3 integration (validation, export, polish)
 5. ⏳ Testing and validation
 
-## 🎯 **Next Steps Before Sprint 1**
+## ✅ **COMPLETED TASKS**
+
+### 📋 **Pre-Sprint Verification Workflow**
+
+The verification process has been refined and includes:
+
+1. **Environment Setup**: Virtual environment creation and dependency installation
+2. **Database Initialization**: `python src/init_db.py`
+3. **Unit Testing**: `pytest tests/test_home.py -v`
+4. **Flask App Testing**: Two options for HTTP validation:
+   - **Option A**: PowerShell one-liner using `python -c` with requests
+   - **Option B**: Dedicated Python test file (`tests/test_flask_app_running.py`)
+5. **Project Structure Validation**: Directory and file checks
+6. **Manual Browser Testing**: Visual confirmation at <http://127.0.0.1:5000>
+
+**New HTTP Testing Options:**
+
+- `tests/test_flask_app_running.py` - Comprehensive pytest-based HTTP validation
+- Includes response time testing and proper error handling
+- Can be run as standalone Python script or via pytest
+- Provides clear success/failure messages and troubleshooting guidance
+
+**Next Steps Before Sprint 1**
 
 **Verification Required:**
 

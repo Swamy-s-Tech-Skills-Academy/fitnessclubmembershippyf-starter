@@ -272,7 +272,9 @@ python app.py
 # * Debug mode: on
 ```
 
-### **Step 5: Verify HTTP Response (New Terminal)**
+### **Step 5: Verify HTTP Response (Choose Option A or B)**
+
+#### Option A: PowerShell One-liner (Quick Test)
 
 ```bash
 # In a new terminal, activate environment and test HTTP response
@@ -285,6 +287,25 @@ python -c "import requests; response = requests.get('http://127.0.0.1:5000'); pr
 # Expected output:
 # Status: 200
 # Success!
+```
+
+#### Option B: Python Test File (Comprehensive Testing)
+
+```bash
+# Run the dedicated HTTP test (Flask app must be running)
+pytest tests/test_flask_app_running.py -v
+
+# Expected output:
+# tests/test_flask_app_running.py::TestFlaskAppRunning::test_flask_app_is_running PASSED
+# tests/test_flask_app_running.py::TestFlaskAppRunning::test_flask_app_response_time PASSED
+# ✅ Flask app is running successfully!
+
+# OR run directly as a Python script:
+python tests/test_flask_app_running.py
+
+# Expected output:
+# 🔍 Checking if Flask app is running...
+# ✅ Flask app working! Status: 200
 ```
 
 ### **Step 6: Verify Project Structure**
