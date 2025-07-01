@@ -2,7 +2,7 @@
 
 ## 🏆 Complete Documentation Suite
 
-**All documentation is up-to-date as of June 29, 2025** ✅
+**All documentation is up-to-date as of July 1, 2025** ✅
 
 This comprehensive documentation covers every aspect of the Fitness Club Membership System development process, from initial setup to production deployment.
 
@@ -11,14 +11,14 @@ This comprehensive documentation covers every aspect of the Fitness Club Members
 ### **Main Documentation**
 
 - **[README.md](../README.md)** - Main project overview, features, and quick start guide
-- **[Pre-Sprint Setup](pre-sprint-setup.md)** - Environment setup and initial configuration
+- **[Project Status](project-status.md)** - Current development status and progress tracking
 
-### **Sprint Documentation**
+### **Development Guides (Prompts Folder)**
 
-- **[Sprint 1 Completion](pre-sprint-and-sprint1-completion.md)** - Backend and database implementation
-- **[Sprint 2 Completion](sprint2-completion.md)** - Frontend templates and UI development
-- **[Sprint 2 Success Summary](sprint2-success-summary.md)** - Detailed Sprint 2 achievements
-- **[Sprint 3 Completion](sprint3-completion.md)** - Integration, polish, and production features
+- **[Pre-Sprint Setup](../prompts/2_Pre-Sprint-Setup.md)** - Environment setup and verification checklist
+- **[Sprint 1: Backend](../prompts/3_Sprint1-Backend.md)** - Database models and API development
+- **[Sprint 2: Frontend](../prompts/4_Sprint2-Frontend.md)** - Templates and UI development
+- **[Sprint 3: Integration](../prompts/5_Sprint3-Integration.md)** - Integration, polish, and production features
 
 ### **Project Tracking**
 
@@ -62,10 +62,10 @@ This comprehensive documentation covers every aspect of the Fitness Club Members
 
 ### **For Developers:**
 
-1. Start with [Pre-Sprint Setup](pre-sprint-setup.md)
-2. Review [Sprint 1 Completion](pre-sprint-and-sprint1-completion.md) for backend understanding
-3. Check [Sprint 2 Completion](sprint2-completion.md) for frontend implementation
-4. Explore [Sprint 3 Completion](sprint3-completion.md) for advanced features
+1. Start with [Pre-Sprint Setup](../prompts/2_Pre-Sprint-Setup.md)
+2. Follow [Sprint 1: Backend](../prompts/3_Sprint1-Backend.md) for backend development
+3. Continue with [Sprint 2: Frontend](../prompts/4_Sprint2-Frontend.md) for frontend implementation
+4. Complete with [Sprint 3: Integration](../prompts/5_Sprint3-Integration.md) for advanced features
 
 ### **For Project Managers:**
 

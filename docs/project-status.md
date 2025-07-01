@@ -151,7 +151,7 @@ fitness-club-membership/
 
 **Verification Required:**
 
-- ✅ Complete all verification steps in [Pre-Sprint Setup & Verification Guide](pre-sprint-setup.md)
+- ✅ Complete all verification steps in [Pre-Sprint Setup Guide](../prompts/2_Pre-Sprint-Setup.md)
 - ✅ Ensure all 7 verification steps pass successfully
 - ✅ Confirm Flask app responds at http://127.0.0.1:5000
 
