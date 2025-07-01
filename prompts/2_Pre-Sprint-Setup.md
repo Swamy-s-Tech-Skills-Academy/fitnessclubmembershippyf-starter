@@ -332,6 +332,9 @@ Get-ChildItem -Recurse src, tests | Select-Object FullName
 # Run final pre-sprint completion validation
 python -c "print('🎯 PRE-SPRINT COMPLETION CHECK'); print('=' * 40); print('✅ Virtual Environment: Active'); print('✅ Flask App: Running'); print('✅ Dependencies: Installed'); print('✅ Project Structure: Complete'); print('✅ Tests: All Passing'); print('✅ HTTP Validation: Working'); print('=' * 40); print('🚀 READY FOR SPRINT 1!')"
 
+# OR use the validation script:
+python tests/validate_pre_sprint.py
+
 # Expected output:
 # 🎯 PRE-SPRINT COMPLETION CHECK
 # ========================================
