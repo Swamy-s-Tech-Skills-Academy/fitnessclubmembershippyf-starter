@@ -5,50 +5,32 @@
 ```text
 Complete the fitness club system with advanced features and production polish:
 
-PREREQUISITE VERIFICATION:
-- Sprint 1: All models have required properties (member.full_name, plan.price, session.duration_minutes)
-- Sprint 2: All templates work without UndefinedError or BuildError
-- All routes accessible: /, /members, /members/create, /members/<id>, /members/<id>/edit, /plans, /sessions, /sessions/schedule
-
 ADVANCED FEATURES TO ADD:
-1. Form validation (server-side Flask-WTF + client-side JavaScript)
-2. CSV export functionality (/export/members, /export/sessions)
-3. AJAX endpoints (/api/member/<id>/toggle-status, /api/session/<id>/book, /api/member/<id>/assign-plan)
+1. Form validation (server-side and client-side)
+2. CSV export functionality for members and sessions
+3. AJAX endpoints for member status toggle and session bookings
 4. Enhanced dashboard with revenue calculations and growth metrics
-5. Session booking system with capacity management and duplicate prevention
+5. Session booking system with capacity management
 6. Search and filtering for members and sessions
-7. Professional error handling (404, 500 pages)
-8. Mobile optimization and production polish
+7. Error handling and user feedback messages
+8. Mobile optimization and final polish
 
 SPECIFIC IMPLEMENTATIONS:
-
-SERVER-SIDE (app.py updates):
-- Add Flask-WTF form classes with comprehensive validation
-- Add CSV export routes with proper headers and error handling
-- Add AJAX API endpoints with JSON responses
-- Enhance dashboard route with revenue/growth calculations
+- Add CSV export routes (/export/members, /export/sessions)
+- Create API endpoints (/api/member/<id>/toggle-status, /api/session/<id>/bookings)
+- Enhance app.py with comprehensive validation
+- Add JavaScript for AJAX calls and form enhancement
+- Implement session booking logic with capacity checking
 - Add context processor for navigation highlighting
-- Add error handlers for 404/500 with custom templates
-- Fix any remaining model attribute issues
-
-CLIENT-SIDE (new static/js/app.js):
-- AJAX functions for member status toggle, session booking, plan assignment
-- Form validation with real-time feedback
-- Search and filtering with debounced input
-- Loading states and user feedback notifications
-- CSV export functionality with loading indicators
-
-TEMPLATES TO CREATE:
-- templates/errors/404.html (professional 404 page)
-- templates/errors/500.html (professional 500 page)
+- Create professional error pages
+- Add final styling touches and animations
 
 VALIDATION REQUIREMENTS:
-- No duplicate emails for members (server + client validation)
-- Date validation (no future birth dates, no past session dates)
+- No duplicate emails for members
+- Date validation (no future birth dates)
 - Session capacity cannot exceed max_capacity
 - Proper error messages for all scenarios
 - Success notifications for all actions
-- Mobile responsiveness maintained
 
 The system should be production-ready with all features working smoothly.
 ```
@@ -56,48 +38,36 @@ The system should be production-ready with all features working smoothly.
 ## ✅ **VALIDATION COMMANDS**
 
 ```bash
-# ✅ PREREQUISITE: Verify Sprints 1 & 2 are working
+# ✅ Activate virtual environment (choose your platform)
+# Windows:
+.venv\Scripts\activate
+# macOS/Linux:
+# source .venv/bin/activate
+
+# ✅ Run the application
 cd src
 python app.py
-# Test all pages load without errors:
-# - http://localhost:5000/ (dashboard)
-# - http://localhost:5000/members (member list)
-# - http://localhost:5000/members/create (registration)
-# - http://localhost:5000/plans (plans display)
-# - http://localhost:5000/sessions (sessions list)
+# Visit http://localhost:5000
 
-# ✅ Install additional dependencies if needed
-pip install flask-wtf wtforms
-
-# ✅ Implement Sprint 3 features
-# - Add form validation classes
-# - Add CSV export routes
-# - Add AJAX API endpoints
-# - Create error page templates
-# - Add JavaScript file
-
-# ✅ Test all advanced functionality
+# ✅ Test all functionality
 # - Create new members (test email validation)
 # - Export CSV files (/export/members, /export/sessions)
 # - Book sessions (test capacity limits)
 # - Toggle member status (AJAX functionality)
 # - Test form validation (client and server-side)
 # - Check mobile responsiveness
-# - Verify error handling (visit /nonexistent-page)
+# - Verify error handling
 
-# ✅ Production readiness check
-# - All routes work without errors
-# - No UndefinedError or BuildError exceptions
-# - Mobile responsive design maintained
-# - Professional error pages display
-# - AJAX endpoints return proper JSON
+# ✅ Run pytest validation
+cd ..
+pytest tests/ -v
 ```
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
 - ✅ Complete form validation (server-side & client-side)
 - ✅ CSV export functionality (/export/members, /export/sessions)
-- ✅ AJAX endpoints working (member status, session booking, plan assignment)
+- ✅ AJAX endpoints working (/api/member/<id>/toggle-status, /api/session/<id>/bookings)
 - ✅ Session booking system with capacity management
 - ✅ Enhanced dashboard analytics (revenue, growth metrics)
 - ✅ Production-ready polish and mobile optimization
@@ -109,34 +79,6 @@ pip install flask-wtf wtforms
 **Time**: 15 minutes
 
 **Result**: Production-ready fitness club management system
-
-## 🚨 **TROUBLESHOOTING GUIDE**
-
-### **Common Issues & Fixes:**
-
-**UndefinedError: 'models.MembershipPlan object' has no attribute 'price'**
-- Fix: Add `@property price` to MembershipPlan model returning `monthly_price`
-
-**BuildError: Could not build url for endpoint 'edit_member'**
-- Fix: Add missing route `@app.route('/members/<int:member_id>/edit')` to app.py
-
-**AttributeError: 'WorkoutSession' has no attribute 'duration_minutes'**
-- Fix: Add `@property duration_minutes` to WorkoutSession calculating from start/end times
-
-**Template shows 'member.name' instead of full name**
-- Fix: Use `member.full_name` in templates, ensure `@property full_name` exists in model
-
-**POSTS_PER_PAGE not found**
-- Fix: Add `POSTS_PER_PAGE = 10` to config.py
-
-### **Pre-Sprint 3 Validation:**
-```bash
-# Test these work before starting Sprint 3:
-curl http://localhost:5000/                    # Should return 200
-curl http://localhost:5000/members             # Should return 200  
-curl http://localhost:5000/plans               # Should return 200
-curl http://localhost:5000/sessions            # Should return 200
-```
 
 ## 🤖 **COPILOT AGENT COMPATIBILITY**
 
