@@ -110,6 +110,34 @@ pip install flask-wtf wtforms
 
 **Result**: Production-ready fitness club management system
 
+## 🚨 **TROUBLESHOOTING GUIDE**
+
+### **Common Issues & Fixes:**
+
+**UndefinedError: 'models.MembershipPlan object' has no attribute 'price'**
+- Fix: Add `@property price` to MembershipPlan model returning `monthly_price`
+
+**BuildError: Could not build url for endpoint 'edit_member'**
+- Fix: Add missing route `@app.route('/members/<int:member_id>/edit')` to app.py
+
+**AttributeError: 'WorkoutSession' has no attribute 'duration_minutes'**
+- Fix: Add `@property duration_minutes` to WorkoutSession calculating from start/end times
+
+**Template shows 'member.name' instead of full name**
+- Fix: Use `member.full_name` in templates, ensure `@property full_name` exists in model
+
+**POSTS_PER_PAGE not found**
+- Fix: Add `POSTS_PER_PAGE = 10` to config.py
+
+### **Pre-Sprint 3 Validation:**
+```bash
+# Test these work before starting Sprint 3:
+curl http://localhost:5000/                    # Should return 200
+curl http://localhost:5000/members             # Should return 200  
+curl http://localhost:5000/plans               # Should return 200
+curl http://localhost:5000/sessions            # Should return 200
+```
+
 ## 🤖 **COPILOT AGENT COMPATIBILITY**
 
 This sprint is optimized for Copilot Agent execution:
