@@ -13,11 +13,9 @@ Build a complete fitness club membership system using **Flask**, **Tailwind CSS*
 3. **[4_Sprint2-Frontend.md](4_Sprint2-Frontend.md)** - Frontend templates (15 minutes)
 4. **[5_Sprint3-Integration.md](5_Sprint3-Integration.md)** - Integration & polish (15 minutes)
 
-### **Reference Files:**
+### **Additional Resources:**
 
-5. **[6_Master-All-Prompts.md](6_Master-All-Prompts.md)** - All prompts in one file (backup)
-6. **[7_Quick-Reference.md](7_Quick-Reference.md)** - Validation checklist
-7. **[8_Organization-Guide.md](8_Organization-Guide.md)** - How to use these files
+1. **[45-minute-live-coding-guide.md](45-minute-live-coding-guide.md)** - Presenter notes for live demos
 
 ## 📚 **QUICK ACCESS**
 
@@ -25,9 +23,7 @@ Build a complete fitness club membership system using **Flask**, **Tailwind CSS*
 - [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
 - [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
 - [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
-- [6_Master-All-Prompts.md](6_Master-All-Prompts.md) - 🧾 All Prompts Combined
-- [7_Quick-Reference.md](7_Quick-Reference.md) - ✅ Validation Checklist
-- [8_Organization-Guide.md](8_Organization-Guide.md) - 📂 Project Structure
+- [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 ## 🌐 **LIVE DEMO**
 

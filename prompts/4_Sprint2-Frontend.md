@@ -51,3 +51,14 @@ python app.py
 - ✅ Forms with validation styling
 - ✅ Dashboard with analytics layout
 - ✅ Mobile-first responsive design
+
+## 📚 **QUICK ACCESS TO OTHER PROMPTS**
+
+- [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🔧 Setup & Environment
+- [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
+- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
+- [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
+
+## 🎯 **NEXT STEP**
+
+After completing Sprint 2, proceed to: **[5_Sprint3-Integration.md](5_Sprint3-Integration.md)** - Integration & Polish
