@@ -416,3 +416,17 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Python virtual environments
+.venv/
+
+# Python/Flask specific entries
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+instance/
+.env
+*.db
+.pytest_cache/
+*.log
