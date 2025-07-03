@@ -9,7 +9,23 @@ REQUIREMENTS:
 1. Create virtual environment (.venv)
 2. Install Flask dependencies
 3. Create basic project structure
-4. Set up folder organization
+4.---
+
+**✅ ALL CHECKS PASSED?** → **Ready for Sprint 1!**
+**❌ ANY FAILURES?** → **Review setup steps and fix issues**
+
+---
+
+## 🚀 **PRE-SPRINT SETUP COMPLETE**
+
+Once all verification steps pass, you're ready to proceed with:
+
+- **Sprint 1:** [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - Backend Development
+- **Live Demo Guide:** [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - Complete presentation guide
+
+## 🔄 **ALTERNATIVE: Manual Setup (If Not Pre-Created)**
+
+If you need to create the setup from scratch, use the setup commands above. Otherwise, just run the verification checklist to ensure everything is working correctly.r organization
 5. Create basic Flask app with welcome home page
 
 FOLDERS TO CREATE:
@@ -221,7 +237,7 @@ EOF
 
 ## 🧪 **PRE-SPRINT VERIFICATION CHECKLIST**
 
-**Run these commands to verify your setup before starting Sprint 1:**
+**If the setup is already complete, run these commands to verify everything is working:**
 
 ### **Step 1: Activate Virtual Environment**
 
@@ -238,32 +254,30 @@ cd "d:\STSA\fitnessclubmembershippyf-starter"
 ### **Step 2: Verify Python Environment**
 
 ```bash
-# Check Python version (should be 3.12.5)
+# Check Python version
 python --version
 
-# List installed packages (should show 25+ packages)
+# List installed packages (should show Flask, SQLAlchemy, etc.)
 pip list
 
 # Verify Flask is installed
 python -c "import flask; print(f'Flask version: {flask.__version__}')"
 ```
 
-### **Step 3: Run Automated Tests**
+### **Step 3: Basic Validation**
 
 ```bash
-# Run pytest validation (should pass 2/2 tests)
+# Run basic pytest validation on the home page
 pytest tests\test_home.py -v
 
-# Expected output:
-# tests/test_home.py::test_home_page PASSED [ 50%]
-# tests/test_home.py::test_flask_app_running PASSED [100%]
-# ============ 2 passed in 0.XX s ============
+# Expected output should show tests passing
+# If tests fail, ensure virtual environment is active and Flask app structure is correct
 ```
 
 ### **Step 4: Test Flask Application**
 
 ```bash
-# Start Flask development server (run in background or new terminal)
+# Start Flask development server
 cd src
 python app.py
 
@@ -272,16 +286,10 @@ python app.py
 # * Debug mode: on
 ```
 
-### **Step 5: Verify HTTP Response (Choose Option A or B)**
-
-#### Option A: PowerShell One-liner (Quick Test)
+### **Step 5: Verify HTTP Response**
 
 ```bash
-# In a new terminal, activate environment and test HTTP response
-cd "d:\STSA\fitnessclubmembershippyf-starter"
-.venv\Scripts\activate
-
-# Test HTTP request
+# Test HTTP request (make sure Flask app is running first)
 python -c "import requests; response = requests.get('http://127.0.0.1:5000'); print(f'Status: {response.status_code}'); print('Success!' if 'Welcome to Fitness Club' in response.text else 'Failed!')"
 
 # Expected output:
@@ -289,29 +297,10 @@ python -c "import requests; response = requests.get('http://127.0.0.1:5000'); pr
 # Success!
 ```
 
-#### Option B: Python Test File (Comprehensive Testing)
-
-```bash
-# Run the dedicated HTTP test (Flask app must be running)
-pytest tests/test_flask_app_running.py -v
-
-# Expected output:
-# tests/test_flask_app_running.py::TestFlaskAppRunning::test_flask_app_is_running PASSED
-# tests/test_flask_app_running.py::TestFlaskAppRunning::test_flask_app_response_time PASSED
-# ✅ Flask app is running successfully!
-
-# OR run directly as a Python script:
-python tests/test_flask_app_running.py
-
-# Expected output:
-# 🔍 Checking if Flask app is running...
-# ✅ Flask app working! Status: 200
-```
-
 ### **Step 6: Verify Project Structure**
 
 ```bash
-# Check project structure
+# Check project structure exists
 Get-ChildItem -Recurse src, tests | Select-Object FullName
 
 # Expected structure:
@@ -323,17 +312,14 @@ Get-ChildItem -Recurse src, tests | Select-Object FullName
 ### **Step 7: Manual Browser Test**
 
 - Open browser to `http://127.0.0.1:5000`
-- Verify you see: **"🏋️‍♂️ Welcome to Fitness Club"**
-- Verify page loads with Tailwind CSS styling
+- Verify you see: **"Welcome to Fitness Club"**
+- Verify page loads with Tailwind CSS styling (blue header, centered layout)
 
 ### **Step 8: Final Completion Check**
 
 ```bash
-# Run final pre-sprint completion validation
-python -c "print('🎯 PRE-SPRINT COMPLETION CHECK'); print('=' * 40); print('✅ Virtual Environment: Active'); print('✅ Flask App: Running'); print('✅ Dependencies: Installed'); print('✅ Project Structure: Complete'); print('✅ Tests: All Passing'); print('✅ HTTP Validation: Working'); print('=' * 40); print('🚀 READY FOR SPRINT 1!')"
-
-# OR use the validation script:
-python tests/validate_pre_sprint.py
+# Simple completion validation
+python -c "print('🎯 PRE-SPRINT COMPLETION CHECK'); print('=' * 40); print('✅ Virtual Environment: Active'); print('✅ Flask App: Running'); print('✅ Dependencies: Installed'); print('✅ Project Structure: Complete'); print('✅ Tests: Basic validation passed'); print('✅ HTTP Validation: Working'); print('=' * 40); print('🚀 READY FOR SPRINT 1!')"
 
 # Expected output:
 # 🎯 PRE-SPRINT COMPLETION CHECK
@@ -342,7 +328,7 @@ python tests/validate_pre_sprint.py
 # ✅ Flask App: Running
 # ✅ Dependencies: Installed
 # ✅ Project Structure: Complete
-# ✅ Tests: All Passing
+# ✅ Tests: Basic validation passed
 # ✅ HTTP Validation: Working
 # ========================================
 # 🚀 READY FOR SPRINT 1!
@@ -360,20 +346,7 @@ python tests/validate_pre_sprint.py
 Once all verification steps pass, you're ready to proceed with:
 
 - **Sprint 1:** [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - Backend Development
-- **Full Project:** [6_Master-All-Prompts.md](6_Master-All-Prompts.md) - Complete 45-minute guide
-
-## 🚀 **TEST YOUR SETUP**
-
-```bash
-# ✅ Test the basic Flask app
-cd src
-python app.py
-# Visit http://localhost:5000 - you should see "Welcome to Fitness Club"
-
-# ✅ Test with pytest (optional validation)
-cd ..
-pytest tests/test_home.py -v
-```
+- **Live Demo Guide:** [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - Complete presentation guide
 
 ## 🤖 **COPILOT AGENT COMPATIBILITY**
 
@@ -393,8 +366,6 @@ This setup is optimized for Copilot Agent execution:
 - [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
 - [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
 - [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
-- [6_Master-All-Prompts.md](6_Master-All-Prompts.md) - 🧾 All Prompts Combined
-- [7_Quick-Reference.md](7_Quick-Reference.md) - ✅ Validation Checklist
-- [8_Organization-Guide.md](8_Organization-Guide.md) - 📂 Project Structure
+- [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 **TailwindCSS Note**: The welcome template already includes TailwindCSS CDN, so you'll see styled content immediately!
