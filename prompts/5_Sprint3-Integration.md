@@ -159,8 +159,6 @@ This sprint is optimized for Copilot Agent execution:
 - [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🔧 Setup & Environment
 - [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
 - [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
-- [6_Master-All-Prompts.md](6_Master-All-Prompts.md) - 🧾 All Prompts Combined
-- [7_Quick-Reference.md](7_Quick-Reference.md) - ✅ Validation Checklist
 
 **Final Note**: After completing Sprint 3, you'll have a fully functional, production-ready fitness club membership system with all modern web app features!
 

@@ -50,7 +50,6 @@ with member management, session booking, and analytics dashboard."
    .venv\Scripts\activate
    # Show requirements.txt creation
    pip install -r requirements.txt
-   mkdir src docs
    mkdir src\templates src\static src\instance
    ```
 
