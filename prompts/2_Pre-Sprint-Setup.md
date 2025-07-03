@@ -49,8 +49,6 @@ FRONTEND STYLING:
 Create requirements.txt with these dependencies and set up virtual environment.
 ```
 
-## ✅ **SETUP COMMANDS**`
-
 ## ✅ **SETUP COMMANDS**
 
 ```bash
