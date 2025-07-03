@@ -16,7 +16,7 @@ FOLDERS TO CREATE:
 - src/ (main application code)
 - src/templates/ (HTML templates)
 - src/static/ (CSS, JS, images)
-- src/instance/ (database files)
+- src/instance/ (database files - ensure this exists to prevent database path issues)
 
 DEPENDENCIES TO INSTALL (from requirements.txt):
 
@@ -305,7 +305,11 @@ This setup is optimized for Copilot Agent execution:
 - ✅ No ambiguous shell syntax
 - ✅ Development-focused workflow
 
-## 📚 **QUICK ACCESS TO OTHER PROMPTS**
+## � **IMPORTANT NOTES FOR SPRINT 1**
+
+**Database Configuration:** The `src/instance/` folder created during setup is crucial for Sprint 1 database initialization. Sprint 1 will use absolute paths to prevent "unable to open database file" errors.
+
+## �📚 **QUICK ACCESS TO OTHER PROMPTS**
 
 - [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
 - [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates

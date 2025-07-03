@@ -2,7 +2,7 @@
 
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 1**
 
-```text
+````text
 Build a complete Flask backend for a fitness club membership system with the following requirements:
 
 MODELS NEEDED:
@@ -15,22 +15,32 @@ MODELS NEEDED:
 
 FILES TO CREATE:
 - src/models.py (SQLAlchemy models with relationships)
-- src/config.py (Flask configuration)
+- src/config.py (Flask configuration with ABSOLUTE database path)
 - src/app.py (Flask app with routes for dashboard, members, plans, sessions)
 - src/init_db.py (database initialization with sample data)
 
+IMPORTANT DATABASE PATH CONFIG:
+In config.py, use absolute path to prevent "unable to open database file" error:
+
+```python
+basedir = os.path.abspath(os.path.dirname(__file__))
+SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "instance", "fitness_club.db")}'
+````
+
 ROUTES NEEDED:
+
 - / (dashboard with statistics)
 - /members (list with search)
 - /members/create (member registration)
-- /members/<id> (member details)
+- /members/\<id\> (member details)
 - /plans (membership plans)
 - /sessions (workout sessions)
 - /sessions/schedule (session scheduling)
 
 Include comprehensive sample data: 3 members, 3 plans, 3 trainers, 3 sessions with proper relationships.
 Use SQLite database in src/instance/fitness_club.db
-```
+
+````
 
 ## ✅ **VALIDATION COMMANDS**
 
@@ -41,7 +51,15 @@ cd src
 python init_db.py
 python app.py
 # Visit http://localhost:5000 - should show dashboard
-```
+````
+
+## 🛠️ **TROUBLESHOOTING**
+
+**If you get "unable to open database file" error:**
+
+- Ensure config.py uses absolute path with `basedir = os.path.abspath(os.path.dirname(__file__))`
+- Verify `src/instance/` directory exists
+- Check that database URI uses forward slashes: `f'sqlite:///{os.path.join(basedir, "instance", "fitness_club.db")}'`
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
