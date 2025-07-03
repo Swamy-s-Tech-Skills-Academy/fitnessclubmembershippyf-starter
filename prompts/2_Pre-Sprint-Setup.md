@@ -1,6 +1,6 @@
 # 🚀 Pre-Sprint Setup: Environment & Dependencies
 
-## 🎯 **SETUP PROMPT** (5 minutes before Sprint 1)
+## 🎯 **COPY-PASTE PROMPT FOR PRE-SPRINT**
 
 ```text
 Set up the development environment for a Flask fitness club membership system:
@@ -9,23 +9,7 @@ REQUIREMENTS:
 1. Create virtual environment (.venv)
 2. Install Flask dependencies
 3. Create basic project structure
-4.---
-
-**✅ ALL CHECKS PASSED?** → **Ready for Sprint 1!**
-**❌ ANY FAILURES?** → **Review setup steps and fix issues**
-
----
-
-## 🚀 **PRE-SPRINT SETUP COMPLETE**
-
-Once all verification steps pass, you're ready to proceed with:
-
-- **Sprint 1:** [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - Backend Development
-- **Live Demo Guide:** [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - Complete presentation guide
-
-## 🔄 **ALTERNATIVE: Manual Setup (If Not Pre-Created)**
-
-If you need to create the setup from scratch, use the setup commands above. Otherwise, just run the verification checklist to ensure everything is working correctly.r organization
+4. Set up folder organization
 5. Create basic Flask app with welcome home page
 
 FOLDERS TO CREATE:
@@ -33,8 +17,6 @@ FOLDERS TO CREATE:
 - src/templates/ (HTML templates)
 - src/static/ (CSS, JS, images)
 - src/instance/ (database files)
-- tests/ (test files)
-- docs/ (documentation)
 
 DEPENDENCIES TO INSTALL (from requirements.txt):
 
@@ -56,11 +38,6 @@ Database & Core Dependencies:
 - itsdangerous==2.1.2
 - blinker==1.6.3
 
-Development & Testing:
-- pytest==7.4.3
-- pytest-flask==1.3.0
-- requests==2.31.0
-
 Optional Production/Development:
 - gunicorn==21.2.0
 - python-dotenv==1.0.0
@@ -71,6 +48,8 @@ FRONTEND STYLING:
 
 Create requirements.txt with these dependencies and set up virtual environment.
 ```
+
+## ✅ **SETUP COMMANDS**`
 
 ## ✅ **SETUP COMMANDS**
 
@@ -89,7 +68,6 @@ pip install -r requirements.txt
 
 # ✅ Create folder structure (cross-platform)
 mkdir -p src/templates src/static src/instance
-mkdir -p tests docs
 
 # ✅ Create .gitignore for clean repository (early setup)
 cat <<EOF > .gitignore
@@ -99,7 +77,6 @@ __pycache__/
 instance/
 .env
 *.db
-.pytest_cache/
 EOF
 ```
 
@@ -144,33 +121,12 @@ cat <<EOF > src/templates/index.html
 </html>
 EOF
 
-# ✅ Create test placeholder for validation
-cat <<EOF > tests/test_home.py
-import pytest
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
-
-from app import app
-
-@pytest.fixture
-def client():
-    app.testing = True
-    return app.test_client()
-
-def test_home_page(client):
-    response = client.get('/')
-    assert response.status_code == 200
-    assert b"Welcome to Fitness Club" in response.data
-EOF
-
 # ✅ Create Copilot configuration for better assistance
 mkdir -p .copilot
 cat <<EOF > .copilot/settings.json
 {
   "projectType": "flask",
   "useVirtualEnv": true,
-  "testFramework": "pytest",
   "frontend": "tailwindcss",
   "database": "sqlite"
 }
@@ -204,11 +160,6 @@ click==8.1.7
 itsdangerous==2.1.2
 blinker==1.6.3
 
-# Development & Testing
-pytest==7.4.3
-pytest-flask==1.3.0
-requests==2.31.0
-
 # Optional: Production Deployment
 gunicorn==21.2.0
 
@@ -234,6 +185,24 @@ EOF
 - ✅ All Tailwind classes available immediately
 
 **Note:** For production deployment, consider using Tailwind CLI for optimized builds.
+
+## ✅ **VALIDATION COMMANDS**
+
+```bash
+# Activate virtual environment
+.venv\Scripts\activate
+cd src
+python app.py
+# Visit http://localhost:5000 - should show welcome page
+```
+
+## 🎯 **EXPECTED DELIVERABLES**
+
+- ✅ Virtual environment created and activated
+- ✅ All dependencies installed
+- ✅ Project folder structure created
+- ✅ Basic Flask app with welcome page
+- ✅ HTTP responses working
 
 ## 🧪 **PRE-SPRINT VERIFICATION CHECKLIST**
 
@@ -264,17 +233,7 @@ pip list
 python -c "import flask; print(f'Flask version: {flask.__version__}')"
 ```
 
-### **Step 3: Basic Validation**
-
-```bash
-# Run basic pytest validation on the home page
-pytest tests\test_home.py -v
-
-# Expected output should show tests passing
-# If tests fail, ensure virtual environment is active and Flask app structure is correct
-```
-
-### **Step 4: Test Flask Application**
+### **Step 3: Test Flask Application**
 
 ```bash
 # Start Flask development server
@@ -286,40 +245,28 @@ python app.py
 # * Debug mode: on
 ```
 
-### **Step 5: Verify HTTP Response**
-
-```bash
-# Test HTTP request (make sure Flask app is running first)
-python -c "import requests; response = requests.get('http://127.0.0.1:5000'); print(f'Status: {response.status_code}'); print('Success!' if 'Welcome to Fitness Club' in response.text else 'Failed!')"
-
-# Expected output:
-# Status: 200
-# Success!
-```
-
-### **Step 6: Verify Project Structure**
+### **Step 4: Verify Project Structure**
 
 ```bash
 # Check project structure exists
-Get-ChildItem -Recurse src, tests | Select-Object FullName
+Get-ChildItem -Recurse src | Select-Object FullName
 
 # Expected structure:
 # src\app.py ✅
 # src\templates\index.html ✅
-# tests\test_home.py ✅
 ```
 
-### **Step 7: Manual Browser Test**
+### **Step 5: Manual Browser Test**
 
 - Open browser to `http://127.0.0.1:5000`
 - Verify you see: **"Welcome to Fitness Club"**
 - Verify page loads with Tailwind CSS styling (blue header, centered layout)
 
-### **Step 8: Final Completion Check**
+### **Step 6: Final Completion Check**
 
 ```bash
 # Simple completion validation
-python -c "print('🎯 PRE-SPRINT COMPLETION CHECK'); print('=' * 40); print('✅ Virtual Environment: Active'); print('✅ Flask App: Running'); print('✅ Dependencies: Installed'); print('✅ Project Structure: Complete'); print('✅ Tests: Basic validation passed'); print('✅ HTTP Validation: Working'); print('=' * 40); print('🚀 READY FOR SPRINT 1!')"
+python -c "print('🎯 PRE-SPRINT COMPLETION CHECK'); print('=' * 40); print('✅ Virtual Environment: Active'); print('✅ Flask App: Running'); print('✅ Dependencies: Installed'); print('✅ Project Structure: Complete'); print('✅ HTTP Validation: Working'); print('=' * 40); print('🚀 READY FOR SPRINT 1!')"
 
 # Expected output:
 # 🎯 PRE-SPRINT COMPLETION CHECK
@@ -328,7 +275,6 @@ python -c "print('🎯 PRE-SPRINT COMPLETION CHECK'); print('=' * 40); print('�
 # ✅ Flask App: Running
 # ✅ Dependencies: Installed
 # ✅ Project Structure: Complete
-# ✅ Tests: Basic validation passed
 # ✅ HTTP Validation: Working
 # ========================================
 # 🚀 READY FOR SPRINT 1!
@@ -357,9 +303,9 @@ This setup is optimized for Copilot Agent execution:
 - ✅ Comment headers for clear bash block identification
 - ✅ Scriptable commands with clear separation
 - ✅ Includes .gitignore for clean repository
-- ✅ Test validation included
 - ✅ Copilot configuration for contextual assistance
 - ✅ No ambiguous shell syntax
+- ✅ Development-focused workflow
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 

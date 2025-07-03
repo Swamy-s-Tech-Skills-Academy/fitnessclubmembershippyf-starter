@@ -59,7 +59,7 @@ The system should be production-ready with all features working smoothly.
 # ✅ PREREQUISITE: Verify Sprints 1 & 2 are working
 cd src
 python app.py
-# Test all pages load without errors:
+# Verify all pages load without errors:
 # - http://localhost:5000/ (dashboard)
 # - http://localhost:5000/members (member list)
 # - http://localhost:5000/members/create (registration)
@@ -76,12 +76,12 @@ pip install flask-wtf wtforms
 # - Create error page templates
 # - Add JavaScript file
 
-# ✅ Test all advanced functionality
-# - Create new members (test email validation)
+# ✅ Verify all advanced functionality
+# - Create new members (check email validation)
 # - Export CSV files (/export/members, /export/sessions)
-# - Book sessions (test capacity limits)
+# - Book sessions (check capacity limits)
 # - Toggle member status (AJAX functionality)
-# - Test form validation (client and server-side)
+# - Verify form validation (client and server-side)
 # - Check mobile responsiveness
 # - Verify error handling (visit /nonexistent-page)
 

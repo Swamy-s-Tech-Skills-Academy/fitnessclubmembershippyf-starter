@@ -38,7 +38,7 @@ Include proper error handling and success messages
 .venv\Scripts\activate
 cd src
 python app.py
-# Visit http://localhost:5000 - test all pages
+# Visit http://localhost:5000 - verify all pages
 # Check responsive design on different screen sizes
 # Verify forms are styled properly
 ```

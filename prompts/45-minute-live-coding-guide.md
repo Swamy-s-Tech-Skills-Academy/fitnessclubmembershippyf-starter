@@ -50,7 +50,7 @@ with member management, session booking, and analytics dashboard."
    .venv\Scripts\activate
    # Show requirements.txt creation
    pip install -r requirements.txt
-   mkdir src tests docs
+   mkdir src docs
    mkdir src\templates src\static src\instance
    ```
 
@@ -188,41 +188,6 @@ with member management, session booking, and analytics dashboard."
 - "CSV exports give real business value"
 - "AJAX makes the interface feel modern and responsive"
 - "Dashboard provides actionable business insights"
-
----
-
-## 🧪 **QUICK VALIDATION SCRIPT**
-
-### **Using the Application Validator**
-
-After completing all sprints, you can use the built-in validation script:
-
-```powershell
-# From project root (make sure Flask app is running)
-cd tests
-python validate_application.py
-```
-
-**What it tests:**
-
-- Homepage loads successfully
-- All main pages (members, plans, sessions) working
-- Database has sample data
-- API endpoints responding correctly
-
-**Requirements:**
-
-- Flask app must be running (`python src/app.py`)
-- `requests` library installed (included in requirements.txt)
-- All dependencies properly installed
-
-**Alternative validation:**
-Use the comprehensive test suite in the `tests/` folder:
-
-```powershell
-cd tests
-python quick_validation.py
-```
 
 ---
 

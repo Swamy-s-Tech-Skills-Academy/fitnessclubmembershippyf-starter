@@ -54,7 +54,7 @@ By the end of this session, you'll have a complete fitness club management syste
 1. **Start with file #2** - Pre-Sprint Setup
 2. **Copy-paste each prompt** exactly as written
 3. **Follow the sequence** - don't skip steps
-4. **Test after each sprint** using validation commands
+4. **Validate after each sprint** using browser testing
 5. **Keep the energy high!** 🎉
 
 ## 💡 **PRO TIPS**
