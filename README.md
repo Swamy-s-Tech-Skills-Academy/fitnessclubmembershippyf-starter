@@ -1,4 +1,11 @@
-# Fitness Club Membership System
+# Fitness Clu## 🛠 Tech Stack
+
+- **Backend:** Flask 3.0.0 + SQLAlchemy
+- **Frontend:** Tailwind CSS + Jinja2
+- **Icons:** Font Awesome 6.4.0
+- **Typography:** Google Fonts (Inter + Poppins)
+- **Database:** SQLite
+- **Development:** Live coding optimizedership System
 
 🏋️‍♂️ A complete fitness club management system built with **Flask**, **SQLAlchemy**, and **Tailwind CSS**.
 

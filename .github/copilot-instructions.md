@@ -13,6 +13,8 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 | ORM                | SQLAlchemy                 |
 | Forms Library      | Flask-WTF                  |
 | Frontend Framework | Tailwind CSS (CDN)         |
+| Icons              | Font Awesome (CDN)         |
+| Typography         | Google Fonts (CDN)         |
 | Database           | SQLite (in `src/instance`) |
 | Mode               | Live coding demo           |
 | Duration           | ~45 minutes                |

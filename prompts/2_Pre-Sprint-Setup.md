@@ -45,6 +45,10 @@ Optional Production/Development:
 FRONTEND STYLING:
 - TailwindCSS via CDN (no installation required)
 - CDN URL: https://cdn.tailwindcss.com
+- Font Awesome via CDN (icons and graphics)
+- CDN URL: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
+- Google Fonts (Inter & Poppins)
+- CDN URL: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
 
 Create requirements.txt with these dependencies and set up virtual environment.
 ```
@@ -103,15 +107,41 @@ cat <<EOF > src/templates/index.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Club Membership System</title>
+    <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="text-center">
-        <h1 class="text-6xl font-bold text-blue-600 mb-4">Welcome to Fitness Club</h1>
-        <p class="text-xl text-gray-600">Your fitness journey starts here!</p>
+        <div class="mb-6">
+            <i class="fas fa-dumbbell text-6xl text-blue-600 mb-4"></i>
+        </div>
+        <h1 class="text-6xl font-bold text-blue-600 mb-4 font-poppins">Welcome to Fitness Club</h1>
+        <p class="text-xl text-gray-600 mb-6">Your fitness journey starts here!</p>
+        <div class="flex justify-center gap-4 mb-8">
+            <div class="flex items-center gap-2 text-gray-700">
+                <i class="fas fa-users text-blue-500"></i>
+                <span>Members</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-700">
+                <i class="fas fa-calendar-alt text-green-500"></i>
+                <span>Bookings</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-700">
+                <i class="fas fa-chart-line text-purple-500"></i>
+                <span>Analytics</span>
+            </div>
+        </div>
         <div class="mt-8">
             <span class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">
-                ✅ Flask App Running Successfully
+                <i class="fas fa-check-circle mr-2"></i>Flask App Running Successfully
             </span>
         </div>
     </div>
@@ -166,13 +196,27 @@ python-dotenv==1.0.0
 EOF
 ```
 
-## 🎨 **TAILWINDCSS SETUP**
+## 🎨 **FRONTEND STYLING SETUP**
 
 **No Installation Required!** - Using CDN approach for rapid development:
 
 ```html
-<!-- Add this to your base.html template <head> section -->
+<!-- Add these to your base.html template <head> section -->
+
+<!-- TailwindCSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Font Awesome CDN -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 **Benefits of CDN approach:**
@@ -180,9 +224,18 @@ EOF
 - ✅ No build process required
 - ✅ Instant setup for rapid prototyping
 - ✅ Perfect for live coding demonstrations
-- ✅ All Tailwind classes available immediately
+- ✅ All styling resources available immediately
+- ✅ Professional typography with Google Fonts
+- ✅ Rich icon library with Font Awesome
 
-**Note:** For production deployment, consider using Tailwind CLI for optimized builds.
+**Available Resources:**
+
+- **TailwindCSS**: Complete utility-first CSS framework
+- **Font Awesome**: 1,000+ icons for UI elements
+- **Inter Font**: Clean, readable body text
+- **Poppins Font**: Modern headings and display text
+
+**Note:** For production deployment, consider using build tools for optimized assets.
 
 ## ✅ **VALIDATION COMMANDS**
 

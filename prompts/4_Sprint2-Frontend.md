@@ -3,7 +3,7 @@
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 2**
 
 ```text
-Create a complete responsive frontend for the fitness club system using Tailwind CSS:
+Create a complete responsive frontend for the fitness club system using modern styling:
 
 TEMPLATES NEEDED:
 1. base.html - Navigation with Tailwind, responsive design, footer
@@ -15,9 +15,16 @@ TEMPLATES NEEDED:
 7. sessions/list.html - Session list with booking functionality
 8. sessions/schedule.html - Session scheduling form
 
+STYLING RESOURCES:
+- TailwindCSS: https://cdn.tailwindcss.com
+- Font Awesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
+- Google Fonts: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
+
 FEATURES TO INCLUDE:
 - Mobile-responsive navigation with hamburger menu
 - Professional Tailwind CSS styling (blue/gray theme)
+- Font Awesome icons for UI elements
+- Google Fonts typography (Inter for body, Poppins for headings)
 - Form validation with error messages
 - Data tables with hover effects
 - Button styling (primary, secondary, danger)
@@ -26,7 +33,6 @@ FEATURES TO INCLUDE:
 - Progress bars for analytics
 - Professional footer with contact info
 
-Use CDN for Tailwind: https://cdn.tailwindcss.com
 All forms should connect to existing Flask routes
 Include proper error handling and success messages
 ```
