@@ -1,178 +1,294 @@
-# 🏗️ Sprint 1: Backend Foundation (15 minutes)
+# 🏗️ Sprint 1: Backend API Foundation (15 minutes)
 
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 1**
 
 ````text
-Build a complete Flask backend for a fitness club membership system with the following requirements:
+Build Flask backend API endpoints for a fitness club membership system with the following requirements:
 
 PYTHON VERSION REQUIREMENT:
-- Python 3.13.5 (ensure compatibility with all Flask 3.0.0 and SQLAlchemy 2.0.35 features)
+- Python 3.13.5 (ensure compatibility with Flask 3.0.0 and SQLAlchemy 2.0.41 features)
 
-CRITICAL: REPLACE THE EXISTING SIMPLE WELCOME APP
-The current src\app.py only contains a basic welcome page. You must REPLACE it entirely with a full application containing all the routes and functionality listed below.
+SPRINT 1 FOCUS: BACKEND API ONLY
+- Keep the existing welcome page (/) unchanged from pre-sprint setup
+- Add JSON API endpoints that return data (no HTML templates)
+- NO UI/Templates in Sprint 1 - that's Sprint 2's job
+- Focus purely on backend functionality and data structure
 
-MODELS NEEDED:
-1. Member (id, first_name, last_name, email, phone, date_of_birth, gender, emergency_contact, emergency_phone, join_date, status)
-2. MembershipPlan (id, name, description, monthly_price, benefits)
-3. Trainer (id, name, specialization, email, phone)
-4. WorkoutSession (id, title, description, trainer_id, session_date, start_time, end_time, max_capacity, current_bookings)
-5. MemberPlan (id, member_id, plan_id, start_date, end_date, status)
-6. SessionBooking (id, member_id, session_id, booking_date, status)
+APPROACH:
+1. Keep existing src\app.py welcome page route (/) unchanged
+2. Add new API routes that return JSON responses
+3. Use mock data for Sprint 1 (no database required yet)
+4. Prepare data structure for Sprint 2 frontend consumption
 
-FILES TO CREATE/REPLACE:
-- src\models.py (NEW: SQLAlchemy models with relationships)
-- src\config.py (NEW: Flask configuration with ABSOLUTE database path)
-- src\app.py (REPLACE: Complete Flask app with all routes - replaces existing welcome app)
-- src\init_db.py (NEW: Database initialization with sample data)
-
-IMPORTANT: REPLACE THE EXISTING SIMPLE WELCOME APP
-The current src\app.py only has a welcome page. Replace it entirely with the full application.
+REQUIRED API ENDPOINTS:
+- GET / - Keep existing welcome page (pre-sprint, unchanged)
+- GET /test - Backend verification endpoint (JSON)
+- GET /api/members - Get all members (JSON)
+- POST /api/members - Create new member (JSON)
+- GET /api/plans - Get membership plans (JSON)
+- GET /api/sessions - Get workout sessions (JSON)
+- GET /api/trainers - Get trainers list (JSON)
+- GET /api/stats - Get dashboard statistics (JSON)
+- POST /api/sessions/schedule - Schedule session (JSON)
 
 REQUIRED APP.PY STRUCTURE:
 ```python
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-from models import db, Member, MembershipPlan, Trainer, WorkoutSession, MemberPlan, SessionBooking
+from flask import Flask, render_template, jsonify, request
 import config
 from datetime import datetime
 
 app = Flask(__name__)
-app.config.from_object(config)
-db.init_app(app)
+app.config.from_object(config.Config)
 
-# Dashboard route (replaces welcome page)
+# Keep the original welcome page from pre-sprint (no changes)
 @app.route('/')
-def dashboard():
-    # Statistics calculations here
-    return render_template('dashboard.html', stats=stats)
+def home():
+    return render_template('index.html')
 
-# Member management routes
-@app.route('/members')
-def members_list():
-    # Members list logic
-    return render_template('members/list.html', members=members)
+# Sprint 1: Backend API endpoints only (return JSON, no HTML/templates)
 
-@app.route('/members/create')
-def members_create():
-    # Member creation form
-    return render_template('members/create.html')
+@app.route('/test')
+def test():
+    """Test endpoint to verify backend is working"""
+    return jsonify({
+        'status': 'success',
+        'message': 'Flask Backend is Working!',
+        'endpoint': '/test',
+        'timestamp': datetime.now().isoformat()
+    })
 
-# Continue with other routes...
-````
+@app.route('/api/members', methods=['GET'])
+def api_members():
+    """API: Get all members"""
+    return jsonify({
+        'status': 'success',
+        'data': [],
+        'count': 0,
+        'message': 'Members API endpoint ready'
+    })
 
-EXACT ROUTES TO IMPLEMENT:
+@app.route('/api/members', methods=['POST'])
+def api_create_member():
+    """API: Create new member"""
+    return jsonify({
+        'status': 'success',
+        'message': 'Member creation API ready',
+        'received_data': request.get_json() if request.is_json else None
+    })
 
-- / (dashboard with statistics: total members, active sessions, revenue, growth)
-- /members (list with search functionality)
-- /members/create (member registration form)
-- /members/\<id\> (member details view)
-- /members/\<id\>/edit (member edit form)
-- /plans (membership plans display)
-- /sessions (workout sessions list)
-- /sessions/schedule (session scheduling form)
+# Continue with other API endpoints...
 
-IMPORTANT DATABASE PATH CONFIG:
-In config.py, use absolute path to prevent "unable to open database file" error:
+@app.route('/api/plans', methods=['GET'])
+def api_plans():
+    """API: Get all membership plans"""
+    return jsonify({
+        'status': 'success',
+        'data': [],
+        'count': 0,
+        'message': 'Plans API endpoint ready'
+    })
 
+@app.route('/api/sessions', methods=['GET'])
+def api_sessions():
+    """API: Get all workout sessions"""
+    return jsonify({
+        'status': 'success',
+        'data': [],
+        'count': 0,
+        'message': 'Sessions API endpoint ready'
+    })
+
+@app.route('/api/trainers', methods=['GET'])
+def api_trainers():
+    """API: Get all trainers"""
+    return jsonify({
+        'status': 'success',
+        'data': [],
+        'count': 0,
+        'message': 'Trainers API endpoint ready'
+    })
+
+@app.route('/api/stats', methods=['GET'])
+def api_stats():
+    """API: Get dashboard statistics"""
+    stats = {
+        'total_members': 0,
+        'active_sessions': 0,
+        'total_plans': 0,
+        'monthly_revenue': 0,
+        'new_members': 0
+    }
+    return jsonify({
+        'status': 'success',
+        'data': stats,
+        'message': 'Stats API endpoint ready'
+    })
+
+@app.route('/api/sessions/schedule', methods=['POST'])
+def api_schedule_session():
+    """API: Schedule a new session"""
+    return jsonify({
+        'status': 'success',
+        'message': 'Session scheduling API ready',
+        'received_data': request.get_json() if request.is_json else None
+    })
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+SPRINT 1 API ENDPOINTS SUMMARY:
+
+✅ **Keep Unchanged:**
+- GET / - Welcome page from pre-sprint (HTML)
+
+✅ **Add New API Endpoints:**
+- GET /test - Backend verification (JSON)
+- GET /api/members - Get all members (JSON)
+- POST /api/members - Create new member (JSON)
+- GET /api/plans - Get membership plans (JSON)
+- GET /api/sessions - Get workout sessions (JSON)
+- GET /api/trainers - Get trainers list (JSON)
+- GET /api/stats - Get dashboard statistics (JSON)
+- POST /api/sessions/schedule - Schedule session (JSON)
+
+IMPORTANT: NO TEMPLATES IN SPRINT 1
+- Sprint 1 = Backend API endpoints (JSON responses)
+- Sprint 2 = Frontend templates and UI
+- Sprint 3 = Integration and polish
+
+CONFIG.PY REQUIREMENTS (OPTIONAL FOR SPRINT 1):
 ```python
 import os
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-
 class Config:
-    SECRET_KEY = 'your-secret-key-here'
-    SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "instance", "fitness_club.db")}'
+    SECRET_KEY = 'fitness-club-secret-key-2025'
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(os.path.abspath(os.path.dirname(__file__)), "instance", "fitness_club.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 ```
 
-MODELS.PY REQUIREMENTS:
-All models must include these specific properties that will be used in templates:
+SPRINT 1 DATA STRUCTURE (Mock Data for API Responses):
+Each API endpoint should return JSON with this structure:
 
-Member model:
-
-- full_name property (returns f"{first_name} {last_name}")
-- age property (calculated from date_of_birth)
-
-MembershipPlan model:
-
-- price property (for displaying monthly_price with currency)
-
-WorkoutSession model:
-
-- duration_minutes property (for session length display)
-- available_spots property (max_capacity - current_bookings)
-
-SAMPLE DATA REQUIREMENTS:
-Include realistic sample data with proper relationships:
-
-- 3 Members with different statuses (Active, Inactive, Pending)
-- 3 MembershipPlans (Basic, Premium, VIP) with different prices
-- 3 Trainers with different specializations
-- 3 WorkoutSessions scheduled for next week
-- MemberPlan assignments connecting members to plans
-- SessionBooking records showing member session registrations
-
-TESTING VERIFICATION:
-After implementation, these URLs should work:
-
-- http://localhost:5000/ (dashboard with stats)
-- http://localhost:5000/members (members list)
-- http://localhost:5000/plans (plans display)
-- http://localhost:5000/sessions (sessions list)
-
-DO NOT CREATE /api/ ROUTES - Use standard Flask routes as listed above.
-
-````
-
-## ✅ **POST-DEVELOPMENT VERIFICATION**
-
-**CRITICAL: Test these exact URLs after Copilot completes the backend:**
-
-```powershell
-# Activate virtual environment (if not already active)
-.venv\Scripts\activate
-
-# Navigate to src and initialize database
-Set-Location src
-python init_db.py
-python app.py
+```json
+{
+    "status": "success",
+    "data": [],
+    "count": 0,
+    "message": "Endpoint description"
+}
 ```
 
-**Browser Testing Checklist:**
-- ✅ http://localhost:5000/ (dashboard with statistics)
-- ✅ http://localhost:5000/members (members list page)
-- ✅ http://localhost:5000/plans (membership plans)
-- ✅ http://localhost:5000/sessions (workout sessions)
+For /api/stats endpoint:
+```json
+{
+    "status": "success",
+    "data": {
+        "total_members": 0,
+        "active_sessions": 0,
+        "total_plans": 0,
+        "monthly_revenue": 0,
+        "new_members": 0
+    },
+    "message": "Stats API endpoint ready"
+}
+```
 
-**If any URL returns 404 Not Found:**
-- Verify app.py has @app.route('/') decorator (not @app.route('/api/dashboard'))
-- Check that config.py uses proper class structure
-- Ensure init_db.py runs without errors
-
-## 🛠️ **TROUBLESHOOTING**
-
-**Common Issues and Solutions:**
-
-**"unable to open database file" error:**
-- Ensure config.py uses absolute path with `basedir = os.path.abspath(os.path.dirname(__file__))`
-- Verify `src\instance\` directory exists
-- Check that database URI uses forward slashes: `f'sqlite:///{os.path.join(basedir, "instance", "fitness_club.db")}'`
-
-**404 Not Found for routes:**
-- Verify app.py imports: `from models import db, Member, MembershipPlan, ...`
-- Check route decorators use exact paths: `@app.route('/')` not `@app.route('/api/dashboard')`
-- Ensure Flask app configuration: `app.config.from_object(config)`
-
-**Template errors:**
-- Templates will be created in Sprint 2 - expect TemplateNotFound errors for now
-- Focus on route functionality and database operations
+NO DATABASE REQUIRED FOR SPRINT 1:
+- Use mock data (empty arrays, zero counts)
+- Database and models will be added in Sprint 2
+- Focus purely on API endpoint structure
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
-- ✅ Complete database schema with 6 tables and relationships
-- ✅ Flask app with 8 working routes (/, /members, /members/create, etc.)
-- ✅ Sample data populated via init_db.py
-- ✅ Working database operations (no SQLite errors)
-- ✅ All URLs returning 200 status (templates will be added in Sprint 2)
+✅ **Sprint 1 Backend API Deliverables:**
+
+- **src\app.py** - Flask app with API endpoints (keeps existing welcome page)
+- **src\config.py** - Basic Flask configuration (optional for Sprint 1)
+- **API Endpoints** - All endpoints return JSON responses, not HTML
+- **Welcome Page** - Original welcome page unchanged from pre-sprint
+
+✅ **API Endpoints Working:**
+
+- `GET /` - Welcome page (HTML, unchanged from pre-sprint)
+- `GET /test` - Backend verification (JSON)
+- `GET /api/members` - Members API (JSON)
+- `POST /api/members` - Create member API (JSON)
+- `GET /api/plans` - Plans API (JSON)
+- `GET /api/sessions` - Sessions API (JSON)
+- `GET /api/trainers` - Trainers API (JSON)
+- `GET /api/stats` - Dashboard stats API (JSON)
+- `POST /api/sessions/schedule` - Schedule session API (JSON)
+
+## 🧪 **SPRINT 1 VERIFICATION CHECKLIST**
+
+**Manual verification steps for Sprint 1 backend API:**
+
+### **Step 1: Start Flask Application**
+
+```powershell
+# Navigate to src folder and start Flask app
+Set-Location src
+python app.py
+```
+
+### **Step 2: Test Welcome Page (Should Remain Unchanged)**
+
+- Open browser to `http://127.0.0.1:5000`
+- ✅ Verify welcome page displays correctly (same as pre-sprint)
+- ✅ Confirm TailwindCSS, Font Awesome, and favicon still work
+
+### **Step 3: Test API Endpoints (New for Sprint 1)**
+
+Open browser or use curl to test these JSON API endpoints:
+
+- `http://127.0.0.1:5000/test` - Should return JSON backend verification
+- `http://127.0.0.1:5000/api/members` - Should return JSON members response
+- `http://127.0.0.1:5000/api/plans` - Should return JSON plans response
+- `http://127.0.0.1:5000/api/sessions` - Should return JSON sessions response
+- `http://127.0.0.1:5000/api/trainers` - Should return JSON trainers response
+- `http://127.0.0.1:5000/api/stats` - Should return JSON stats response
+
+### **Step 4: Verify JSON Responses**
+
+Each API endpoint should return JSON format like:
+
+```json
+{
+    "status": "success",
+    "data": [],
+    "message": "Endpoint description"
+}
+```
+
+---
+
+## ✅ **SPRINT 1 COMPLETION CRITERIA**
+
+**✅ ALL CHECKS PASSED?** → **Ready for Sprint 2!**
+**❌ ANY FAILURES?** → **Review API endpoints and fix issues**
+
+**Sprint 1 Success Indicators:**
+- Welcome page unchanged from pre-sprint (HTML with styling)
+- All API endpoints return JSON responses
+- No HTML templates required (that's Sprint 2)
+- Backend structure ready for frontend integration
+
+---
+
+## 🚀 **SPRINT 1 COMPLETE - NEXT STEPS**
+
+Once Sprint 1 verification passes, you're ready for:
+
+**Sprint 2: Frontend Templates** - Create HTML templates that consume these APIs
+**Sprint 3: Integration & Polish** - Connect frontend with backend, add validation
+
+## 📚 **QUICK ACCESS TO OTHER PROMPTS**
+
+- [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🛠 Environment Setup
+- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
+- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
+- [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 
