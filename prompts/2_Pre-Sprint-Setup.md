@@ -5,6 +5,9 @@
 ```text
 Set up the development environment for a Flask fitness club membership system:
 
+PYTHON VERSION REQUIREMENT:
+✅ Python 3.13.5 - Required for optimal compatibility with Flask 3.0.0 and SQLAlchemy 2.0.23
+
 STARTER PROJECT INCLUDES:
 ✅ requirements.txt - All Python dependencies with specific versions
 ✅ .gitignore - Python/Flask optimized ignore rules
@@ -192,6 +195,13 @@ if __name__ == '__main__':
 ```powershell
 # Navigate to your project root directory
 Set-Location "path\to\your\project"
+
+# Verify Python version first
+$pythonVersion = python --version
+Write-Host "🐍 Python Version: $pythonVersion" -ForegroundColor Cyan
+if ($pythonVersion -notmatch "3\.13\.5") {
+    Write-Host "⚠️  Recommended Python version is 3.13.5 for optimal compatibility" -ForegroundColor Yellow
+}
 
 # Smart detection and setup of virtual environment
 if (Test-Path ".venv") {

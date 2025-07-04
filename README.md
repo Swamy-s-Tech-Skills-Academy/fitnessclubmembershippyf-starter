@@ -46,6 +46,7 @@ This starter project provides everything needed to begin development:
 
 ## 🛠 Tech Stack
 
+- **Python:** 3.13.5 (recommended for optimal compatibility)
 - **Backend:** Flask 3.0.0 + SQLAlchemy + Flask-WTF
 - **Frontend:** Tailwind CSS + Jinja2 + JavaScript
 - **Icons:** Font Awesome 6.4.0

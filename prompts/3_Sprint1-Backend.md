@@ -5,6 +5,9 @@
 ````text
 Build a complete Flask backend for a fitness club membership system with the following requirements:
 
+PYTHON VERSION REQUIREMENT:
+- Python 3.13.5 (ensure compatibility with all Flask 3.0.0 and SQLAlchemy 2.0.35 features)
+
 CRITICAL: REPLACE THE EXISTING SIMPLE WELCOME APP
 The current src\app.py only contains a basic welcome page. You must REPLACE it entirely with a full application containing all the routes and functionality listed below.
 
