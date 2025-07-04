@@ -13,7 +13,7 @@ STARTER PROJECT INCLUDES:
 ✅ .gitignore - Python/Flask optimized ignore rules
 ✅ .copilot/settings.json - GitHub Copilot configuration
 ✅ .github/copilot-instructions.md - Copilot Agent instructions
-✅ docs/ folder - Documentation and images
+✅ docs/ folder - Documentation and images (includes favicon.ico)
 ✅ prompts/ folder - All sprint .md files with copy-paste prompts
 ✅ LICENSE - Project license
 ✅ README.md - Project documentation

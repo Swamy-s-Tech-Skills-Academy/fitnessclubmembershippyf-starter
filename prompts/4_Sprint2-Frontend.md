@@ -1,4 +1,64 @@
-# 🎨 Sprint 2: Frontend Templates (15 minutes)
+# 🎨 Sprint 2: Frontend TFAVICON IMPLEMENTATION:
+
+Include comprehensive favicon support in base.html:
+
+```html
+<!-- Favicon -->
+<link
+  rel="icon"
+  type="image/x-icon"
+  href="{{ url_for('static', filename='favicon.ico') }}"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="{{ url_for('static', filename='favicon-32x32.png') }}"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="{{ url_for('static', filename='favicon-16x16.png') }}"
+/>
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="{{ url_for('static', filename='apple-touch-icon.png') }}"
+/>
+```
+
+FAVICON FILE CREATION:
+Create a fitness-themed favicon for the application:
+
+1. Generate a fitness club favicon (dumbbell, gym, or fitness icon)
+2. Create multiple sizes: 16x16, 32x32, and 180x180 pixels
+3. Save as both ICO and PNG formats in src\static\ folder:
+
+```powershell
+# PowerShell commands to create favicon files in src\static\
+# Note: Use actual favicon generation tool or copy existing fitness-themed favicons
+
+# Create a simple fitness-themed favicon using Font Awesome dumbbell icon concept
+# Place these files in src\static\ folder:
+# - favicon.ico (standard ICO format with multiple sizes)
+# - favicon-32x32.png (32x32 PNG version)
+# - favicon-16x16.png (16x16 PNG version)
+# - apple-touch-icon.png (180x180 for iOS devices)
+
+# If favicon already exists in docs\icons\, copy it:
+Copy-Item "..\..\docs\icons\favicon.ico" "src\static\favicon.ico"
+```
+
+REQUIRED FAVICON SPECIFICATIONS:
+
+- Theme: Fitness/gym related (dumbbell, barbell, gym equipment)
+- Colors: Blue (#2563eb) and gray (#6b7280) to match site theme
+- Formats: ICO (primary) and PNG (modern browsers)
+- Sizes: 16x16, 32x32, 48x48 (in ICO), plus 180x180 (Apple Touch)
+- Background: Transparent or white
+
+STYLING RESOURCES:5 minutes)
 
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 2**
 
@@ -79,10 +139,18 @@ python app.py
 - ✅ 9 professional HTML templates with Jinja2 inheritance
 - ✅ Responsive Tailwind CSS design with Font Awesome icons
 - ✅ Complete navigation system with breadcrumbs
+- ✅ Favicon implementation with multiple formats (ICO, PNG, Apple Touch)
 - ✅ Forms with client-side validation styling and error display
 - ✅ Dashboard with analytics layout and visual metrics
 - ✅ Mobile-first responsive design across all templates
 - ✅ Professional typography with Google Fonts integration
+
+**FAVICON VERIFICATION CHECKLIST:**
+
+- ✅ favicon.ico exists in src\static\ folder
+- ✅ Favicon displays in browser tab when visiting http://localhost:5000
+- ✅ Favicon follows fitness theme (dumbbell, gym equipment, etc.)
+- ✅ Multiple sizes included for optimal compatibility
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 
