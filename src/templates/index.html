@@ -5,52 +5,254 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Club Membership System</title>
-    <!-- TailwindCSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+
+    <!-- Google Fonts (Inter & Poppins) -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
 
-        .font-poppins {
-            font-family: 'Poppins', sans-serif;
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif']
+                    },
+                    colors: {
+                        'fitness-blue': '#3B82F6',
+                        'fitness-dark': '#1E293B',
+                        'fitness-light': '#F8FAFC'
+                    }
+                }
+            }
         }
-    </style>
+    </script>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="text-center">
-        <div class="mb-6">
-            <i class="fas fa-dumbbell text-6xl text-blue-600 mb-4"></i>
-        </div>
-        <h1 class="text-6xl font-bold text-blue-600 mb-4 font-poppins">Welcome to Fitness Club</h1>
-        <p class="text-xl text-gray-600 mb-6">Your fitness journey starts here!</p>
-        <div class="flex justify-center gap-4 mb-8">
-            <div class="flex items-center gap-2 text-gray-700">
-                <i class="fas fa-users text-blue-500"></i>
-                <span>Members</span>
+<body class="bg-gradient-to-br from-fitness-light to-blue-50 min-h-screen font-inter">
+    <!-- Header/Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-dumbbell text-fitness-blue text-3xl"></i>
+                    <h1 class="text-2xl font-bold font-poppins text-fitness-dark">
+                        Fitness Club
+                    </h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-fitness-blue transition duration-300">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-fitness-blue transition duration-300">
+                        <i class="fas fa-users mr-2"></i>Members
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-fitness-blue transition duration-300">
+                        <i class="fas fa-calendar mr-2"></i>Sessions
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-fitness-blue transition duration-300">
+                        <i class="fas fa-chart-bar mr-2"></i>Analytics
+                    </a>
+                </div>
             </div>
-            <div class="flex items-center gap-2 text-gray-700">
-                <i class="fas fa-calendar-alt text-green-500"></i>
-                <span>Bookings</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <div class="mb-8">
+                <i class="fas fa-heartbeat text-fitness-blue text-8xl mb-6 animate-pulse"></i>
             </div>
-            <div class="flex items-center gap-2 text-gray-700">
-                <i class="fas fa-chart-line text-purple-500"></i>
-                <span>Analytics</span>
+            <h1 class="text-6xl font-bold font-poppins text-fitness-dark mb-6 leading-tight">
+                Welcome to <span class="text-fitness-blue">Fitness Club</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Your complete fitness club membership management system.
+                Streamline member registration, session booking, and club operations with ease.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div class="bg-green-100 text-green-800 px-6 py-3 rounded-full font-medium flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    Flask App Running Successfully
+                </div>
+                <div class="bg-blue-100 text-blue-800 px-6 py-3 rounded-full font-medium flex items-center">
+                    <i class="fas fa-code mr-2"></i>
+                    Development Environment Ready
+                </div>
             </div>
         </div>
-        <div class="mt-8">
-            <span class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">
-                <i class="fas fa-check-circle mr-2"></i>Flask App Running Successfully
-            </span>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <!-- Member Management -->
+            <div
+                class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-fitness-blue text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold font-poppins text-fitness-dark mb-3">Member Management</h3>
+                <p class="text-gray-600">Register, manage, and track member information with comprehensive profiles.</p>
+            </div>
+
+            <!-- Session Booking -->
+            <div
+                class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-calendar-check text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold font-poppins text-fitness-dark mb-3">Session Booking</h3>
+                <p class="text-gray-600">Schedule and manage workout sessions with trainers and capacity tracking.</p>
+            </div>
+
+            <!-- Membership Plans -->
+            <div
+                class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+                <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-medal text-purple-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold font-poppins text-fitness-dark mb-3">Membership Plans</h3>
+                <p class="text-gray-600">Flexible membership tiers with different benefits and pricing options.</p>
+            </div>
+
+            <!-- Analytics Dashboard -->
+            <div
+                class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+                <div class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-chart-line text-orange-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold font-poppins text-fitness-dark mb-3">Analytics & Reports</h3>
+                <p class="text-gray-600">Real-time insights, revenue tracking, and comprehensive business analytics.</p>
+            </div>
         </div>
-    </div>
+
+        <!-- Technology Stack -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-16">
+            <h2 class="text-3xl font-bold font-poppins text-fitness-dark text-center mb-8">
+                <i class="fas fa-cogs mr-3 text-fitness-blue"></i>
+                Technology Stack
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <i class="fab fa-python text-4xl text-blue-600 mb-3"></i>
+                    <h4 class="font-semibold text-fitness-dark">Python & Flask</h4>
+                    <p class="text-sm text-gray-600">Backend Framework</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-database text-4xl text-green-600 mb-3"></i>
+                    <h4 class="font-semibold text-fitness-dark">SQLite & SQLAlchemy</h4>
+                    <p class="text-sm text-gray-600">Database & ORM</p>
+                </div>
+                <div class="text-center">
+                    <i class="fab fa-html5 text-4xl text-orange-600 mb-3"></i>
+                    <h4 class="font-semibold text-fitness-dark">TailwindCSS</h4>
+                    <p class="text-sm text-gray-600">Frontend Styling</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-vial text-4xl text-purple-600 mb-3"></i>
+                    <h4 class="font-semibold text-fitness-dark">Pytest</h4>
+                    <p class="text-sm text-gray-600">Testing Framework</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start Guide -->
+        <div class="bg-gradient-to-r from-fitness-blue to-blue-600 rounded-xl shadow-lg p-8 text-white">
+            <h2 class="text-3xl font-bold font-poppins text-center mb-8">
+                <i class="fas fa-rocket mr-3"></i>
+                Ready to Get Started?
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div
+                        class="bg-white bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">1</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Set Up Environment</h4>
+                    <p class="text-blue-100">Virtual environment and dependencies are ready!</p>
+                </div>
+                <div>
+                    <div
+                        class="bg-white bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Build Features</h4>
+                    <p class="text-blue-100">Follow the sprint prompts to add functionality</p>
+                </div>
+                <div>
+                    <div
+                        class="bg-white bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">3</span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Deploy & Manage</h4>
+                    <p class="text-blue-100">Launch your fitness club management system</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-fitness-dark text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <i class="fas fa-dumbbell text-fitness-blue text-2xl mr-3"></i>
+                <span class="text-xl font-semibold font-poppins">Fitness Club Management System</span>
+            </div>
+            <p class="text-gray-400">
+                Built with <i class="fas fa-heart text-red-500"></i> using Flask, TailwindCSS, and modern web
+                technologies
+            </p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-fitness-blue transition duration-300">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-fitness-blue transition duration-300">
+                    <i class="fas fa-book text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-fitness-blue transition duration-300">
+                    <i class="fas fa-play-circle text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for enhanced interactivity -->
+    <script>
+        // Add smooth scrolling and interactive elements
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Add loading animation
+            const cards = document.querySelectorAll('.hover\\:shadow-xl');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 
 </html>
