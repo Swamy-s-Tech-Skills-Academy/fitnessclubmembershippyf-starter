@@ -51,7 +51,7 @@ with member management, session booking, and analytics dashboard."
    ```powershell
    python -m venv .venv
    .venv\Scripts\activate
-   # Show requirements.txt creation
+   # requirements.txt is already provided in starter project
    pip install -r requirements.txt
    mkdir src\templates src\static src\instance
    ```
@@ -66,8 +66,9 @@ with member management, session booking, and analytics dashboard."
 **Key Talking Points:**
 
 - "Virtual environments keep dependencies isolated"
-- "We're following industry best practices from day one"
+- "All configuration files are provided in the starter project"
 - "This folder structure scales for larger projects"
+- "requirements.txt, .gitignore, and .copilot settings are ready to use"
 
 ---
 

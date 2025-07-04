@@ -13,7 +13,20 @@
 
 **Total Development Time:** 50 minutes
 
-> 💡 **Windows Users**: All instructions use PowerShell commands for Windows 11 compatibility. The starter project includes `.gitignore`, `requirements.txt`, and `.copilot/settings.json` for immediate development.
+## � **Starter Project Includes**
+
+This starter project provides everything needed to begin development:
+
+- **A.** `.copilot/settings.json` - GitHub Copilot configuration
+- **B.** `.github/copilot-instructions.md` - Copilot Agent instructions
+- **C.** `docs/` folder - Documentation and images
+- **D.** `prompts/` folder - All sprint `.md` files with copy-paste prompts
+- **E.** `.gitignore` - Python/Flask optimized ignore rules
+- **F.** `LICENSE` - Project license
+- **G.** `README.md` - This file
+- **H.** `requirements.txt` - All Python dependencies with versions
+
+> 💡 **Ready to Code**: No manual setup required! Just activate your virtual environment and start with [Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md).
 
 ## 🛠 Tech Stack
 

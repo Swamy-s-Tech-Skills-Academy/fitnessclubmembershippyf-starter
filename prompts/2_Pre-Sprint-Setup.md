@@ -5,12 +5,21 @@
 ```text
 Set up the development environment for a Flask fitness club membership system:
 
-REQUIREMENTS:
+STARTER PROJECT INCLUDES:
+✅ requirements.txt - All Python dependencies with specific versions
+✅ .gitignore - Python/Flask optimized ignore rules
+✅ .copilot/settings.json - GitHub Copilot configuration
+✅ .github/copilot-instructions.md - Copilot Agent instructions
+✅ docs/ folder - Documentation and images
+✅ prompts/ folder - All sprint .md files with copy-paste prompts
+✅ LICENSE - Project license
+✅ README.md - Project documentation
+
+SETUP TASKS:
 1. Create virtual environment (.venv)
-2. Install Flask dependencies
-3. Create basic project structure
-4. Set up folder organization
-5. Create basic Flask app with welcome home page
+2. Install dependencies from provided requirements.txt
+3. Create src/ folder structure
+4. Set up basic Flask app with welcome home page
 
 FOLDERS TO CREATE:
 - src\ (main application code)
@@ -18,7 +27,7 @@ FOLDERS TO CREATE:
 - src\static\ (CSS, JS, images)
 - src\instance\ (database files - ensure this exists to prevent database path issues)
 
-DEPENDENCIES TO INSTALL (from requirements.txt):
+DEPENDENCIES (already defined in requirements.txt):
 
 Core Flask Framework:
 - Flask==3.0.0
@@ -50,7 +59,7 @@ FRONTEND STYLING:
 - Google Fonts (Inter & Poppins)
 - CDN URL: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
 
-Note: requirements.txt, .gitignore, and .copilot settings are already included in the starter project.
+✅ All configuration files are included in the starter project - no manual creation needed!
 ```
 
 ## 🏠 **CREATE BASIC WELCOME HOME PAGE**

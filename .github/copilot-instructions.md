@@ -23,22 +23,28 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 
 ## 📁 Project Structure (Expected)
 
+**Starter Project Includes:**
+
+- A. `.copilot/settings.json` - GitHub Copilot configuration
+- B. `.github/copilot-instructions.md` - Copilot Agent instructions
+- C. `docs/` folder - Documentation and images
+- D. `prompts/` folder - All sprint `.md` files with copy-paste prompts
+- E. `.gitignore` - Python/Flask optimized ignore rules
+- F. `LICENSE` - Project license
+- G. `README.md` - Project documentation
+- H. `requirements.txt` - All Python dependencies with versions
+
+**Generated During Development:**
+
 ```
-.
-├── src\
-│   ├── app.py
-│   ├── config.py
-│   ├── init_db.py
-│   ├── models.py
-│   ├── templates\
-│   ├── static\
-│   └── instance\
-├── requirements.txt
-├── README.md
-├── .gitignore
-├── .copilot\settings.json
-└── .github\
-    └── copilot-instructions.md
+src\
+├── app.py
+├── config.py
+├── init_db.py
+├── models.py
+├── templates\
+├── static\
+└── instance\
 ```
 
 ---
@@ -131,7 +137,7 @@ python app.py
 # Open: <http://localhost:5000>
 ```
 
-> **Note**: These commands are for user verification after Copilot generates the code. The starter project includes all required files (`.gitignore`, `requirements.txt`, `.copilot/settings.json`).
+> **Note**: These commands are for user verification after Copilot generates the code. The starter project includes all configuration files: `.gitignore`, `requirements.txt`, `.copilot/settings.json`, `.github/copilot-instructions.md`, `docs/`, `prompts/`, `LICENSE`, and `README.md`.
 
 ---
 
