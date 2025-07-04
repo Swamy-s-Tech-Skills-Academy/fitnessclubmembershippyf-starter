@@ -55,38 +55,61 @@ Create requirements.txt with these dependencies and set up virtual environment.
 
 ## ✅ **SETUP COMMANDS**
 
-```bash
+### **Windows PowerShell Commands:**
+
+```powershell
 # ✅ Create virtual environment
 python -m venv .venv
 
-# ✅ Activate virtual environment (choose your platform)
-# Windows:
+# ✅ Activate virtual environment (Windows PowerShell)
 .venv\Scripts\activate
-# macOS/Linux:
-# source .venv/bin/activate
 
 # ✅ Install dependencies from existing requirements.txt
 pip install -r requirements.txt
 
-# ✅ Create folder structure (cross-platform)
-mkdir -p src/templates src/static src/instance
+# ✅ Create folder structure (Windows)
+New-Item -ItemType Directory -Path "src" -Force
+New-Item -ItemType Directory -Path "src\templates" -Force
+New-Item -ItemType Directory -Path "src\static" -Force
+New-Item -ItemType Directory -Path "src\instance" -Force
 
-# ✅ Create .gitignore for clean repository (early setup)
-cat <<EOF > .gitignore
+# ✅ Create .gitignore for clean repository
+@"
 .venv/
 __pycache__/
 *.pyc
 instance/
 .env
 *.db
-EOF
+"@ | Out-File -FilePath ".gitignore" -Encoding UTF8
+```
+
+### **Alternative: Command Prompt (cmd) - if PowerShell not available:**
+
+```cmd
+REM ✅ Create virtual environment
+python -m venv .venv
+
+REM ✅ Activate virtual environment (Command Prompt)
+.venv\Scripts\activate.bat
+
+REM ✅ Install dependencies
+pip install -r requirements.txt
+
+REM ✅ Create folder structure
+mkdir src
+mkdir src\templates
+mkdir src\static
+mkdir src\instance
 ```
 
 ## 🏠 **CREATE BASIC WELCOME HOME PAGE**
 
-```bash
-# ✅ Create basic Flask app (src/app.py) using cat for better formatting
-cat <<EOF > src/app.py
+### **PowerShell File Creation Commands:**
+
+```powershell
+# ✅ Create basic Flask app (src/app.py)
+@"
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -97,75 +120,86 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
-EOF
+"@ | Out-File -FilePath "src\app.py" -Encoding UTF8
 
 # ✅ Create welcome template (src/templates/index.html)
-cat <<EOF > src/templates/index.html
+@"
 <!DOCTYPE html>
-<html lang="en">
+<html lang=`"en`">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset=`"UTF-8`">
+    <meta name=`"viewport`" content=`"width=device-width, initial-scale=1.0`">
     <title>Fitness Club Membership System</title>
     <!-- TailwindCSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src=`"https://cdn.tailwindcss.com`"></script>
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel=`"stylesheet`" href=`"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css`">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href=`"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap`" rel=`"stylesheet`">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .font-poppins { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="text-center">
-        <div class="mb-6">
-            <i class="fas fa-dumbbell text-6xl text-blue-600 mb-4"></i>
+<body class=`"bg-gray-100 min-h-screen flex items-center justify-center`">
+    <div class=`"text-center`">
+        <div class=`"mb-6`">
+            <i class=`"fas fa-dumbbell text-6xl text-blue-600 mb-4`"></i>
         </div>
-        <h1 class="text-6xl font-bold text-blue-600 mb-4 font-poppins">Welcome to Fitness Club</h1>
-        <p class="text-xl text-gray-600 mb-6">Your fitness journey starts here!</p>
-        <div class="flex justify-center gap-4 mb-8">
-            <div class="flex items-center gap-2 text-gray-700">
-                <i class="fas fa-users text-blue-500"></i>
+        <h1 class=`"text-6xl font-bold text-blue-600 mb-4 font-poppins`">Welcome to Fitness Club</h1>
+        <p class=`"text-xl text-gray-600 mb-6`">Your fitness journey starts here!</p>
+        <div class=`"flex justify-center gap-4 mb-8`">
+            <div class=`"flex items-center gap-2 text-gray-700`">
+                <i class=`"fas fa-users text-blue-500`"></i>
                 <span>Members</span>
             </div>
-            <div class="flex items-center gap-2 text-gray-700">
-                <i class="fas fa-calendar-alt text-green-500"></i>
+            <div class=`"flex items-center gap-2 text-gray-700`">
+                <i class=`"fas fa-calendar-alt text-green-500`"></i>
                 <span>Bookings</span>
             </div>
-            <div class="flex items-center gap-2 text-gray-700">
-                <i class="fas fa-chart-line text-purple-500"></i>
+            <div class=`"flex items-center gap-2 text-gray-700`">
+                <i class=`"fas fa-chart-line text-purple-500`"></i>
                 <span>Analytics</span>
             </div>
         </div>
-        <div class="mt-8">
-            <span class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">
-                <i class="fas fa-check-circle mr-2"></i>Flask App Running Successfully
+        <div class=`"mt-8`">
+            <span class=`"inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium`">
+                <i class=`"fas fa-check-circle mr-2`"></i>Flask App Running Successfully
             </span>
         </div>
     </div>
 </body>
 </html>
-EOF
+"@ | Out-File -FilePath "src\templates\index.html" -Encoding UTF8
 
 # ✅ Create Copilot configuration for better assistance
-mkdir -p .copilot
-cat <<EOF > .copilot/settings.json
+New-Item -ItemType Directory -Path ".copilot" -Force
+@"
 {
-  "projectType": "flask",
-  "useVirtualEnv": true,
-  "frontend": "tailwindcss",
-  "database": "sqlite"
+  `"projectType`": `"flask`",
+  `"useVirtualEnv`": true,
+  `"frontend`": `"tailwindcss`",
+  `"database`": `"sqlite`"
 }
-EOF
+"@ | Out-File -FilePath ".copilot\settings.json" -Encoding UTF8
+```
+
+### **Alternative: For users who prefer separate files (recommended for complex projects):**
+
+```powershell
+# Create empty files first, then edit them manually or copy content
+New-Item -ItemType File -Path "src\app.py" -Force
+New-Item -ItemType File -Path "src\templates\index.html" -Force
+# Then copy the content from above into each file using your editor
 ```
 
 ## 📋 **ALTERNATIVE: Create requirements.txt from scratch**
 
-```bash
+### **PowerShell Command:**
+
+```powershell
 # If requirements.txt doesn't exist, create it:
-cat <<EOF > requirements.txt
+@"
 # Fitness Club Membership System - Python Dependencies
 
 # Core Flask Framework
@@ -193,7 +227,7 @@ gunicorn==21.2.0
 
 # Optional: Development Tools
 python-dotenv==1.0.0
-EOF
+"@ | Out-File -FilePath "requirements.txt" -Encoding UTF8
 ```
 
 ## 🎨 **FRONTEND STYLING SETUP**
@@ -239,12 +273,27 @@ EOF
 
 ## ✅ **VALIDATION COMMANDS**
 
-```bash
+### **Windows PowerShell:**
+
+```powershell
 # Activate virtual environment
 .venv\Scripts\activate
+
+# Navigate to src directory and start app
 cd src
 python app.py
 # Visit http://localhost:5000 - should show welcome page
+```
+
+### **Alternative: Command Prompt (cmd):**
+
+```cmd
+REM Activate virtual environment
+.venv\Scripts\activate.bat
+
+REM Navigate to src directory and start app
+cd src
+python app.py
 ```
 
 ## 🎯 **EXPECTED DELIVERABLES**
@@ -262,19 +311,29 @@ python app.py
 
 ### **Step 1: Activate Virtual Environment**
 
-```bash
+```powershell
 # Navigate to your project root directory
-cd "path\to\your\project"
+Set-Location "path\to\your\project"
 
-# Activate virtual environment
+# Activate virtual environment (PowerShell)
 .venv\Scripts\activate
 
 # Verify you see (.venv) in your prompt
 ```
 
+**Alternative for Command Prompt:**
+
+```cmd
+REM Navigate to your project root directory
+cd "path\to\your\project"
+
+REM Activate virtual environment (Command Prompt)
+.venv\Scripts\activate.bat
+```
+
 ### **Step 2: Verify Python Environment**
 
-```bash
+```powershell
 # Check Python version
 python --version
 
@@ -287,9 +346,9 @@ python -c "import flask; print(f'Flask version: {flask.__version__}')"
 
 ### **Step 3: Test Flask Application**
 
-```bash
+```powershell
 # Start Flask development server
-cd src
+Set-Location src
 python app.py
 
 # Expected output:
@@ -299,8 +358,8 @@ python app.py
 
 ### **Step 4: Verify Project Structure**
 
-```bash
-# Check project structure exists
+```powershell
+# Check project structure exists (PowerShell)
 Get-ChildItem -Recurse src | Select-Object FullName
 
 # Expected structure:
@@ -316,8 +375,8 @@ Get-ChildItem -Recurse src | Select-Object FullName
 
 ### **Step 6: Final Completion Check**
 
-```bash
-# Simple completion validation
+```powershell
+# Simple completion validation (PowerShell)
 python -c "print('🎯 PRE-SPRINT COMPLETION CHECK'); print('=' * 40); print('✅ Virtual Environment: Active'); print('✅ Flask App: Running'); print('✅ Dependencies: Installed'); print('✅ Project Structure: Complete'); print('✅ HTTP Validation: Working'); print('=' * 40); print('🚀 READY FOR SPRINT 1!')"
 
 # Expected output:
@@ -348,16 +407,16 @@ Once all verification steps pass, you're ready to proceed with:
 
 ## 🤖 **COPILOT AGENT COMPATIBILITY**
 
-This setup is optimized for Copilot Agent execution:
+This setup is optimized for Copilot Agent execution on Windows:
 
-- ✅ Uses `cat <<EOF` for better multiline file creation
-- ✅ Cross-platform commands (Windows/macOS/Linux)
-- ✅ Comment headers for clear bash block identification
-- ✅ Scriptable commands with clear separation
+- ✅ Uses PowerShell `@"..."@` syntax for better multiline file creation
+- ✅ Windows-specific commands (PowerShell + Command Prompt alternatives)
+- ✅ Comment headers for clear PowerShell block identification
+- ✅ Scriptable commands with Windows path separators (\)
 - ✅ Includes .gitignore for clean repository
 - ✅ Copilot configuration for contextual assistance
-- ✅ No ambiguous shell syntax
-- ✅ Development-focused workflow
+- ✅ No Unix-specific shell syntax
+- ✅ Development-focused workflow optimized for Windows 11
 
 ## � **IMPORTANT NOTES FOR SPRINT 1**
 

@@ -4,12 +4,16 @@
 
 ## 🚀 Quick Start
 
-1. **Setup Environment** - [Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md) (5 min)
+### **Windows 11 / PowerShell Instructions:**
+
+1. **Setup Environment** - [Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md) (5 min) - Windows PowerShell optimized
 2. **Build Backend** - [Sprint 1: Backend](prompts/3_Sprint1-Backend.md) (15 min)
 3. **Create Frontend** - [Sprint 2: Frontend](prompts/4_Sprint2-Frontend.md) (15 min)
 4. **Polish & Deploy** - [Sprint 3: Integration](prompts/5_Sprint3-Integration.md) (15 min)
 
 **Total Development Time:** 50 minutes
+
+> 💡 **Windows Users**: All instructions use PowerShell commands with Command Prompt alternatives provided.
 
 ## 🛠 Tech Stack
 

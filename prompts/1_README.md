@@ -2,7 +2,11 @@
 
 ## 🚀 **WELCOME TO THE 45-MINUTE LIVE CODING CHALLENGE!**
 
+### **Windows 11 & PowerShell Optimized**
+
 Build a complete fitness club membership system using **Flask**, **SQLAlchemy**, **Tailwind CSS**, **Font Awesome**, **Google Fonts**, **JavaScript**, and **SQLite** in just 45 minutes!
+
+> 💡 **All instructions are optimized for Windows 11 with PowerShell commands and Command Prompt alternatives.**
 
 ## 📋 **STEP-BY-STEP GUIDE** (Follow in Order)
 
@@ -67,6 +71,8 @@ By the end of this session, you'll have a complete fitness club management syste
 - **If you fall behind**, focus on core features and skip advanced polish
 - **Engage your audience** - explain the architecture decisions
 - **Test frequently** - browser validation after each sprint
+- **PowerShell optimized** - all commands work on Windows 11 out of the box
+- **Command Prompt alternatives** provided for compatibility
 - **Have fun and keep energy high!** 🎉
 
 ---

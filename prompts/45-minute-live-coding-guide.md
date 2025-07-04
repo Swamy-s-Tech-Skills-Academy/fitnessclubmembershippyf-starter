@@ -9,13 +9,16 @@ This guide provides detailed presenter notes for conducting a 45-minute live cod
 ### **Pre-Session (5 minutes before start)**
 
 - Have VS Code/IDE ready
-- Terminal prepared with PowerShell
+- Terminal prepared with PowerShell (Windows 11 optimized)
 - Python 3.8+ verified installed
 - Internet connection confirmed for CDN resources (Tailwind, Font Awesome, Google Fonts)
+- Verify PowerShell execution policy allows script execution
+
+> 💡 **Windows Note**: All commands in this guide use PowerShell syntax optimized for Windows 11
 
 ### **Opening (2 minutes) - Total: 2 min**
 
-```
+```text
 "Today we're building a complete fitness club membership system in 45 minutes.
 We'll use Flask, SQLAlchemy, Tailwind CSS, Font Awesome, and Google Fonts to create a production-ready app
 with member management, session booking, and analytics dashboard."
@@ -86,7 +89,7 @@ with member management, session booking, and analytics dashboard."
 4. **Test the backend** (3 minutes)
 
    ```powershell
-   cd src
+   Set-Location src
    python init_db.py
    python app.py
    ```

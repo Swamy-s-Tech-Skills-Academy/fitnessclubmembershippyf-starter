@@ -25,19 +25,19 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 
 ```
 .
-├── src/
+├── src\
 │   ├── app.py
 │   ├── config.py
 │   ├── init_db.py
 │   ├── models.py
-│   ├── templates/
-│   ├── static/
-│   └── instance/
+│   ├── templates\
+│   ├── static\
+│   └── instance\
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
-├── .copilot/settings.json
-└── .github/
+├── .copilot\settings.json
+└── .github\
     └── copilot-instructions.md
 ```
 
@@ -58,10 +58,11 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 
 Copilot Agent must remember:
 
-- The project structure is focused on development with Flask app in `src/` folder
-- All application code resides in the `src/` directory
-- Database files are stored in `src/instance/`
-- Templates are in `src/templates/` and static files in `src/static/`
+- The project structure is focused on development with Flask app in `src\` folder
+- All application code resides in the `src\` directory
+- Database files are stored in `src\instance\`
+- Templates are in `src\templates\` and static files in `src\static\`
+- Use Windows path separators (\) in commands and file paths
 
 ---
 
@@ -93,9 +94,10 @@ Copilot Agent should:
 - Integrate Google Fonts typography (Inter for body, Poppins for headings)
 - Propose Flask-WTF forms with comprehensive validation
 - Generate JavaScript/AJAX functionality for dynamic interactions
-- Use `cat <<EOF` format for writing files
+- Use PowerShell `@"..."@` format for writing files (Windows-optimized)
 - Follow `settings.json` configuration
 - Focus on development workflow (no test file generation)
+- Use Windows path separators (\) and PowerShell commands
 
 ---
 
@@ -112,19 +114,37 @@ Copilot Agent should:
 
 ## 🔁 Developer Commands (Validation)
 
-```bash
+### **Windows PowerShell:**
+
+```powershell
 # Setup
 python -m venv .venv
-source .venv/bin/activate       # or .venv\Scripts\activate
+.venv\Scripts\activate
 pip install -r requirements.txt
 
 # Run database init
-cd src
+Set-Location src
 python init_db.py
 
 # Start app
 python app.py
 # Open: http://localhost:5000
+```
+
+### **Alternative: Command Prompt (cmd):**
+
+```cmd
+REM Setup
+python -m venv .venv
+.venv\Scripts\activate.bat
+pip install -r requirements.txt
+
+REM Run database init
+cd src
+python init_db.py
+
+REM Start app
+python app.py
 ```
 
 ---

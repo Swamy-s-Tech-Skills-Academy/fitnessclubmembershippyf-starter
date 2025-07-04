@@ -53,13 +53,29 @@ Use SQLite database in src/instance/fitness_club.db
 
 ## ✅ **VALIDATION COMMANDS**
 
-```bash
+### **Windows PowerShell:**
+
+```powershell
 # Activate virtual environment
 .venv\Scripts\activate
-cd src
+
+# Navigate to src and initialize database
+Set-Location src
 python init_db.py
 python app.py
 # Visit http://localhost:5000 - should show dashboard
+```
+
+### **Alternative: Command Prompt (cmd):**
+
+```cmd
+REM Activate virtual environment
+.venv\Scripts\activate.bat
+
+REM Navigate to src and run application
+cd src
+python init_db.py
+python app.py
 ````
 
 ## 🛠️ **TROUBLESHOOTING**

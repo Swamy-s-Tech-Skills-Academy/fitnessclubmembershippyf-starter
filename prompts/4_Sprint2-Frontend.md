@@ -46,14 +46,29 @@ Include proper error handling and success messages
 
 ## ✅ **VALIDATION COMMANDS**
 
-```bash
+### **Windows PowerShell:**
+
+```powershell
 # Activate virtual environment
 .venv\Scripts\activate
-cd src
+
+# Navigate to src and start application
+Set-Location src
 python app.py
 # Visit http://localhost:5000 - verify all pages
 # Check responsive design on different screen sizes
 # Verify forms are styled properly
+```
+
+### **Alternative: Command Prompt (cmd):**
+
+```cmd
+REM Activate virtual environment
+.venv\Scripts\activate.bat
+
+REM Navigate to src and run application
+cd src
+python app.py
 ```
 
 ## 🎯 **EXPECTED DELIVERABLES**

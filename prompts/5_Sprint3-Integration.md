@@ -55,9 +55,11 @@ The system should be production-ready with all features working smoothly.
 
 ## ✅ **VALIDATION COMMANDS**
 
-```bash
+### **Windows PowerShell:**
+
+```powershell
 # ✅ PREREQUISITE: Verify Sprints 1 & 2 are working
-cd src
+Set-Location src
 python app.py
 # Verify all pages load without errors:
 # - http://localhost:5000/ (dashboard)
@@ -68,8 +70,8 @@ python app.py
 
 # ✅ Verify dependencies (should already be installed from Sprint 1)
 # Flask-WTF and WTForms are in requirements.txt
-pip list | grep -i flask-wtf
-pip list | grep -i wtforms
+pip list | Select-String -Pattern "flask-wtf" -CaseSensitive:$false
+pip list | Select-String -Pattern "wtforms" -CaseSensitive:$false
 
 # ✅ Implement Sprint 3 features
 # - Add form validation classes
@@ -93,6 +95,18 @@ pip list | grep -i wtforms
 # - Mobile responsive design maintained
 # - Professional error pages display
 # - AJAX endpoints return proper JSON
+```
+
+### **Alternative: Command Prompt (cmd):**
+
+```cmd
+REM Navigate to src directory
+cd src
+python app.py
+
+REM Check dependencies
+pip list | findstr /i "flask-wtf"
+pip list | findstr /i "wtforms"
 ```
 
 ## 🎯 **EXPECTED DELIVERABLES**
@@ -138,12 +152,24 @@ pip list | grep -i wtforms
 
 ### **Pre-Sprint 3 Validation:**
 
-```bash
+#### **PowerShell Commands:**
+
+```powershell
 # Test these work before starting Sprint 3:
-curl http://localhost:5000/                    # Should return 200
-curl http://localhost:5000/members             # Should return 200
-curl http://localhost:5000/plans               # Should return 200
-curl http://localhost:5000/sessions            # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/" -Method GET         # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/members" -Method GET  # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/plans" -Method GET    # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/sessions" -Method GET # Should return 200
+```
+
+#### **Alternative: Manual Browser Testing (Recommended):**
+
+```text
+# Open these URLs in your browser to verify they work:
+- http://localhost:5000/ (should show dashboard)
+- http://localhost:5000/members (should show member list)
+- http://localhost:5000/plans (should show plans)
+- http://localhost:5000/sessions (should show sessions)
 ```
 
 ## 🤖 **COPILOT AGENT COMPATIBILITY**
