@@ -250,10 +250,11 @@ python app.py
 ## 🎯 **EXPECTED DELIVERABLES**
 
 - ✅ Virtual environment created and activated
-- ✅ All dependencies installed
-- ✅ Project folder structure created
-- ✅ Basic Flask app with welcome page
-- ✅ HTTP responses working
+- ✅ All Flask dependencies installed (Flask, SQLAlchemy, Flask-WTF, etc.)
+- ✅ Project folder structure created (src/, templates/, static/, instance/)
+- ✅ Basic Flask app with professional welcome page
+- ✅ CDN resources integrated (Tailwind CSS, Font Awesome, Google Fonts)
+- ✅ HTTP responses working and styled content visible
 
 ## 🧪 **PRE-SPRINT VERIFICATION CHECKLIST**
 
@@ -262,8 +263,8 @@ python app.py
 ### **Step 1: Activate Virtual Environment**
 
 ```bash
-# Navigate to project root
-cd "d:\STSA\fitnessclubmembershippyf-starter"
+# Navigate to your project root directory
+cd "path\to\your\project"
 
 # Activate virtual environment
 .venv\Scripts\activate

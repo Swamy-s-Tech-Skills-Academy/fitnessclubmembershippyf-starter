@@ -11,9 +11,16 @@ TEMPLATES NEEDED:
 3. members/list.html - Member list with search, filters, export button
 4. members/create.html - Member registration form with validation
 5. members/detail.html - Member profile with plan assignment
-6. plans/list.html - Membership plans with pricing cards
-7. sessions/list.html - Session list with booking functionality
-8. sessions/schedule.html - Session scheduling form
+6. members/edit.html - Member edit form with validation
+7. plans/list.html - Membership plans with pricing cards
+8. sessions/list.html - Session list with booking functionality
+9. sessions/schedule.html - Session scheduling form
+
+TEMPLATE STRUCTURE:
+- All templates should extend base.html using Jinja2 inheritance
+- Use consistent block structure: title, content, scripts
+- Implement breadcrumb navigation for sub-pages
+- Include flash message display for user feedback
 
 STYLING RESOURCES:
 - TailwindCSS: https://cdn.tailwindcss.com
@@ -51,12 +58,13 @@ python app.py
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
-- ✅ 8 professional HTML templates
-- ✅ Responsive Tailwind CSS design
-- ✅ Complete navigation system
-- ✅ Forms with validation styling
-- ✅ Dashboard with analytics layout
-- ✅ Mobile-first responsive design
+- ✅ 9 professional HTML templates with Jinja2 inheritance
+- ✅ Responsive Tailwind CSS design with Font Awesome icons
+- ✅ Complete navigation system with breadcrumbs
+- ✅ Forms with client-side validation styling and error display
+- ✅ Dashboard with analytics layout and visual metrics
+- ✅ Mobile-first responsive design across all templates
+- ✅ Professional typography with Google Fonts integration
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 

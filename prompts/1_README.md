@@ -2,7 +2,7 @@
 
 ## 🚀 **WELCOME TO THE 45-MINUTE LIVE CODING CHALLENGE!**
 
-Build a complete fitness club membership system using **Flask**, **Tailwind CSS**, **Font Awesome**, **Google Fonts**, and **SQLite** in just 45 minutes!
+Build a complete fitness club membership system using **Flask**, **SQLAlchemy**, **Tailwind CSS**, **Font Awesome**, **Google Fonts**, **JavaScript**, and **SQLite** in just 45 minutes!
 
 ## 📋 **STEP-BY-STEP GUIDE** (Follow in Order)
 
@@ -41,13 +41,14 @@ Coming soon: [Deployed App Link](https://your-deployment-url.com)
 
 By the end of this session, you'll have a complete fitness club management system with:
 
-- ✅ **Member Management** - Registration, profiles, search
-- ✅ **Session Booking** - Schedule workouts, manage capacity
-- ✅ **Membership Plans** - Different tiers and pricing
-- ✅ **Analytics Dashboard** - Revenue, growth, statistics
-- ✅ **Data Export** - CSV exports for analysis
+- ✅ **Member Management** - Registration, profiles, search, status management
+- ✅ **Session Booking** - Schedule workouts, manage capacity, real-time booking
+- ✅ **Membership Plans** - Different tiers and pricing with assignment
+- ✅ **Analytics Dashboard** - Revenue, growth, statistics with visual metrics
+- ✅ **AJAX Functionality** - Dynamic interactions without page refresh
+- ✅ **Data Export** - CSV exports for analysis and reporting
 - ✅ **Professional UI** - Responsive design with Tailwind CSS, Font Awesome icons, and Google Fonts
-- ✅ **Production Ready** - Form validation, error handling
+- ✅ **Production Ready** - Form validation, error handling, and user feedback
 
 ## 🚀 **QUICK START**
 
@@ -57,12 +58,16 @@ By the end of this session, you'll have a complete fitness club management syste
 4. **Validate after each sprint** using browser testing
 5. **Keep the energy high!** 🎉
 
-## 💡 **PRO TIPS**
+## 💡 **PRO TIPS FOR PRESENTERS**
 
-- Each file contains one complete prompt to copy-paste
-- Validation commands are included in each file
-- If you fall behind, focus on core features
-- Have fun and engage your audience!
+- **Each file contains one complete prompt** to copy-paste to AI assistants
+- **Validation commands are included** in each file for testing
+- **CDN-based setup** means no build process - instant results
+- **Follow the exact sequence** - each sprint builds on the previous
+- **If you fall behind**, focus on core features and skip advanced polish
+- **Engage your audience** - explain the architecture decisions
+- **Test frequently** - browser validation after each sprint
+- **Have fun and keep energy high!** 🎉
 
 ---
 

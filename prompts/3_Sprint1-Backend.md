@@ -29,13 +29,22 @@ SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "instance", "fitnes
 
 ROUTES NEEDED:
 
-- / (dashboard with statistics)
-- /members (list with search)
-- /members/create (member registration)
-- /members/\<id\> (member details)
-- /plans (membership plans)
-- /sessions (workout sessions)
-- /sessions/schedule (session scheduling)
+- / (dashboard with statistics: total members, active sessions, revenue, growth)
+- /members (list with search functionality)
+- /members/create (member registration form)
+- /members/\<id\> (member details view)
+- /members/\<id\>/edit (member edit form)
+- /plans (membership plans display)
+- /sessions (workout sessions list)
+- /sessions/schedule (session scheduling form)
+
+RELATIONSHIPS TO IMPLEMENT:
+
+- Member → MemberPlan (one-to-many: member can have multiple plan histories)
+- MembershipPlan → MemberPlan (one-to-many: plan can be assigned to multiple members)
+- Trainer → WorkoutSession (one-to-many: trainer can lead multiple sessions)
+- Member → SessionBooking (one-to-many: member can book multiple sessions)
+- WorkoutSession → SessionBooking (one-to-many: session can have multiple bookings)
 
 Include comprehensive sample data: 3 members, 3 plans, 3 trainers, 3 sessions with proper relationships.
 Use SQLite database in src/instance/fitness_club.db

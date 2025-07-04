@@ -69,12 +69,12 @@ Copilot Agent must remember:
 
 ### 🛠 Sprint Files (Sequential)
 
-| Sprint Step | File Name                  | Duration | Summary                          |
-| ----------- | -------------------------- | -------- | -------------------------------- |
-| 1️⃣          | `2_Pre-Sprint-Setup.md`    | 5 min    | Setup virtual env, Flask, layout |
-| 2️⃣          | `3_Sprint1-Backend.md`     | 15 min   | SQLAlchemy models & routes       |
-| 3️⃣          | `4_Sprint2-Frontend.md`    | 15 min   | Jinja2 templates & Tailwind UI   |
-| 4️⃣          | `5_Sprint3-Integration.md` | 15 min   | Booking logic, CSV export        |
+| Sprint Step | File Name                  | Duration | Summary                                         |
+| ----------- | -------------------------- | -------- | ----------------------------------------------- |
+| 1️⃣          | `2_Pre-Sprint-Setup.md`    | 5 min    | Setup virtual env, Flask, CDN resources         |
+| 2️⃣          | `3_Sprint1-Backend.md`     | 15 min   | SQLAlchemy models & routes                      |
+| 3️⃣          | `4_Sprint2-Frontend.md`    | 15 min   | Templates, Tailwind, FA icons, Google Fonts     |
+| 4️⃣          | `5_Sprint3-Integration.md` | 15 min   | AJAX, validation, CSV export, production polish |
 
 ### 📚 Reference Files
 
@@ -89,8 +89,10 @@ Copilot Agent should:
 - Follow file flow: `2_`, `3_`, `4_`, `5_`
 - Suggest model creation using SQLAlchemy
 - Recommend routes/views using Flask decorators
-- Generate Tailwind-based HTML templates
-- Propose Flask-WTF forms
+- Generate Tailwind-based HTML templates with Font Awesome icons
+- Integrate Google Fonts typography (Inter for body, Poppins for headings)
+- Propose Flask-WTF forms with comprehensive validation
+- Generate JavaScript/AJAX functionality for dynamic interactions
 - Use `cat <<EOF` format for writing files
 - Follow `settings.json` configuration
 - Focus on development workflow (no test file generation)
