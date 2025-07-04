@@ -6,13 +6,13 @@
 
 ### **Choose Your Learning Path:**
 
-**🎯 Option A: Quick Start (Recommended for Demos)**
+#### 🎯 Option A: Quick Start (Recommended for Demos)
 
 - Use the pre-built Flask app (keeps existing `src/` folder)
 - [Pre-Sprint Verification](prompts/2_Pre-Sprint-Setup.md) (2-3 min)
 - Jump straight to [Sprint 1: Backend](prompts/3_Sprint1-Backend.md)
 
-**📚 Option B: Full Learning Experience**
+#### 📚 Option B: Full Learning Experience
 
 - Delete the `src/` folder first: `Remove-Item -Recurse -Force src`
 - [Complete Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md) (5-8 min)
