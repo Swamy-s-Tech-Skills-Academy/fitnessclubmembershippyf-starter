@@ -2,7 +2,7 @@
 
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 2**
 
-```text
+````text
 Create a complete responsive frontend for the fitness club system using modern styling:
 
 TEMPLATES NEEDED:
@@ -21,13 +21,26 @@ TEMPLATE STRUCTURE:
 - Use consistent block structure: title, content, scripts
 - Implement breadcrumb navigation for sub-pages
 - Include flash message display for user feedback
+- Add favicon support in base.html head section
+
+FAVICON IMPLEMENTATION:
+Include comprehensive favicon support in base.html:
+```html
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+````
 
 STYLING RESOURCES:
+
 - TailwindCSS: https://cdn.tailwindcss.com
 - Font Awesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
 - Google Fonts: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
 
 FEATURES TO INCLUDE:
+
 - Mobile-responsive navigation with hamburger menu
 - Professional Tailwind CSS styling (blue/gray theme)
 - Font Awesome icons for UI elements
@@ -42,7 +55,8 @@ FEATURES TO INCLUDE:
 
 All forms should connect to existing Flask routes
 Include proper error handling and success messages
-```
+
+````
 
 ## ✅ **POST-DEVELOPMENT VERIFICATION**
 
@@ -58,7 +72,7 @@ python app.py
 # Visit <http://localhost:5000> - verify all pages
 # Check responsive design on different screen sizes
 # Verify forms are styled properly
-```
+````
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
