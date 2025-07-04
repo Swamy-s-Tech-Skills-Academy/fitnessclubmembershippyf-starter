@@ -50,28 +50,7 @@ FRONTEND STYLING:
 - Google Fonts (Inter & Poppins)
 - CDN URL: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
 
-Create requirements.txt with these dependencies and set up virtual environment.
-```
-
-## ✅ **SETUP COMMANDS**
-
-### **Windows PowerShell Commands:**
-
-```powershell
-# ✅ Create virtual environment
-python -m venv .venv
-
-# ✅ Activate virtual environment (Windows PowerShell)
-.venv\Scripts\activate
-
-# ✅ Install dependencies from existing requirements.txt
-pip install -r requirements.txt
-
-# ✅ Create folder structure (Windows)
-New-Item -ItemType Directory -Path "src" -Force
-New-Item -ItemType Directory -Path "src\templates" -Force
-New-Item -ItemType Directory -Path "src\static" -Force
-New-Item -ItemType Directory -Path "src\instance" -Force
+Note: requirements.txt, .gitignore, and .copilot settings are already included in the starter project.
 ```
 
 ## 🏠 **CREATE BASIC WELCOME HOME PAGE**
@@ -185,20 +164,6 @@ if __name__ == '__main__':
 
 **Note:** For production deployment, consider using build tools for optimized assets.
 
-## ✅ **VALIDATION COMMANDS**
-
-### **Windows PowerShell:**
-
-```powershell
-# Activate virtual environment
-.venv\Scripts\activate
-
-# Navigate to src directory and start app
-Set-Location src
-python app.py
-# Visit <http://localhost:5000> - should show welcome page
-```
-
 ## 🎯 **EXPECTED DELIVERABLES**
 
 - ✅ Virtual environment created and activated
@@ -210,7 +175,7 @@ python app.py
 
 ## 🧪 **PRE-SPRINT VERIFICATION CHECKLIST**
 
-**If the setup is already complete, run these commands to verify everything is working:**
+**Manual verification steps for the user to confirm setup is working:**
 
 ### **Step 1: Activate Virtual Environment**
 
@@ -303,11 +268,11 @@ Once all verification steps pass, you're ready to proceed with:
 This setup is optimized for Copilot Agent execution on Windows:
 
 - ✅ Uses PowerShell `@"..."@` syntax for better multiline file creation
-- ✅ Windows-specific commands (PowerShell + Command Prompt alternatives)
+- ✅ Windows-specific PowerShell commands
 - ✅ Comment headers for clear PowerShell block identification
 - ✅ Scriptable commands with Windows path separators (\)
-- ✅ Includes .gitignore for clean repository
-- ✅ Copilot configuration for contextual assistance
+- ✅ .gitignore already included in starter project
+- ✅ Copilot configuration already included in starter project
 - ✅ No Unix-specific shell syntax
 - ✅ Development-focused workflow optimized for Windows 11
 
