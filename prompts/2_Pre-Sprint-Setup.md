@@ -72,35 +72,6 @@ New-Item -ItemType Directory -Path "src" -Force
 New-Item -ItemType Directory -Path "src\templates" -Force
 New-Item -ItemType Directory -Path "src\static" -Force
 New-Item -ItemType Directory -Path "src\instance" -Force
-
-# ✅ Create .gitignore for clean repository
-@"
-.venv/
-__pycache__/
-*.pyc
-instance/
-.env
-*.db
-"@ | Out-File -FilePath ".gitignore" -Encoding UTF8
-```
-
-### **Alternative: Command Prompt (cmd) - if PowerShell not available:**
-
-```cmd
-REM ✅ Create virtual environment
-python -m venv .venv
-
-REM ✅ Activate virtual environment (Command Prompt)
-.venv\Scripts\activate.bat
-
-REM ✅ Install dependencies
-pip install -r requirements.txt
-
-REM ✅ Create folder structure
-mkdir src
-mkdir src\templates
-mkdir src\static
-mkdir src\instance
 ```
 
 ## 🏠 **CREATE BASIC WELCOME HOME PAGE**
@@ -171,63 +142,6 @@ if __name__ == '__main__':
 </body>
 </html>
 "@ | Out-File -FilePath "src\templates\index.html" -Encoding UTF8
-
-# ✅ Create Copilot configuration for better assistance
-New-Item -ItemType Directory -Path ".copilot" -Force
-@"
-{
-  `"projectType`": `"flask`",
-  `"useVirtualEnv`": true,
-  `"frontend`": `"tailwindcss`",
-  `"database`": `"sqlite`"
-}
-"@ | Out-File -FilePath ".copilot\settings.json" -Encoding UTF8
-```
-
-### **Alternative: For users who prefer separate files (recommended for complex projects):**
-
-```powershell
-# Create empty files first, then edit them manually or copy content
-New-Item -ItemType File -Path "src\app.py" -Force
-New-Item -ItemType File -Path "src\templates\index.html" -Force
-# Then copy the content from above into each file using your editor
-```
-
-## 📋 **ALTERNATIVE: Create requirements.txt from scratch**
-
-### **PowerShell Command:**
-
-```powershell
-# If requirements.txt doesn't exist, create it:
-@"
-# Fitness Club Membership System - Python Dependencies
-
-# Core Flask Framework
-Flask==3.0.0
-Flask-SQLAlchemy==3.1.1
-Flask-WTF==1.2.1
-
-# Forms & Validation
-WTForms==3.1.1
-email-validator==2.1.0
-
-# Database
-SQLAlchemy==2.0.23
-
-# Web Server & Core Dependencies
-Werkzeug==3.0.1
-Jinja2==3.1.2
-MarkupSafe==2.1.3
-click==8.1.7
-itsdangerous==2.1.2
-blinker==1.6.3
-
-# Optional: Production Deployment
-gunicorn==21.2.0
-
-# Optional: Development Tools
-python-dotenv==1.0.0
-"@ | Out-File -FilePath "requirements.txt" -Encoding UTF8
 ```
 
 ## 🎨 **FRONTEND STYLING SETUP**
@@ -285,17 +199,6 @@ python app.py
 # Visit <http://localhost:5000> - should show welcome page
 ```
 
-### **Alternative: Command Prompt (cmd):**
-
-```cmd
-REM Activate virtual environment
-.venv\Scripts\activate.bat
-
-REM Navigate to src directory and start app
-cd src
-python app.py
-```
-
 ## 🎯 **EXPECTED DELIVERABLES**
 
 - ✅ Virtual environment created and activated
@@ -319,16 +222,6 @@ Set-Location "path\to\your\project"
 .venv\Scripts\activate
 
 # Verify you see (.venv) in your prompt
-```
-
-**Alternative for Command Prompt:**
-
-```cmd
-REM Navigate to your project root directory
-cd "path\to\your\project"
-
-REM Activate virtual environment (Command Prompt)
-.venv\Scripts\activate.bat
 ```
 
 ### **Step 2: Verify Python Environment**
