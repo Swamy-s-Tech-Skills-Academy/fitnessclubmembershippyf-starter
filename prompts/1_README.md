@@ -2,7 +2,7 @@
 
 ## 🚀 **WELCOME TO THE 45-MINUTE LIVE CODING CHALLENGE!**
 
-Build a complete fitness club membership system using **Flask**, **Tailwind CSS**, and **SQLite** in just 45 minutes!
+Build a complete fitness club membership system using **Flask**, **Tailwind CSS**, **Font Awesome**, **Google Fonts**, and **SQLite** in just 45 minutes!
 
 ## 📋 **STEP-BY-STEP GUIDE** (Follow in Order)
 

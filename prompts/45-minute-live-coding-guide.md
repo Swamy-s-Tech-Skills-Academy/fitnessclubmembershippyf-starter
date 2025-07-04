@@ -11,13 +11,13 @@ This guide provides detailed presenter notes for conducting a 45-minute live cod
 - Have VS Code/IDE ready
 - Terminal prepared with PowerShell
 - Python 3.8+ verified installed
-- Internet connection confirmed for Tailwind CDN
+- Internet connection confirmed for CDN resources (Tailwind, Font Awesome, Google Fonts)
 
 ### **Opening (2 minutes) - Total: 2 min**
 
 ```
 "Today we're building a complete fitness club membership system in 45 minutes.
-We'll use Flask, SQLAlchemy, and Tailwind CSS to create a production-ready app
+We'll use Flask, SQLAlchemy, Tailwind CSS, Font Awesome, and Google Fonts to create a production-ready app
 with member management, session booking, and analytics dashboard."
 ```
 
@@ -122,7 +122,7 @@ with member management, session booking, and analytics dashboard."
 
 3. **Monitor template creation** (10 minutes)
 
-   - **Base template** (2 min): Point out Tailwind CDN and navigation
+   - **Base template** (2 min): Point out CDN integrations (Tailwind, Font Awesome, Google Fonts) and navigation
    - **Dashboard** (3 min): Highlight analytics cards and responsive design
    - **Member templates** (3 min: Show form validation and mobile layout
    - **Session templates** (2 min): Demonstrate booking interface
@@ -140,7 +140,7 @@ with member management, session booking, and analytics dashboard."
 
 **Key Talking Points:**
 
-- "Tailwind CSS gives us professional design instantly"
+- "Our frontend stack gives us professional design instantly: Tailwind for styling, Font Awesome for icons, and Google Fonts for typography"
 - "Mobile-first approach ensures accessibility"
 - "Notice the consistent color scheme and typography"
 - "Forms have built-in validation styling"
@@ -233,7 +233,7 @@ with member management, session booking, and analytics dashboard."
 
 **Frontend Issues:**
 
-- **Tailwind not loading**: Check internet connection for CDN
+- **CDN resources not loading**: Check internet connection for external CSS/JS
 - **Templates not found**: Verify `src/templates/` structure
 - **Styling broken**: Clear browser cache
 
@@ -287,7 +287,7 @@ If live coding fails, have a pre-built version ready:
 - [ ] Python 3.8+ installed and verified
 - [ ] VS Code or preferred IDE ready
 - [ ] PowerShell/Terminal configured
-- [ ] Internet connection stable (for Tailwind CDN)
+- [ ] Internet connection stable (for CDN resources)
 - [ ] Screen sharing/projection tested
 - [ ] Font sizes increased for visibility
 

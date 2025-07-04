@@ -369,4 +369,4 @@ This setup is optimized for Copilot Agent execution:
 - [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
 - [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
-**TailwindCSS Note**: The welcome template already includes TailwindCSS CDN, so you'll see styled content immediately!
+**Styling Resources Note**: The welcome template already includes TailwindCSS CDN, Font Awesome icons, and Google Fonts, so you'll see professional styling immediately!
