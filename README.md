@@ -16,7 +16,7 @@
 - **Backend:** Flask 3.0.0 + SQLAlchemy
 - **Frontend:** Tailwind CSS + Jinja2
 - **Database:** SQLite
-- **Testing:** Pytest
+- **Development:** Live coding optimized
 
 ## ✨ Features
 
