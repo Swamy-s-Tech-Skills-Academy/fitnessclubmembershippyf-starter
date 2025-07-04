@@ -31,6 +31,11 @@ INCLUDED FLASK APPLICATION:
 - src\static\ (Ready for CSS and JS files)
 - src\instance\ (Ready for database files)
 
+FAVICON SETUP:
+- docs\icons\favicon.ico (Professional fitness-themed favicon)
+- Needs to be copied to src\static\favicon.ico during setup
+- Will be referenced in HTML templates for browser tab icon
+
 DEPENDENCIES (already defined in requirements.txt):
 
 Core Flask Framework:
@@ -71,6 +76,10 @@ FRONTEND STYLING:
 ### **PowerShell File Creation Commands:**
 
 ```powershell
+# ✅ Copy favicon to static folder (must be done first)
+Copy-Item "docs\icons\favicon.ico" -Destination "src\static\favicon.ico" -Force
+Write-Host "✅ Favicon copied to src\static\" -ForegroundColor Green
+
 # ✅ Create basic Flask app (src\app.py)
 @"
 from flask import Flask, render_template
@@ -93,6 +102,9 @@ if __name__ == '__main__':
     <meta charset=`"UTF-8`">
     <meta name=`"viewport`" content=`"width=device-width, initial-scale=1.0`">
     <title>Fitness Club Membership System</title>
+    <!-- Favicon -->
+    <link rel=`"icon`" type=`"image/x-icon`" href=`"{{ url_for('static', filename='favicon.ico') }}`">
+    <link rel=`"shortcut icon`" type=`"image/x-icon`" href=`"{{ url_for('static', filename='favicon.ico') }}`">
     <!-- TailwindCSS CDN -->
     <script src=`"https://cdn.tailwindcss.com`"></script>
     <!-- Font Awesome CDN -->
@@ -183,6 +195,7 @@ if __name__ == '__main__':
 - ✅ All Flask dependencies installed (Flask, SQLAlchemy, Flask-WTF, etc.)
 - ✅ Project folder structure verified (src\, templates\, static\, instance\)
 - ✅ Professional Flask app tested with welcome page
+- ✅ Favicon properly configured and displaying in browser tab
 - ✅ CDN resources verified (Tailwind CSS, Font Awesome, Google Fonts loading correctly)
 - ✅ HTTP responses working and professional styling visible
 
@@ -248,6 +261,18 @@ foreach ($dir in $directories) {
         Write-Host "✅ Directory already exists: $dir" -ForegroundColor Gray
     }
 }
+
+# Copy favicon to static folder if it doesn't exist
+if (-not (Test-Path "src\static\favicon.ico")) {
+    if (Test-Path "docs\icons\favicon.ico") {
+        Copy-Item "docs\icons\favicon.ico" -Destination "src\static\favicon.ico" -Force
+        Write-Host "✅ Favicon copied to src\static\" -ForegroundColor Green
+    } else {
+        Write-Host "⚠️  Favicon not found in docs\icons\" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "✅ Favicon already exists in src\static\" -ForegroundColor Gray
+}
 ```
 
 ### **Step 3: Verify Dependencies**
@@ -276,6 +301,7 @@ python app.py
 - Open browser to `http://127.0.0.1:5000`
 - Verify you see: **"Welcome to Fitness Club"** with professional styling
 - Confirm TailwindCSS, Font Awesome icons, and Google Fonts are loading
+- **Check favicon appears in browser tab** (fitness-themed icon)
 - Stop the server with `Ctrl+C`
 - Return to project root: `Set-Location ..`
 
