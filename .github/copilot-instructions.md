@@ -14,7 +14,6 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 | Forms Library      | Flask-WTF                  |
 | Frontend Framework | Tailwind CSS (CDN)         |
 | Database           | SQLite (in `src/instance`) |
-| Testing Framework  | Pytest                     |
 | Mode               | Live coding demo           |
 | Duration           | ~45 minutes                |
 
@@ -32,9 +31,6 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 │   ├── templates/
 │   ├── static/
 │   └── instance/
-├── tests/
-│   └── test_home.py
-├── docs/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
@@ -60,32 +56,10 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 
 Copilot Agent must remember:
 
-- The `src/` and `tests/` folders are **at the same level** in the project root.
-- Test files (like `tests/test_home.py`) must **manually add `src/` to `sys.path`** before importing from `src`.
-
-### 🔧 Example (for `test_home.py`)
-
-```python
-# isort: off
-import pytest
-import sys
-import os
-
-# Add the src directory to the Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
-
-# Import the Flask app after path is adjusted
-from app import app  # noqa
-# isort: on
-```
-
-> ⚠️ Copilot should **not move the `from app import app`** line above the `sys.path.insert(...)`. If necessary, use inline imports or disable `isort` for that block.
-
-### 🛡 Why It Matters
-
-- Prevents **`ModuleNotFoundError`** in test execution
-- Ensures correct import behavior when using `pytest` from root directory
-- Supports multi-platform compatibility (VS Code, GitHub Codespaces, etc.)
+- The project structure is focused on development with Flask app in `src/` folder
+- All application code resides in the `src/` directory
+- Database files are stored in `src/instance/`
+- Templates are in `src/templates/` and static files in `src/static/`
 
 ---
 
@@ -102,9 +76,7 @@ from app import app  # noqa
 
 ### 📚 Reference Files
 
-- `6_Master-All-Prompts.md` → All sprint prompts in one
-- `7_Quick-Reference.md` → Checklist for validation
-- `8_Organization-Guide.md` → How to use this structure
+_Note: Reference files have been removed to focus on core sprint workflow_
 
 ---
 
@@ -117,9 +89,9 @@ Copilot Agent should:
 - Recommend routes/views using Flask decorators
 - Generate Tailwind-based HTML templates
 - Propose Flask-WTF forms
-- Assist with Pytest test files
 - Use `cat <<EOF` format for writing files
 - Follow `settings.json` configuration
+- Focus on development workflow (no test file generation)
 
 ---
 
@@ -129,8 +101,8 @@ Copilot Agent should:
 - CRUD + booking features with relationships
 - Professional UI with TailwindCSS
 - Data export capability
-- Testable endpoints via Pytest
 - Clean, modular source layout
+- Browser-testable endpoints
 
 ---
 
@@ -149,10 +121,6 @@ python init_db.py
 # Start app
 python app.py
 # Open: http://localhost:5000
-
-# Run tests
-cd ..
-pytest tests/test_home.py -v
 ```
 
 ---
@@ -182,19 +150,11 @@ This ensures quality, clarity, and a smooth live demo flow.
 
 ## 📂 Folder Purpose Clarification
 
-### 🧾 `docs/` – Documentation for Humans
-
-- Contains supporting documentation, references, and helper files.
-- Used by Swamy or contributors for understanding structure, flow, or writing articles.
-- **Not intended for Copilot code generation.**
-
 ### 💡 `prompts/` – Sprint Prompts for Copilot Agent
 
 - Contains `.md` prompt files used **exclusively** for **coding guidance during live sprints**.
 - Copilot should **rely only on files inside `prompts/`** for generating code during the live demo.
 - Each file is self-contained, follows the naming pattern `2_`, `3_`, `4_`, etc.
-
-> 🚫 Copilot should not infer implementation logic from files inside the `docs/` folder.
-> ✅ It should use only files inside `prompts/` for all sprint-based generation tasks.
+- Focus on development workflow and live coding demonstrations.
 
 ---
