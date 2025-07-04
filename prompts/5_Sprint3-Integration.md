@@ -13,7 +13,7 @@ PREREQUISITE VERIFICATION:
 ADVANCED FEATURES TO ADD:
 1. Form validation (server-side Flask-WTF + client-side JavaScript)
 2. CSV export functionality (/export/members, /export/sessions)
-3. AJAX endpoints (/api/member/<id>/toggle-status, /api/session/<id>/book, /api/member/<id>/assign-plan)
+3. AJAX endpoints (/members/<id>/toggle-status, /sessions/<id>/book, /members/<id>/assign-plan)
 4. Enhanced dashboard with revenue calculations and growth metrics
 5. Session booking system with capacity management and duplicate prevention
 6. Search and filtering for members and sessions
@@ -25,7 +25,7 @@ SPECIFIC IMPLEMENTATIONS:
 SERVER-SIDE (app.py updates):
 - Add Flask-WTF form classes with comprehensive validation
 - Add CSV export routes with proper headers and error handling
-- Add AJAX API endpoints with JSON responses
+- Add AJAX endpoints with JSON responses (no /api/ prefix - use existing route structure)
 - Enhance dashboard route with revenue/growth calculations
 - Add context processor for navigation highlighting
 - Add error handlers for 404/500 with custom templates
