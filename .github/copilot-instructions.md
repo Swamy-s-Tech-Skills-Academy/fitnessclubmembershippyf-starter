@@ -101,7 +101,7 @@ Copilot Agent should:
 
 - Fully working Flask web app
 - CRUD + booking features with relationships
-- Professional UI with TailwindCSS
+- Professional UI with TailwindCSS, Font Awesome icons, and Google Fonts
 - Data export capability
 - Clean, modular source layout
 - Browser-testable endpoints
