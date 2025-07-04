@@ -14,18 +14,19 @@ STARTER PROJECT INCLUDES:
 ✅ prompts/ folder - All sprint .md files with copy-paste prompts
 ✅ LICENSE - Project license
 ✅ README.md - Project documentation
+✅ src/ folder - Complete Flask application with professional welcome page
 
 SETUP TASKS:
 1. Create virtual environment (.venv)
 2. Install dependencies from provided requirements.txt
-3. Create src/ folder structure
-4. Set up basic Flask app with welcome home page
+3. Verify src/ folder structure (already included)
+4. Test the included Flask app with welcome page
 
-FOLDERS TO CREATE:
-- src\ (main application code)
-- src\templates\ (HTML templates)
-- src\static\ (CSS, JS, images)
-- src\instance\ (database files - ensure this exists to prevent database path issues)
+INCLUDED FLASK APPLICATION:
+- src\app.py (Flask app with template rendering)
+- src\templates\index.html (Professional welcome page with TailwindCSS, Font Awesome, Google Fonts)
+- src\static\ (Ready for CSS and JS files)
+- src\instance\ (Ready for database files)
 
 DEPENDENCIES (already defined in requirements.txt):
 
@@ -177,10 +178,10 @@ if __name__ == '__main__':
 
 - ✅ Virtual environment created and activated
 - ✅ All Flask dependencies installed (Flask, SQLAlchemy, Flask-WTF, etc.)
-- ✅ Project folder structure created (src\, templates\, static\, instance\)
-- ✅ Basic Flask app with professional welcome page
-- ✅ CDN resources integrated (Tailwind CSS, Font Awesome, Google Fonts)
-- ✅ HTTP responses working and styled content visible
+- ✅ Project folder structure verified (src\, templates\, static\, instance\)
+- ✅ Professional Flask app tested with welcome page
+- ✅ CDN resources verified (Tailwind CSS, Font Awesome, Google Fonts loading correctly)
+- ✅ HTTP responses working and professional styling visible
 
 ## 🧪 **PRE-SPRINT VERIFICATION CHECKLIST**
 
@@ -252,31 +253,19 @@ pip list | Select-String -Pattern "SQLAlchemy|WTForms|Jinja2"
 
 ### **Step 4: Test Basic Flask Setup**
 
-Create a minimal Flask app to test the environment:
+Test the existing Flask app (already included in starter project):
 
 ```powershell
-# Quick test file creation (will be replaced in Sprint 1)
-@"
-from flask import Flask
-app = Flask(__name__)
-
-@app.route('/')
-def hello():
-    return '<h1>Pre-Sprint Setup Complete!</h1><p>Environment is ready for Sprint 1</p>'
-
-if __name__ == '__main__':
-    app.run(debug=True)
-"@ | Out-File -FilePath "src\test_app.py" -Encoding UTF8
-
-# Test the Flask app
+# Navigate to src folder and test the Flask app
 Set-Location src
-python test_app.py
+python app.py
 ```
 
 ### **Step 5: Manual Browser Verification**
 
 - Open browser to `http://127.0.0.1:5000`
-- Verify you see: **"Pre-Sprint Setup Complete!"**
+- Verify you see: **"Welcome to Fitness Club"** with professional styling
+- Confirm TailwindCSS, Font Awesome icons, and Google Fonts are loading
 - Stop the server with `Ctrl+C`
 - Return to project root: `Set-Location ..`
 
@@ -315,9 +304,13 @@ This setup is optimized for Copilot Agent execution on Windows:
 
 ## 💡 **IMPORTANT NOTES FOR SPRINT 1**
 
-**Database Configuration:** The `src\instance\` folder created during setup is crucial for Sprint 1 database initialization. Sprint 1 will use absolute paths to prevent "unable to open database file" errors.
+**Terminal Navigation:** Always use `Set-Location src` before running Flask commands. New terminals start in the project root, not the src folder.
+
+**Database Configuration:** The `src\instance\` folder is crucial for Sprint 1 database initialization. Sprint 1 will use absolute paths to prevent "unable to open database file" errors.
 
 **Environment Persistence:** The smart .venv detection ensures consistent results across multiple demo runs and workshop scenarios.
+
+**Pre-built Application:** The starter includes a complete Flask app with professional styling - no manual file creation needed!
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 

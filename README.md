@@ -1,4 +1,18 @@
-# Fitness Club Membership System
+# Fitness Club ## 📦 **Starter Project Includes**
+
+This starter project provides everything needed to begin development:
+
+- **A.** `.copilot/settings.json` - GitHub Copilot configuration
+- **B.** `.github/copilot-instructions.md` - Copilot Agent instructions
+- **C.** `docs/` folder - Documentation and images
+- **D.** `prompts/` folder - All sprint `.md` files with copy-paste prompts
+- **E.** `.gitignore` - Python/Flask optimized ignore rules
+- **F.** `LICENSE` - Project license
+- **G.** `README.md` - This file
+- **H.** `requirements.txt` - All Python dependencies with versions
+- **I.** `src/` folder - Complete Flask application structure with welcome page
+
+> 💡 **Ready to Code**: Complete Flask app included! Just follow [Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md) to verify your environment.tem
 
 🏋️‍♂️ A complete fitness club management system built with **Flask**, **SQLAlchemy**, **Tailwind CSS**, **Font Awesome**, and **Google Fonts**.
 
