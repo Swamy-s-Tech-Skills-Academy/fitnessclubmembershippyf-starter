@@ -128,7 +128,7 @@ python init_db.py
 
 # Start app
 python app.py
-# Open: http://localhost:5000
+# Open: <http://localhost:5000>
 ```
 
 ### **Alternative: Command Prompt (cmd):**

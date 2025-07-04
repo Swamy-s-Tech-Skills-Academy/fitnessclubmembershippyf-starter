@@ -14,10 +14,10 @@ MODELS NEEDED:
 6. SessionBooking (id, member_id, session_id, booking_date, status)
 
 FILES TO CREATE:
-- src/models.py (SQLAlchemy models with relationships)
-- src/config.py (Flask configuration with ABSOLUTE database path)
-- src/app.py (Flask app with routes for dashboard, members, plans, sessions)
-- src/init_db.py (database initialization with sample data)
+- src\models.py (SQLAlchemy models with relationships)
+- src\config.py (Flask configuration with ABSOLUTE database path)
+- src\app.py (Flask app with routes for dashboard, members, plans, sessions)
+- src\init_db.py (database initialization with sample data)
 
 IMPORTANT DATABASE PATH CONFIG:
 In config.py, use absolute path to prevent "unable to open database file" error:
@@ -47,7 +47,7 @@ RELATIONSHIPS TO IMPLEMENT:
 - WorkoutSession → SessionBooking (one-to-many: session can have multiple bookings)
 
 Include comprehensive sample data: 3 members, 3 plans, 3 trainers, 3 sessions with proper relationships.
-Use SQLite database in src/instance/fitness_club.db
+Use SQLite database in src\instance\fitness_club.db
 
 ````
 
@@ -63,7 +63,7 @@ Use SQLite database in src/instance/fitness_club.db
 Set-Location src
 python init_db.py
 python app.py
-# Visit http://localhost:5000 - should show dashboard
+# Visit <http://localhost:5000> - should show dashboard
 ```
 
 ### **Alternative: Command Prompt (cmd):**
@@ -83,7 +83,7 @@ python app.py
 **If you get "unable to open database file" error:**
 
 - Ensure config.py uses absolute path with `basedir = os.path.abspath(os.path.dirname(__file__))`
-- Verify `src/instance/` directory exists
+- Verify `src\instance\` directory exists
 - Check that database URI uses forward slashes: `f'sqlite:///{os.path.join(basedir, "instance", "fitness_club.db")}'`
 
 ## 🎯 **EXPECTED DELIVERABLES**

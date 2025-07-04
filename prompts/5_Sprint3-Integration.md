@@ -39,8 +39,8 @@ CLIENT-SIDE (new static/js/app.js):
 - CSV export functionality with loading indicators
 
 TEMPLATES TO CREATE:
-- templates/errors/404.html (professional 404 page)
-- templates/errors/500.html (professional 500 page)
+- templates\errors\404.html (professional 404 page)
+- templates\errors\500.html (professional 500 page)
 
 VALIDATION REQUIREMENTS:
 - No duplicate emails for members (server + client validation)
@@ -62,11 +62,11 @@ The system should be production-ready with all features working smoothly.
 Set-Location src
 python app.py
 # Verify all pages load without errors:
-# - http://localhost:5000/ (dashboard)
-# - http://localhost:5000/members (member list)
-# - http://localhost:5000/members/create (registration)
-# - http://localhost:5000/plans (plans display)
-# - http://localhost:5000/sessions (sessions list)
+# - <http://localhost:5000/> (dashboard)
+# - <http://localhost:5000/members> (member list)
+# - <http://localhost:5000/members/create> (registration)
+# - <http://localhost:5000/plans> (plans display)
+# - <http://localhost:5000/sessions> (sessions list)
 
 # ✅ Verify dependencies (should already be installed from Sprint 1)
 # Flask-WTF and WTForms are in requirements.txt
@@ -166,10 +166,10 @@ Invoke-WebRequest -Uri "http://localhost:5000/sessions" -Method GET # Should ret
 
 ```text
 # Open these URLs in your browser to verify they work:
-- http://localhost:5000/ (should show dashboard)
-- http://localhost:5000/members (should show member list)
-- http://localhost:5000/plans (should show plans)
-- http://localhost:5000/sessions (should show sessions)
+- <http://localhost:5000/> (should show dashboard)
+- <http://localhost:5000/members> (should show member list)
+- <http://localhost:5000/plans> (should show plans)
+- <http://localhost:5000/sessions> (should show sessions)
 ```
 
 ## 🤖 **COPILOT AGENT COMPATIBILITY**

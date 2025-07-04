@@ -38,7 +38,7 @@ with member management, session booking, and analytics dashboard."
 
    ```powershell
    mkdir fitness-club-demo
-   cd fitness-club-demo
+   Set-Location fitness-club-demo
    ```
 
 2. **Copy-paste setup prompt** from `2_Pre-Sprint-Setup.md` (1 minute)
@@ -57,6 +57,7 @@ with member management, session booking, and analytics dashboard."
    ```
 
 4. **Validate setup** (30 seconds)
+
    ```powershell
    python --version
    pip list
@@ -94,7 +95,7 @@ with member management, session booking, and analytics dashboard."
    python app.py
    ```
 
-   - Open http://localhost:5000
+   - Open <http://localhost:5000>
    - Test /members, /plans endpoints
 
 5. **Quick validation** (30 seconds)

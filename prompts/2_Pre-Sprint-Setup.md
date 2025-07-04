@@ -13,10 +13,10 @@ REQUIREMENTS:
 5. Create basic Flask app with welcome home page
 
 FOLDERS TO CREATE:
-- src/ (main application code)
-- src/templates/ (HTML templates)
-- src/static/ (CSS, JS, images)
-- src/instance/ (database files - ensure this exists to prevent database path issues)
+- src\ (main application code)
+- src\templates\ (HTML templates)
+- src\static\ (CSS, JS, images)
+- src\instance\ (database files - ensure this exists to prevent database path issues)
 
 DEPENDENCIES TO INSTALL (from requirements.txt):
 
@@ -108,7 +108,7 @@ mkdir src\instance
 ### **PowerShell File Creation Commands:**
 
 ```powershell
-# ✅ Create basic Flask app (src/app.py)
+# ✅ Create basic Flask app (src\app.py)
 @"
 from flask import Flask, render_template
 
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     app.run(debug=True)
 "@ | Out-File -FilePath "src\app.py" -Encoding UTF8
 
-# ✅ Create welcome template (src/templates/index.html)
+# ✅ Create welcome template (src\templates\index.html)
 @"
 <!DOCTYPE html>
 <html lang=`"en`">
@@ -280,9 +280,9 @@ python-dotenv==1.0.0
 .venv\Scripts\activate
 
 # Navigate to src directory and start app
-cd src
+Set-Location src
 python app.py
-# Visit http://localhost:5000 - should show welcome page
+# Visit <http://localhost:5000> - should show welcome page
 ```
 
 ### **Alternative: Command Prompt (cmd):**
@@ -300,7 +300,7 @@ python app.py
 
 - ✅ Virtual environment created and activated
 - ✅ All Flask dependencies installed (Flask, SQLAlchemy, Flask-WTF, etc.)
-- ✅ Project folder structure created (src/, templates/, static/, instance/)
+- ✅ Project folder structure created (src\, templates\, static\, instance\)
 - ✅ Basic Flask app with professional welcome page
 - ✅ CDN resources integrated (Tailwind CSS, Font Awesome, Google Fonts)
 - ✅ HTTP responses working and styled content visible
@@ -420,7 +420,7 @@ This setup is optimized for Copilot Agent execution on Windows:
 
 ## � **IMPORTANT NOTES FOR SPRINT 1**
 
-**Database Configuration:** The `src/instance/` folder created during setup is crucial for Sprint 1 database initialization. Sprint 1 will use absolute paths to prevent "unable to open database file" errors.
+**Database Configuration:** The `src\instance\` folder created during setup is crucial for Sprint 1 database initialization. Sprint 1 will use absolute paths to prevent "unable to open database file" errors.
 
 ## �📚 **QUICK ACCESS TO OTHER PROMPTS**
 

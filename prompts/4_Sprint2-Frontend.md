@@ -55,7 +55,7 @@ Include proper error handling and success messages
 # Navigate to src and start application
 Set-Location src
 python app.py
-# Visit http://localhost:5000 - verify all pages
+# Visit <http://localhost:5000> - verify all pages
 # Check responsive design on different screen sizes
 # Verify forms are styled properly
 ```
