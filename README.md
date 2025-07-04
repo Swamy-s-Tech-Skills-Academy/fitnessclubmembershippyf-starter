@@ -6,17 +6,19 @@
 
 ### **Choose Your Learning Path:**
 
-**🎯 Option A: Quick Start (Recommended for Demos)**
+#### 🎯 Option A: Quick Start (Recommended for Demos)
 
-- Use the pre-built Flask app
+- Use the pre-built Flask app (keeps existing `src/` folder)
 - [Pre-Sprint Verification](prompts/2_Pre-Sprint-Setup.md) (2-3 min)
 - Jump straight to [Sprint 1: Backend](prompts/3_Sprint1-Backend.md)
 
-**📚 Option B: Full Learning Experience**
+#### 📚 Option B: Full Learning Experience
 
 - Delete the `src/` folder first: `Remove-Item -Recurse -Force src`
 - [Complete Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md) (5-8 min)
-- Build everything from scratch
+- Build everything from scratch (recreates the same `src/` structure)
+
+> **📂 Both paths end up with identical project structure** - Option B just builds what Option A starts with!
 
 ### **Windows 11 / PowerShell Instructions:**
 
@@ -44,9 +46,10 @@ This starter project provides everything needed to begin development:
 
 ## 🛠 Tech Stack
 
+- **Python:** 3.13.5 (recommended for optimal compatibility)
 - **Backend:** Flask 3.0.0 + SQLAlchemy + Flask-WTF
 - **Frontend:** Tailwind CSS + Jinja2 + JavaScript
-- **Icons:** Font Awesome 6.4.0
+- **Icons:** Font Awesome 6.4.0 + Custom Favicon
 - **Typography:** Google Fonts (Inter + Poppins)
 - **Database:** SQLite
 - **Development:** Live coding optimized (CDN-based, no build process)
