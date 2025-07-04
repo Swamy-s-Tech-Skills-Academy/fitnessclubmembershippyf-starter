@@ -14,10 +14,10 @@ MODELS NEEDED:
 6. SessionBooking (id, member_id, session_id, booking_date, status)
 
 FILES TO CREATE:
-- src/models.py (SQLAlchemy models with relationships)
-- src/config.py (Flask configuration with ABSOLUTE database path)
-- src/app.py (Flask app with routes for dashboard, members, plans, sessions)
-- src/init_db.py (database initialization with sample data)
+- src\models.py (SQLAlchemy models with relationships)
+- src\config.py (Flask configuration with ABSOLUTE database path)
+- src\app.py (Flask app with routes for dashboard, members, plans, sessions)
+- src\init_db.py (database initialization with sample data)
 
 IMPORTANT DATABASE PATH CONFIG:
 In config.py, use absolute path to prevent "unable to open database file" error:
@@ -29,36 +29,49 @@ SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "instance", "fitnes
 
 ROUTES NEEDED:
 
-- / (dashboard with statistics)
-- /members (list with search)
-- /members/create (member registration)
-- /members/\<id\> (member details)
-- /plans (membership plans)
-- /sessions (workout sessions)
-- /sessions/schedule (session scheduling)
+- / (dashboard with statistics: total members, active sessions, revenue, growth)
+- /members (list with search functionality)
+- /members/create (member registration form)
+- /members/\<id\> (member details view)
+- /members/\<id\>/edit (member edit form)
+- /plans (membership plans display)
+- /sessions (workout sessions list)
+- /sessions/schedule (session scheduling form)
+
+RELATIONSHIPS TO IMPLEMENT:
+
+- Member → MemberPlan (one-to-many: member can have multiple plan histories)
+- MembershipPlan → MemberPlan (one-to-many: plan can be assigned to multiple members)
+- Trainer → WorkoutSession (one-to-many: trainer can lead multiple sessions)
+- Member → SessionBooking (one-to-many: member can book multiple sessions)
+- WorkoutSession → SessionBooking (one-to-many: session can have multiple bookings)
 
 Include comprehensive sample data: 3 members, 3 plans, 3 trainers, 3 sessions with proper relationships.
-Use SQLite database in src/instance/fitness_club.db
+Use SQLite database in src\instance\fitness_club.db
 
 ````
 
-## ✅ **VALIDATION COMMANDS**
+## ✅ **POST-DEVELOPMENT VERIFICATION**
 
-```bash
-# Activate virtual environment
+After Copilot completes the backend development, manually verify:
+
+```powershell
+# Activate virtual environment (if not already active)
 .venv\Scripts\activate
-cd src
+
+# Navigate to src and initialize database
+Set-Location src
 python init_db.py
 python app.py
-# Visit http://localhost:5000 - should show dashboard
-````
+# Visit <http://localhost:5000> - should show dashboard
+```
 
 ## 🛠️ **TROUBLESHOOTING**
 
 **If you get "unable to open database file" error:**
 
 - Ensure config.py uses absolute path with `basedir = os.path.abspath(os.path.dirname(__file__))`
-- Verify `src/instance/` directory exists
+- Verify `src\instance\` directory exists
 - Check that database URI uses forward slashes: `f'sqlite:///{os.path.join(basedir, "instance", "fitness_club.db")}'`
 
 ## 🎯 **EXPECTED DELIVERABLES**
@@ -79,3 +92,4 @@ python app.py
 ## 🎯 **NEXT STEP**
 
 After completing Sprint 1, proceed to: **[4_Sprint2-Frontend.md](4_Sprint2-Frontend.md)** - Frontend Templates
+````

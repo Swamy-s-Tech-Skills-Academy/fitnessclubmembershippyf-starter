@@ -3,7 +3,7 @@
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 2**
 
 ```text
-Create a complete responsive frontend for the fitness club system using Tailwind CSS:
+Create a complete responsive frontend for the fitness club system using modern styling:
 
 TEMPLATES NEEDED:
 1. base.html - Navigation with Tailwind, responsive design, footer
@@ -11,13 +11,27 @@ TEMPLATES NEEDED:
 3. members/list.html - Member list with search, filters, export button
 4. members/create.html - Member registration form with validation
 5. members/detail.html - Member profile with plan assignment
-6. plans/list.html - Membership plans with pricing cards
-7. sessions/list.html - Session list with booking functionality
-8. sessions/schedule.html - Session scheduling form
+6. members/edit.html - Member edit form with validation
+7. plans/list.html - Membership plans with pricing cards
+8. sessions/list.html - Session list with booking functionality
+9. sessions/schedule.html - Session scheduling form
+
+TEMPLATE STRUCTURE:
+- All templates should extend base.html using Jinja2 inheritance
+- Use consistent block structure: title, content, scripts
+- Implement breadcrumb navigation for sub-pages
+- Include flash message display for user feedback
+
+STYLING RESOURCES:
+- TailwindCSS: https://cdn.tailwindcss.com
+- Font Awesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
+- Google Fonts: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
 
 FEATURES TO INCLUDE:
 - Mobile-responsive navigation with hamburger menu
 - Professional Tailwind CSS styling (blue/gray theme)
+- Font Awesome icons for UI elements
+- Google Fonts typography (Inter for body, Poppins for headings)
 - Form validation with error messages
 - Data tables with hover effects
 - Button styling (primary, secondary, danger)
@@ -26,31 +40,35 @@ FEATURES TO INCLUDE:
 - Progress bars for analytics
 - Professional footer with contact info
 
-Use CDN for Tailwind: https://cdn.tailwindcss.com
 All forms should connect to existing Flask routes
 Include proper error handling and success messages
 ```
 
-## ✅ **VALIDATION COMMANDS**
+## ✅ **POST-DEVELOPMENT VERIFICATION**
 
-```bash
-# Activate virtual environment
+After Copilot completes the frontend templates, manually verify:
+
+```powershell
+# Activate virtual environment (if not already active)
 .venv\Scripts\activate
-cd src
+
+# Navigate to src and start application
+Set-Location src
 python app.py
-# Visit http://localhost:5000 - verify all pages
+# Visit <http://localhost:5000> - verify all pages
 # Check responsive design on different screen sizes
 # Verify forms are styled properly
 ```
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
-- ✅ 8 professional HTML templates
-- ✅ Responsive Tailwind CSS design
-- ✅ Complete navigation system
-- ✅ Forms with validation styling
-- ✅ Dashboard with analytics layout
-- ✅ Mobile-first responsive design
+- ✅ 9 professional HTML templates with Jinja2 inheritance
+- ✅ Responsive Tailwind CSS design with Font Awesome icons
+- ✅ Complete navigation system with breadcrumbs
+- ✅ Forms with client-side validation styling and error display
+- ✅ Dashboard with analytics layout and visual metrics
+- ✅ Mobile-first responsive design across all templates
+- ✅ Professional typography with Google Fonts integration
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 

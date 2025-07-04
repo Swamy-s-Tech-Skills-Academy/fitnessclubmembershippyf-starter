@@ -39,8 +39,8 @@ CLIENT-SIDE (new static/js/app.js):
 - CSV export functionality with loading indicators
 
 TEMPLATES TO CREATE:
-- templates/errors/404.html (professional 404 page)
-- templates/errors/500.html (professional 500 page)
+- templates\errors\404.html (professional 404 page)
+- templates\errors\500.html (professional 500 page)
 
 VALIDATION REQUIREMENTS:
 - No duplicate emails for members (server + client validation)
@@ -53,28 +53,25 @@ VALIDATION REQUIREMENTS:
 The system should be production-ready with all features working smoothly.
 ```
 
-## ✅ **VALIDATION COMMANDS**
+## ✅ **POST-DEVELOPMENT VERIFICATION**
 
-```bash
+After Copilot completes the integration features, manually verify:
+
+```powershell
 # ✅ PREREQUISITE: Verify Sprints 1 & 2 are working
-cd src
+Set-Location src
 python app.py
 # Verify all pages load without errors:
-# - http://localhost:5000/ (dashboard)
-# - http://localhost:5000/members (member list)
-# - http://localhost:5000/members/create (registration)
-# - http://localhost:5000/plans (plans display)
-# - http://localhost:5000/sessions (sessions list)
+# - <http://localhost:5000/> (dashboard)
+# - <http://localhost:5000/members> (member list)
+# - <http://localhost:5000/members/create> (registration)
+# - <http://localhost:5000/plans> (plans display)
+# - <http://localhost:5000/sessions> (sessions list)
 
-# ✅ Install additional dependencies if needed
-pip install flask-wtf wtforms
-
-# ✅ Implement Sprint 3 features
-# - Add form validation classes
-# - Add CSV export routes
-# - Add AJAX API endpoints
-# - Create error page templates
-# - Add JavaScript file
+# ✅ Verify dependencies (should already be installed)
+# Flask-WTF and WTForms are in requirements.txt
+pip list | Select-String -Pattern "flask-wtf" -CaseSensitive:$false
+pip list | Select-String -Pattern "wtforms" -CaseSensitive:$false
 
 # ✅ Verify all advanced functionality
 # - Create new members (check email validation)
@@ -136,12 +133,24 @@ pip install flask-wtf wtforms
 
 ### **Pre-Sprint 3 Validation:**
 
-```bash
+#### **PowerShell Commands:**
+
+```powershell
 # Test these work before starting Sprint 3:
-curl http://localhost:5000/                    # Should return 200
-curl http://localhost:5000/members             # Should return 200
-curl http://localhost:5000/plans               # Should return 200
-curl http://localhost:5000/sessions            # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/" -Method GET         # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/members" -Method GET  # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/plans" -Method GET    # Should return 200
+Invoke-WebRequest -Uri "http://localhost:5000/sessions" -Method GET # Should return 200
+```
+
+#### **Alternative: Manual Browser Testing (Recommended):**
+
+```text
+# Open these URLs in your browser to verify they work:
+- <http://localhost:5000/> (should show dashboard)
+- <http://localhost:5000/members> (should show member list)
+- <http://localhost:5000/plans> (should show plans)
+- <http://localhost:5000/sessions> (should show sessions)
 ```
 
 ## 🤖 **COPILOT AGENT COMPATIBILITY**
@@ -168,12 +177,12 @@ This sprint is optimized for Copilot Agent execution:
 
 Your application now includes:
 
-- Complete member management with validation
-- Session booking with capacity management
-- CSV export functionality
-- Real-time AJAX updates
-- Professional responsive design
-- Production-ready error handling
+- **Complete member management** with validation and Font Awesome icons
+- **Session booking** with capacity management and real-time updates
+- **CSV export functionality** with proper error handling
+- **Real-time AJAX updates** with user feedback
+- **Professional responsive design** with Tailwind CSS and Google Fonts
+- **Production-ready error handling** with custom 404/500 pages
 
 ## 🚀 **FINAL TESTING**
 

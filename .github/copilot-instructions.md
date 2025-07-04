@@ -1,6 +1,6 @@
 # 🤖 GitHub Copilot Instructions: Fitness Club Membership System
 
-Welcome to the **Fitness Club Membership System** – a 45-minute live coding demo using **Flask**, **Tailwind CSS**, and **SQLite**. This project is structured into sprints with clear instructions to help GitHub Copilot Agent provide contextual suggestions aligned with the development flow.
+Welcome to the **Fitness Club Membership System** – a 45-minute live coding demo using **Flask**, **Tailwind CSS**, **Font Awesome**, **Google Fonts**, and **SQLite**. This project is structured into sprints with clear instructions to help GitHub Copilot Agent provide contextual suggestions aligned with the development flow.
 
 ---
 
@@ -13,6 +13,8 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 | ORM                | SQLAlchemy                 |
 | Forms Library      | Flask-WTF                  |
 | Frontend Framework | Tailwind CSS (CDN)         |
+| Icons              | Font Awesome (CDN)         |
+| Typography         | Google Fonts (CDN)         |
 | Database           | SQLite (in `src/instance`) |
 | Mode               | Live coding demo           |
 | Duration           | ~45 minutes                |
@@ -21,22 +23,28 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 
 ## 📁 Project Structure (Expected)
 
+**Starter Project Includes:**
+
+- A. `.copilot/settings.json` - GitHub Copilot configuration
+- B. `.github/copilot-instructions.md` - Copilot Agent instructions
+- C. `docs/` folder - Documentation and images
+- D. `prompts/` folder - All sprint `.md` files with copy-paste prompts
+- E. `.gitignore` - Python/Flask optimized ignore rules
+- F. `LICENSE` - Project license
+- G. `README.md` - Project documentation
+- H. `requirements.txt` - All Python dependencies with versions
+
+**Generated During Development:**
+
 ```
-.
-├── src/
-│   ├── app.py
-│   ├── config.py
-│   ├── init_db.py
-│   ├── models.py
-│   ├── templates/
-│   ├── static/
-│   └── instance/
-├── requirements.txt
-├── README.md
-├── .gitignore
-├── .copilot/settings.json
-└── .github/
-    └── copilot-instructions.md
+src\
+├── app.py
+├── config.py
+├── init_db.py
+├── models.py
+├── templates\
+├── static\
+└── instance\
 ```
 
 ---
@@ -56,10 +64,11 @@ Welcome to the **Fitness Club Membership System** – a 45-minute live coding de
 
 Copilot Agent must remember:
 
-- The project structure is focused on development with Flask app in `src/` folder
-- All application code resides in the `src/` directory
-- Database files are stored in `src/instance/`
-- Templates are in `src/templates/` and static files in `src/static/`
+- The project structure is focused on development with Flask app in `src\` folder
+- All application code resides in the `src\` directory
+- Database files are stored in `src\instance\`
+- Templates are in `src\templates\` and static files in `src\static\`
+- Use Windows path separators (\) in commands and file paths
 
 ---
 
@@ -67,12 +76,12 @@ Copilot Agent must remember:
 
 ### 🛠 Sprint Files (Sequential)
 
-| Sprint Step | File Name                  | Duration | Summary                          |
-| ----------- | -------------------------- | -------- | -------------------------------- |
-| 1️⃣          | `2_Pre-Sprint-Setup.md`    | 5 min    | Setup virtual env, Flask, layout |
-| 2️⃣          | `3_Sprint1-Backend.md`     | 15 min   | SQLAlchemy models & routes       |
-| 3️⃣          | `4_Sprint2-Frontend.md`    | 15 min   | Jinja2 templates & Tailwind UI   |
-| 4️⃣          | `5_Sprint3-Integration.md` | 15 min   | Booking logic, CSV export        |
+| Sprint Step | File Name                  | Duration | Summary                                         |
+| ----------- | -------------------------- | -------- | ----------------------------------------------- |
+| 1️⃣          | `2_Pre-Sprint-Setup.md`    | 5 min    | Setup virtual env, Flask, CDN resources         |
+| 2️⃣          | `3_Sprint1-Backend.md`     | 15 min   | SQLAlchemy models & routes                      |
+| 3️⃣          | `4_Sprint2-Frontend.md`    | 15 min   | Templates, Tailwind, FA icons, Google Fonts     |
+| 4️⃣          | `5_Sprint3-Integration.md` | 15 min   | AJAX, validation, CSV export, production polish |
 
 ### 📚 Reference Files
 
@@ -87,11 +96,14 @@ Copilot Agent should:
 - Follow file flow: `2_`, `3_`, `4_`, `5_`
 - Suggest model creation using SQLAlchemy
 - Recommend routes/views using Flask decorators
-- Generate Tailwind-based HTML templates
-- Propose Flask-WTF forms
-- Use `cat <<EOF` format for writing files
+- Generate Tailwind-based HTML templates with Font Awesome icons
+- Integrate Google Fonts typography (Inter for body, Poppins for headings)
+- Propose Flask-WTF forms with comprehensive validation
+- Generate JavaScript/AJAX functionality for dynamic interactions
+- Use PowerShell `@"..."@` format for writing files (Windows-optimized)
 - Follow `settings.json` configuration
 - Focus on development workflow (no test file generation)
+- Use Windows path separators (\) and PowerShell commands
 
 ---
 
@@ -99,29 +111,33 @@ Copilot Agent should:
 
 - Fully working Flask web app
 - CRUD + booking features with relationships
-- Professional UI with TailwindCSS
+- Professional UI with TailwindCSS, Font Awesome icons, and Google Fonts
 - Data export capability
 - Clean, modular source layout
 - Browser-testable endpoints
 
 ---
 
-## 🔁 Developer Commands (Validation)
+## 🔁 Developer Commands (For Manual Verification)
 
-```bash
-# Setup
+### **Windows PowerShell:**
+
+```powershell
+# Setup (performed by user, not Copilot)
 python -m venv .venv
-source .venv/bin/activate       # or .venv\Scripts\activate
+.venv\Scripts\activate
 pip install -r requirements.txt
 
 # Run database init
-cd src
+Set-Location src
 python init_db.py
 
 # Start app
 python app.py
-# Open: http://localhost:5000
+# Open: <http://localhost:5000>
 ```
+
+> **Note**: These commands are for user verification after Copilot generates the code. The starter project includes all configuration files: `.gitignore`, `requirements.txt`, `.copilot/settings.json`, `.github/copilot-instructions.md`, `docs/`, `prompts/`, `LICENSE`, and `README.md`.
 
 ---
 
