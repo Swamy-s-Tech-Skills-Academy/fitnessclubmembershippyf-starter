@@ -53,9 +53,9 @@ VALIDATION REQUIREMENTS:
 The system should be production-ready with all features working smoothly.
 ```
 
-## ✅ **VALIDATION COMMANDS**
+## ✅ **POST-DEVELOPMENT VERIFICATION**
 
-### **Windows PowerShell:**
+After Copilot completes the integration features, manually verify:
 
 ```powershell
 # ✅ PREREQUISITE: Verify Sprints 1 & 2 are working
@@ -68,17 +68,10 @@ python app.py
 # - <http://localhost:5000/plans> (plans display)
 # - <http://localhost:5000/sessions> (sessions list)
 
-# ✅ Verify dependencies (should already be installed from Sprint 1)
+# ✅ Verify dependencies (should already be installed)
 # Flask-WTF and WTForms are in requirements.txt
 pip list | Select-String -Pattern "flask-wtf" -CaseSensitive:$false
 pip list | Select-String -Pattern "wtforms" -CaseSensitive:$false
-
-# ✅ Implement Sprint 3 features
-# - Add form validation classes
-# - Add CSV export routes
-# - Add AJAX API endpoints
-# - Create error page templates
-# - Add JavaScript file
 
 # ✅ Verify all advanced functionality
 # - Create new members (check email validation)
@@ -95,18 +88,6 @@ pip list | Select-String -Pattern "wtforms" -CaseSensitive:$false
 # - Mobile responsive design maintained
 # - Professional error pages display
 # - AJAX endpoints return proper JSON
-```
-
-### **Alternative: Command Prompt (cmd):**
-
-```cmd
-REM Navigate to src directory
-cd src
-python app.py
-
-REM Check dependencies
-pip list | findstr /i "flask-wtf"
-pip list | findstr /i "wtforms"
 ```
 
 ## 🎯 **EXPECTED DELIVERABLES**

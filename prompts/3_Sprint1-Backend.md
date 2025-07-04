@@ -51,12 +51,12 @@ Use SQLite database in src\instance\fitness_club.db
 
 ````
 
-## ✅ **VALIDATION COMMANDS**
+## ✅ **POST-DEVELOPMENT VERIFICATION**
 
-### **Windows PowerShell:**
+After Copilot completes the backend development, manually verify:
 
 ```powershell
-# Activate virtual environment
+# Activate virtual environment (if not already active)
 .venv\Scripts\activate
 
 # Navigate to src and initialize database
@@ -65,18 +65,6 @@ python init_db.py
 python app.py
 # Visit <http://localhost:5000> - should show dashboard
 ```
-
-### **Alternative: Command Prompt (cmd):**
-
-```cmd
-REM Activate virtual environment
-.venv\Scripts\activate.bat
-
-REM Navigate to src and run application
-cd src
-python init_db.py
-python app.py
-````
 
 ## 🛠️ **TROUBLESHOOTING**
 
@@ -104,3 +92,4 @@ python app.py
 ## 🎯 **NEXT STEP**
 
 After completing Sprint 1, proceed to: **[4_Sprint2-Frontend.md](4_Sprint2-Frontend.md)** - Frontend Templates
+````

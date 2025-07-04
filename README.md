@@ -13,7 +13,7 @@
 
 **Total Development Time:** 50 minutes
 
-> 💡 **Windows Users**: All instructions use PowerShell commands with Command Prompt alternatives provided.
+> 💡 **Windows Users**: All instructions use PowerShell commands for Windows 11 compatibility. The starter project includes `.gitignore`, `requirements.txt`, and `.copilot/settings.json` for immediate development.
 
 ## 🛠 Tech Stack
 

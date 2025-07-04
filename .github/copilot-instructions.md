@@ -112,12 +112,12 @@ Copilot Agent should:
 
 ---
 
-## 🔁 Developer Commands (Validation)
+## 🔁 Developer Commands (For Manual Verification)
 
 ### **Windows PowerShell:**
 
 ```powershell
-# Setup
+# Setup (performed by user, not Copilot)
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
@@ -131,21 +131,7 @@ python app.py
 # Open: <http://localhost:5000>
 ```
 
-### **Alternative: Command Prompt (cmd):**
-
-```cmd
-REM Setup
-python -m venv .venv
-.venv\Scripts\activate.bat
-pip install -r requirements.txt
-
-REM Run database init
-cd src
-python init_db.py
-
-REM Start app
-python app.py
-```
+> **Note**: These commands are for user verification after Copilot generates the code. The starter project includes all required files (`.gitignore`, `requirements.txt`, `.copilot/settings.json`).
 
 ---
 

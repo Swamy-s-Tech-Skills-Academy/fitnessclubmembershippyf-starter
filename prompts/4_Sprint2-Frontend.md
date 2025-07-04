@@ -44,12 +44,12 @@ All forms should connect to existing Flask routes
 Include proper error handling and success messages
 ```
 
-## ✅ **VALIDATION COMMANDS**
+## ✅ **POST-DEVELOPMENT VERIFICATION**
 
-### **Windows PowerShell:**
+After Copilot completes the frontend templates, manually verify:
 
 ```powershell
-# Activate virtual environment
+# Activate virtual environment (if not already active)
 .venv\Scripts\activate
 
 # Navigate to src and start application
@@ -58,17 +58,6 @@ python app.py
 # Visit <http://localhost:5000> - verify all pages
 # Check responsive design on different screen sizes
 # Verify forms are styled properly
-```
-
-### **Alternative: Command Prompt (cmd):**
-
-```cmd
-REM Activate virtual environment
-.venv\Scripts\activate.bat
-
-REM Navigate to src and run application
-cd src
-python app.py
 ```
 
 ## 🎯 **EXPECTED DELIVERABLES**
