@@ -13,7 +13,7 @@ STARTER PROJECT INCLUDES:
 ✅ .gitignore - Python/Flask optimized ignore rules
 ✅ .copilot/settings.json - GitHub Copilot configuration
 ✅ .github/copilot-instructions.md - Copilot Agent instructions
-✅ docs/ folder - Documentation and images (includes favicon.ico)
+✅ assets/ folder - Icons and images (includes favicon.ico)
 ✅ prompts/ folder - All sprint .md files with copy-paste prompts
 ✅ LICENSE - Project license
 ✅ README.md - Project documentation
@@ -41,7 +41,7 @@ COMPONENT ARCHITECTURE:
 - All pages extend base.html for consistency
 
 FAVICON SETUP:
-- docs\icons\favicon.ico (Professional fitness-themed favicon)
+- assets\icons\favicon.ico (Professional fitness-themed favicon)
 - Needs to be copied to src\static\favicon.ico during setup
 - Will be referenced in HTML templates for browser tab icon
 
@@ -86,7 +86,7 @@ FRONTEND STYLING:
 
 ```powershell
 # ✅ Copy favicon to static folder (must be done first)
-Copy-Item "docs\icons\favicon.ico" -Destination "src\static\favicon.ico" -Force
+Copy-Item "assets\icons\favicon.ico" -Destination "src\static\favicon.ico" -Force
 Write-Host "✅ Favicon copied to src\static\" -ForegroundColor Green
 
 # ✅ Create basic Flask app (src\app.py)

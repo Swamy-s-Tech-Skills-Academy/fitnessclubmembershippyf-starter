@@ -35,7 +35,7 @@ This starter project provides everything needed to begin development:
 
 - **A.** `.copilot/settings.json` - GitHub Copilot configuration
 - **B.** `.github/copilot-instructions.md` - Copilot Agent instructions
-- **C.** `docs/` folder - Documentation and images
+- **C.** `assets/` folder - Icons and images
 - **D.** `prompts/` folder - All sprint `.md` files with copy-paste prompts
 - **E.** `.gitignore` - Python/Flask optimized ignore rules
 - **F.** `LICENSE` - Project license
