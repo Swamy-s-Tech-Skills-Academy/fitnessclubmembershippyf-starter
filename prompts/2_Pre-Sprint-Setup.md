@@ -27,9 +27,18 @@ SETUP TASKS:
 
 INCLUDED FLASK APPLICATION:
 - src\app.py (Flask app with template rendering)
-- src\templates\index.html (Professional welcome page with TailwindCSS, Font Awesome, Google Fonts)
+- src\templates\base.html (Base template with navigation and footer components)
+- src\templates\_navbar.html (Reusable navigation component)
+- src\templates\_footer.html (Reusable footer component)
+- src\templates\index.html (Professional welcome page extending base template)
 - src\static\ (Ready for CSS and JS files)
 - src\instance\ (Ready for database files)
+
+COMPONENT ARCHITECTURE:
+- Base template system using Jinja2 template inheritance
+- Shared navigation component with 4-item menu structure
+- Shared footer component with company info and links
+- All pages extend base.html for consistency
 
 FAVICON SETUP:
 - docs\icons\favicon.ico (Professional fitness-themed favicon)

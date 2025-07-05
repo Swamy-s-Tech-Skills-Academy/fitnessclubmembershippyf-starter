@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% block title %}Membership Plans{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Membership Plans</h1>
+                    <p class="mt-2 text-gray-600">Manage and view all membership plans</p>
+                </div>
+                <div class="flex space-x-3"> <a href="{{ url_for('plans_export') }}"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-download mr-2"></i>
+                        Export CSV
+                    </a><a href="{{ url_for('plans_create') }}"
+                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>
+                        Add New Plan
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-layer-group text-blue-500 text-2xl"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Total Plans</dt>
+                            <dd class="text-lg font-medium text-gray-900">{{ plans|length }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-dollar-sign text-green-500 text-2xl"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Price Range</dt>
+                            <dd class="text-lg font-medium text-gray-900">
+                                ${{ plans|map(attribute='price')|min|default(0) }} - ${{
+                                plans|map(attribute='price')|max|default(0) }}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-users text-purple-500 text-2xl"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Most Popular</dt>
+                            <dd class="text-lg font-medium text-gray-900">
+                                {% set popular_plan = plans|max(attribute='member_count')|default(None) if plans else
+                                None %}
+                                {{ popular_plan.name if popular_plan and popular_plan.member_count > 0 else 'N/A' }}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-clock text-orange-500 text-2xl"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Avg Duration</dt>
+                            <dd class="text-lg font-medium text-gray-900">
+                                {{ (plans|map(attribute='duration_months')|sum / plans|length)|round|int if plans else 0
+                                }} months
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="bg-white rounded-lg shadow mb-6 p-6">
+            <form method="GET" class="flex flex-wrap gap-4 items-end">
+                <div class="flex-1 min-w-64">
+                    <label for="search" class="block text-sm font-medium text-gray-700 mb-2">Search Plans</label>
+                    <input type="text" id="search" name="search" value="{{ request.args.get('search', '') }}"
+                        placeholder="Search by name or description..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div class="min-w-48">
+                    <label for="price_range" class="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
+                    <select id="price_range" name="price_range"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">All Prices</option>
+                        <option value="0-50" {% if request.args.get('price_range')=='0-50' %}selected{% endif %}>$0 -
+                            $50</option>
+                        <option value="51-100" {% if request.args.get('price_range')=='51-100' %}selected{% endif %}>$51
+                            - $100</option>
+                        <option value="101-200" {% if request.args.get('price_range')=='101-200' %}selected{% endif %}>
+                            $101 - $200</option>
+                        <option value="201+" {% if request.args.get('price_range')=='201+' %}selected{% endif %}>$201+
+                        </option>
+                    </select>
+                </div>
+
+                <div class="min-w-48">
+                    <label for="duration" class="block text-sm font-medium text-gray-700 mb-2">Duration</label>
+                    <select id="duration" name="duration"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">All Durations</option>
+                        <option value="1" {% if request.args.get('duration')=='1' %}selected{% endif %}>1 month</option>
+                        <option value="3" {% if request.args.get('duration')=='3' %}selected{% endif %}>3 months
+                        </option>
+                        <option value="6" {% if request.args.get('duration')=='6' %}selected{% endif %}>6 months
+                        </option>
+                        <option value="12" {% if request.args.get('duration')=='12' %}selected{% endif %}>12 months
+                        </option>
+                    </select>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-search mr-2"></i>Search
+                    </button>
+                    <a href="{{ url_for('plans_list') }}"
+                        class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-times mr-2"></i>Clear
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Plans Grid -->
+        {% if plans %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for plan in plans %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <!-- Plan Header -->
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-8 text-center">
+                    <h3 class="text-2xl font-bold text-white">{{ plan.name }}</h3>
+                    <div class="mt-4">
+                        <span class="text-4xl font-bold text-white">${{ plan.price }}</span>
+                        <span class="text-blue-100">/ {{ plan.duration_months }} month{{ 's' if plan.duration_months !=
+                            1 else '' }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span
+                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white bg-opacity-20 text-white">
+                            <i class="fas fa-users mr-1"></i>
+                            {{ plan.members|length }} member{{ 's' if plan.members|length != 1 else '' }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Plan Body -->
+                <div class="px-6 py-6">
+                    <p class="text-gray-600 mb-4">{{ plan.description }}</p>
+
+                    <!-- Features -->
+                    {% if plan.features %}
+                    <div class="mb-6">
+                        <h4 class="text-sm font-medium text-gray-900 mb-3">What's Included:</h4>
+                        <ul class="space-y-2">
+                            {% for feature in plan.features.split(',') %}
+                            <li class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                {{ feature.strip() }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <!-- Plan Stats -->
+                    <div class="grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-gray-900">
+                                ${{ "%.2f"|format(plan.price / plan.duration_months) }}
+                            </div>
+                            <div class="text-xs text-gray-500">per month</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-gray-900">{{ plan.duration_months }}</div>
+                            <div class="text-xs text-gray-500">month{{ 's' if plan.duration_months != 1 else '' }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-2">
+                        <a href="{{ url_for('plans_detail', plan_id=plan.id) }}"
+                            class="flex-1 text-center px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </a>
+                        <a href="{{ url_for('plans_edit', plan_id=plan.id) }}"
+                            class="flex-1 text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- Empty State -->
+        <div class="text-center py-12">
+            <div class="mx-auto h-24 w-24 text-gray-400">
+                <i class="fas fa-layer-group text-6xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-medium text-gray-900">No membership plans found</h3>
+            <p class="mt-2 text-gray-500">
+                {% if request.args.get('search') or request.args.get('price_range') or request.args.get('duration') %}
+                Try adjusting your search criteria or
+                <a href="{{ url_for('plans_list') }}" class="text-blue-600 hover:text-blue-500">clear all filters</a>.
+                {% else %}
+                Get started by creating your first membership plan.
+                {% endif %}
+            </p>
+            <div class="mt-6"> <a href="{{ url_for('plans_create') }}"
+                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+                    <i class="fas fa-plus mr-2"></i>
+                    Add New Plan
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // Auto-submit form on filter change
+    document.getElementById('price_range').addEventListener('change', function () {
+        this.form.submit();
+    });
+
+    document.getElementById('duration').addEventListener('change', function () {
+        this.form.submit();
+    });
+
+    // Search form enhancement
+    document.getElementById('search').addEventListener('keyup', function (e) {
+        if (e.key === 'Enter') {
+            this.form.submit();
+        }
+    });
+</script>
+{% endblock %}

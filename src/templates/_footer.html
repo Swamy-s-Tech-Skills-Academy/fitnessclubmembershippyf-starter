@@ -1,0 +1,47 @@
+<!-- Footer Component -->
+<footer class="bg-white border-t border-gray-200 mt-auto">
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Company Info -->
+            <div>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-dumbbell text-blue-600 text-xl mr-2"></i>
+                    <h3 class="text-lg font-semibold text-gray-900">Fitness Club</h3>
+                </div>
+                <p class="text-gray-600 text-sm">Your premier destination for fitness and wellness. Join our community
+                    and achieve your health goals.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="{{ url_for('home') }}"
+                            class="text-gray-600 hover:text-blue-600 text-sm transition-colors">Home</a></li>
+                    <li><a href="{{ url_for('dashboard') }}"
+                            class="text-gray-600 hover:text-blue-600 text-sm transition-colors">Dashboard</a></li>
+                    <li><a href="{{ url_for('members_list') }}"
+                            class="text-gray-600 hover:text-blue-600 text-sm transition-colors">Members</a></li>
+                    <li><a href="{{ url_for('plans_list') }}"
+                            class="text-gray-600 hover:text-blue-600 text-sm transition-colors">Plans</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Contact</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><i class="fas fa-phone mr-2"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-envelope mr-2"></i> info@fitnessclub.com</li>
+                    <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Fitness St, Health City</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-200 mt-8 pt-6">
+            <p class="text-center text-sm text-gray-500">
+                © 2025 Fitness Club. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>

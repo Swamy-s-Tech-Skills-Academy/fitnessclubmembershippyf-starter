@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% block title %}Create New Plan{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Create New Membership Plan</h1>
+                    <p class="mt-2 text-gray-600">Add a new membership plan to your fitness club</p>
+                </div>
+                <a href="{{ url_for('plans_list') }}"
+                    class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to Plans
+                </a>
+            </div>
+        </div>
+
+        <!-- Success/Error Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="mb-6">
+            {% for category, message in messages %}
+            <div
+                class="rounded-md p-4 {% if category == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-green-50 text-green-700 border border-green-200{% endif %}">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i
+                            class="fas {% if category == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %} text-sm"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium">{{ message }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Plan Form -->
+        <div class="bg-white shadow-xl rounded-lg">
+            <div class="px-6 py-6">
+                <form method="POST" class="space-y-8">
+                    <!-- Basic Information -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">
+                            <i class="fas fa-info-circle text-blue-500 mr-2"></i>Basic Information
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Plan Name -->
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Plan Name <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" id="name" name="name" placeholder="e.g., Premium Membership"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    required>
+                            </div>
+
+                            <!-- Price -->
+                            <div>
+                                <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Price ($) <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">$</span>
+                                    </div>
+                                    <input type="number" id="price" name="price" step="0.01" min="0" placeholder="0.00"
+                                        class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                        required>
+                                </div>
+                            </div>
+
+                            <!-- Duration -->
+                            <div>
+                                <label for="duration_months" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Duration (months) <span class="text-red-500">*</span>
+                                </label>
+                                <select id="duration_months" name="duration_months"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    required>
+                                    <option value="">Select duration</option>
+                                    <option value="1">1 month</option>
+                                    <option value="3">3 months</option>
+                                    <option value="6">6 months</option>
+                                    <option value="12">12 months</option>
+                                    <option value="24">24 months</option>
+                                </select>
+                            </div>
+
+                            <!-- Monthly Price Display -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Monthly Rate
+                                </label>
+                                <div
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-600">
+                                    $<span id="monthly_rate">0.00</span> per month
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">
+                            <i class="fas fa-file-alt text-blue-500 mr-2"></i>Description
+                        </h3>
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                                Plan Description
+                            </label>
+                            <textarea id="description" name="description" rows="4"
+                                placeholder="Describe what this membership plan includes..."
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">
+                            <i class="fas fa-list-check text-blue-500 mr-2"></i>Features & Benefits
+                        </h3>
+                        <div>
+                            <label for="features" class="block text-sm font-medium text-gray-700 mb-2">
+                                Plan Features
+                            </label>
+                            <textarea id="features" name="features" rows="6"
+                                placeholder="Enter features separated by commas, e.g.:&#10;24/7 gym access, Personal trainer consultation, Group fitness classes, Pool access, Sauna and steam room"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"></textarea>
+                            <p class="mt-2 text-sm text-gray-500">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Separate each feature with a comma. These will be displayed as a bulleted list.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Feature Templates -->
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-700 mb-3">Quick Feature Templates:</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button type="button"
+                                class="text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors feature-template"
+                                data-features="24/7 gym access, Basic equipment access, Locker usage">
+                                <div class="font-medium text-gray-900">Basic Plan</div>
+                                <div class="text-sm text-gray-500">Essential features</div>
+                            </button>
+                            <button type="button"
+                                class="text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors feature-template"
+                                data-features="24/7 gym access, Personal trainer consultation, Group fitness classes, Pool access, Nutrition guidance">
+                                <div class="font-medium text-gray-900">Premium Plan</div>
+                                <div class="text-sm text-gray-500">Enhanced features</div>
+                            </button>
+                            <button type="button"
+                                class="text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors feature-template"
+                                data-features="24/7 gym access, Unlimited personal training, All group classes, Pool & spa access, Nutrition counseling, Priority booking">
+                                <div class="font-medium text-gray-900">Elite Plan</div>
+                                <div class="text-sm text-gray-500">Premium features</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex justify-end space-x-4 pt-6 border-t">
+                        <a href="{{ url_for('plans_list') }}"
+                            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </a>
+                        <button type="submit"
+                            class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-save mr-2"></i>Create Plan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Calculate monthly rate
+    function updateMonthlyRate() {
+        const price = parseFloat(document.getElementById('price').value) || 0;
+        const duration = parseInt(document.getElementById('duration_months').value) || 1;
+        const monthlyRate = price / duration;
+        document.getElementById('monthly_rate').textContent = monthlyRate.toFixed(2);
+    }
+
+    document.getElementById('price').addEventListener('input', updateMonthlyRate);
+    document.getElementById('duration_months').addEventListener('change', updateMonthlyRate);
+
+    // Feature templates
+    document.querySelectorAll('.feature-template').forEach(button => {
+        button.addEventListener('click', function () {
+            const features = this.getAttribute('data-features');
+            document.getElementById('features').value = features;
+        });
+    });
+
+    // Form validation
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const name = document.getElementById('name').value.trim();
+        const price = document.getElementById('price').value;
+        const duration = document.getElementById('duration_months').value;
+
+        if (!name || !price || !duration) {
+            e.preventDefault();
+            alert('Please fill in all required fields.');
+        }
+
+        if (parseFloat(price) <= 0) {
+            e.preventDefault();
+            alert('Price must be greater than 0.');
+        }
+    });
+
+    // Initialize monthly rate calculation
+    updateMonthlyRate();
+</script>
+{% endblock %}
