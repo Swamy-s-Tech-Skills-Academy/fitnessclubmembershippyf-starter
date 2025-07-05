@@ -76,12 +76,12 @@ Copilot Agent must remember:
 
 ### 🛠 Sprint Files (Sequential)
 
-| Sprint Step | File Name                  | Duration | Summary                                         |
-| ----------- | -------------------------- | -------- | ----------------------------------------------- |
-| 1️⃣          | `2_Pre-Sprint-Setup.md`    | 5 min    | Setup virtual env, Flask, CDN resources         |
-| 2️⃣          | `3_Sprint1-Backend.md`     | 15 min   | SQLAlchemy models & routes                      |
-| 3️⃣          | `4_Sprint2-Frontend.md`    | 15 min   | Templates, Tailwind, FA icons, Google Fonts     |
-| 4️⃣          | `5_Sprint3-Integration.md` | 15 min   | AJAX, validation, CSV export, production polish |
+| Sprint Step | File Name                  | Duration | Summary                                               |
+| ----------- | -------------------------- | -------- | ----------------------------------------------------- |
+| 1️⃣          | `2_Pre-Sprint-Setup.md`    | 5 min    | Setup virtual env, Flask, CDN resources               |
+| 2️⃣          | `3_Sprint1-Backend.md`     | 15 min   | Backend API + Dashboard UI with real database         |
+| 3️⃣          | `4_Sprint2-Frontend.md`    | 15 min   | Members & Plans Management UI with CRUD interfaces    |
+| 4️⃣          | `5_Sprint3-Integration.md` | 15 min   | Trainers & Sessions Management UI + production polish |
 
 ### 📚 Reference Files
 
@@ -109,12 +109,15 @@ Copilot Agent should:
 
 ## ✅ Deliverables by End
 
-- Fully working Flask web app
-- CRUD + booking features with relationships
+- Fully working Flask web app with complete management system
+- Backend API + Dashboard UI with real-time statistics
+- Members & Plans management with CRUD interfaces and validation
+- Trainers & Sessions management with booking and scheduling
 - Professional UI with TailwindCSS, Font Awesome icons, and Google Fonts
-- Data export capability
+- Data export capability for all entities (CSV)
+- AJAX functionality for real-time updates
 - Clean, modular source layout
-- Browser-testable endpoints
+- Production-ready error handling and validation
 
 ---
 

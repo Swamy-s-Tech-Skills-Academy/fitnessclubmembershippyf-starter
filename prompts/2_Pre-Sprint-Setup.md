@@ -350,9 +350,9 @@ This setup is optimized for Copilot Agent execution on Windows:
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 
-- [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
-- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
-- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
+- [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🏗️ Backend API + Dashboard UI
+- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Members & Plans Management UI
+- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Trainers & Sessions UI + Polish
 - [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 **Styling Resources Note**: The test Flask app provides a simple verification. The actual professional styling with TailwindCSS, Font Awesome, and Google Fonts will be implemented in Sprint 2!

@@ -23,9 +23,9 @@
 ### **Windows 11 / PowerShell Instructions:**
 
 1. **Setup Environment** - [Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md) (2-8 min) - Choose your path above
-2. **Build Backend** - [Sprint 1: Backend](prompts/3_Sprint1-Backend.md) (15 min)
-3. **Create Frontend** - [Sprint 2: Frontend](prompts/4_Sprint2-Frontend.md) (15 min)
-4. **Polish & Deploy** - [Sprint 3: Integration](prompts/5_Sprint3-Integration.md) (15 min)
+2. **Build Backend + Dashboard** - [Sprint 1: Backend API + Dashboard UI](prompts/3_Sprint1-Backend.md) (15 min)
+3. **Members & Plans Management** - [Sprint 2: Members & Plans Management UI](prompts/4_Sprint2-Frontend.md) (15 min)
+4. **Trainers & Sessions + Polish** - [Sprint 3: Trainers & Sessions Management UI + Polish](prompts/5_Sprint3-Integration.md) (15 min)
 
 **Total Development Time:** 45-55 minutes (depending on path chosen)
 
@@ -70,9 +70,9 @@ This starter project provides everything needed to begin development:
 All development guides are in the [`prompts/`](prompts/) folder:
 
 - **[Pre-Sprint Setup](prompts/2_Pre-Sprint-Setup.md)** - Environment and dependencies
-- **[Sprint 1: Backend](prompts/3_Sprint1-Backend.md)** - Models, routes, and database
-- **[Sprint 2: Frontend](prompts/4_Sprint2-Frontend.md)** - Templates and styling
-- **[Sprint 3: Integration](prompts/5_Sprint3-Integration.md)** - AJAX, validation, and polish
+- **[Sprint 1: Backend API + Dashboard UI](prompts/3_Sprint1-Backend.md)** - Models, routes, database, and dashboard
+- **[Sprint 2: Members & Plans Management UI](prompts/4_Sprint2-Frontend.md)** - CRUD interfaces for members and plans
+- **[Sprint 3: Trainers & Sessions Management UI + Polish](prompts/5_Sprint3-Integration.md)** - Trainer management, session scheduling, and final polish
 - **[Live Coding Guide](prompts/45-minute-live-coding-guide.md)** - Presenter notes for demos
 
 ---

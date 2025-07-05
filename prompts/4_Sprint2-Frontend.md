@@ -1,4 +1,4 @@
-# 🎨 Sprint 2: Frontend TFAVICON IMPLEMENTATION:
+# 🎨 Sprint 2: Members & Plans Management UI (15 minutes)
 
 Include comprehensive favicon support in base.html:
 
@@ -58,40 +58,49 @@ REQUIRED FAVICON SPECIFICATIONS:
 - Sizes: 16x16, 32x32, 48x48 (in ICO), plus 180x180 (Apple Touch)
 - Background: Transparent or white
 
-STYLING RESOURCES:5 minutes)
-
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 2**
 
-````text
-Create a complete responsive frontend for the fitness club system using modern styling:
+```text
+Create Members & Plans Management UI interfaces for the fitness club system using modern responsive design:
+
+SPRINT 2 FOCUS: MEMBERS & PLANS MANAGEMENT UI
+- A. Build comprehensive CRUD interfaces for members management
+- B. Create membership plans management with pricing displays
+- C. Add professional forms with validation and user feedback
+- D. Implement data tables with search, filtering, and export capabilities
+- Focus on user-friendly interfaces for staff to manage members and plans
 
 TEMPLATES NEEDED:
-1. base.html - Navigation with Tailwind, responsive design, footer
-2. index.html - Dashboard with 8 key metrics (members, sessions, revenue, growth)
-3. members/list.html - Member list with search, filters, export button
-4. members/create.html - Member registration form with validation
-5. members/detail.html - Member profile with plan assignment
-6. members/edit.html - Member edit form with validation
-7. plans/list.html - Membership plans with pricing cards
-8. sessions/list.html - Session list with booking functionality
-9. sessions/schedule.html - Session scheduling form
+1. members/list.html - Member list with search, filters, pagination, and export
+2. members/create.html - Member registration form with plan selection
+3. members/detail.html - Member profile with plan history and session bookings
+4. members/edit.html - Member edit form with status and plan management
+5. plans/list.html - Membership plans display with pricing cards and features
+6. plans/create.html - Create new membership plan form
+7. plans/edit.html - Edit existing membership plan
+8. plans/detail.html - Plan details with member count and revenue analytics
 
 TEMPLATE STRUCTURE:
-- All templates should extend base.html using Jinja2 inheritance
-- Use consistent block structure: title, content, scripts
-- Implement breadcrumb navigation for sub-pages
-- Include flash message display for user feedback
-- Add favicon support in base.html head section
+- All templates extend the existing dashboard structure from Sprint 1
+- Use consistent navigation and breadcrumb system
+- Implement professional forms with Flask-WTF integration
+- Include comprehensive error handling and success messages
+- Add data export functionality (CSV) for members and plans
+- Professional styling with existing Tailwind CSS theme
 
-FAVICON IMPLEMENTATION:
-Include comprehensive favicon support in base.html:
-```html
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
-````
+FEATURES TO INCLUDE:
+- Member management: Create, Read, Update, Delete operations
+- Plan management: Pricing displays, feature lists, member assignments
+- Advanced search and filtering for member lists
+- Data export capabilities (CSV format)
+- Form validation with real-time feedback
+- Professional data tables with sorting and pagination
+- Mobile-responsive design for all interfaces
+- Integration with existing Sprint 1 dashboard navigation
+
+All forms should connect to Sprint 1 API routes for data operations
+Include proper error handling and user feedback throughout
+```
 
 STYLING RESOURCES:
 
@@ -136,29 +145,22 @@ python app.py
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
-- ✅ 9 professional HTML templates with Jinja2 inheritance
-- ✅ Responsive Tailwind CSS design with Font Awesome icons
-- ✅ Complete navigation system with breadcrumbs
-- ✅ Favicon implementation with multiple formats (ICO, PNG, Apple Touch)
-- ✅ Forms with client-side validation styling and error display
-- ✅ Dashboard with analytics layout and visual metrics
-- ✅ Mobile-first responsive design across all templates
-- ✅ Professional typography with Google Fonts integration
-
-**FAVICON VERIFICATION CHECKLIST:**
-
-- ✅ favicon.ico exists in src\static\ folder
-- ✅ Favicon displays in browser tab when visiting http://localhost:5000
-- ✅ Favicon follows fitness theme (dumbbell, gym equipment, etc.)
-- ✅ Multiple sizes included for optimal compatibility
+- ✅ **Members Management UI:** Complete CRUD interface with professional forms, search, and filtering
+- ✅ **Plans Management UI:** Pricing displays, feature comparisons, and member assignment interfaces
+- ✅ **Data Tables:** Professional tables with sorting, pagination, and export functionality
+- ✅ **Forms with Validation:** Flask-WTF integration with real-time feedback and error handling
+- ✅ **Responsive Design:** Mobile-first design extending Sprint 1 dashboard theme
+- ✅ **Navigation Integration:** Seamless integration with existing dashboard navigation
+- ✅ **Export Functionality:** CSV export capabilities for members and plans data
+- ✅ **Professional Styling:** Consistent Tailwind CSS styling with Font Awesome icons
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 
 - [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🔧 Setup & Environment
-- [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
-- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
+- [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🏗️ Backend API + Dashboard UI
+- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Trainers & Sessions UI + Polish
 - [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 ## 🎯 **NEXT STEP**
 
-After completing Sprint 2, proceed to: **[5_Sprint3-Integration.md](5_Sprint3-Integration.md)** - Integration & Polish
+After completing Sprint 2, proceed to: **[5_Sprint3-Integration.md](5_Sprint3-Integration.md)** - Trainers & Sessions Management UI + Polish

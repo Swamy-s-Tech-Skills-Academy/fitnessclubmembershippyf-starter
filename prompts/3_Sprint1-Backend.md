@@ -1,35 +1,38 @@
-# 🏗️ Sprint 1: Backend API Foundation (15 minutes)
+# 🏗️ Sprint 1: Backend API + Dashboard UI (15 minutes)
 
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 1**
 
 ````text
-Build Flask backend API endpoints for a fitness club membership system with the following requirements:
+Build Flask backend API endpoints + Dashboard UI for a fitness club membership system with the following requirements:
 
 PYTHON VERSION REQUIREMENT:
 - Python 3.13.5 (ensure compatibility with Flask 3.0.0 and SQLAlchemy 2.0.41 features)
 
-SPRINT 1 FOCUS: BACKEND API + REAL DATABASE
+SPRINT 1 FOCUS: BACKEND API + REAL DATABASE + DASHBOARD UI
 - A. Keep the existing welcome page (/) unchanged from pre-sprint setup
 - B. Create database models and initialize with seed data (real database)
 - C. Add JSON API endpoints that return real data from database
-- NO UI/Templates in Sprint 1 - that's Sprint 2's job
-- Focus on backend functionality, data structure, and database operations
+- D. Create Dashboard UI that displays real statistics and data
+- Focus on backend functionality, data structure, and dashboard visualization
 
 APPROACH:
 1. Keep existing src\app.py welcome page route (/) unchanged
 2. Create SQLAlchemy models for all entities with relationships
 3. Initialize database with realistic seed data (not mock data)
 4. Add API routes that return JSON responses with real database data
-5. Prepare data structure for Sprint 2 frontend consumption
+5. Create Dashboard UI template that consumes the API data
+6. Prepare data structure for Sprint 2 (Members & Plans management)
 
 FILES TO CREATE/UPDATE:
 - src\models.py (NEW: SQLAlchemy models with relationships)
 - src\config.py (NEW: Flask configuration with database path)
 - src\init_db.py (NEW: Database initialization with realistic seed data)
-- src\app.py (UPDATE: Add API routes + database imports, keep welcome page unchanged)
+- src\app.py (UPDATE: Add API routes + Dashboard route + database imports, keep welcome page unchanged)
+- src\templates\dashboard.html (NEW: Dashboard UI template with real data)
 
-REQUIRED API ENDPOINTS:
+REQUIRED ROUTES:
 - GET / - Keep existing welcome page (pre-sprint, unchanged)
+- GET /dashboard - Dashboard UI with real statistics and data visualization
 - GET /test - Backend verification endpoint (JSON)
 - GET /api/members - Get all members (JSON)
 - POST /api/members - Create new member (JSON)
@@ -64,6 +67,53 @@ with app.app_context():
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# Sprint 1: Dashboard UI route (NEW)
+@app.route('/dashboard')
+def dashboard():
+    """Dashboard UI displaying real data from database"""
+    try:
+        # Get real statistics from database
+        total_members = Member.query.filter_by(status='active').count()
+        active_sessions = Session.query.filter_by(status='active').count()
+        total_plans = Plan.query.count()
+        total_trainers = Trainer.query.filter_by(status='active').count()
+
+        # Calculate revenue (simplified - sum of all active member plans)
+        monthly_revenue = 0
+        active_members = Member.query.filter_by(status='active').all()
+        for member in active_members:
+            if member.plan:
+                monthly_revenue += float(member.plan.price)
+
+        # Get recent members
+        recent_members = Member.query.order_by(Member.join_date.desc()).limit(5).all()
+
+        # Get upcoming sessions
+        upcoming_sessions = Session.query.filter_by(status='active').order_by(Session.date, Session.time).limit(5).all()
+
+        # Pass data to template
+        return render_template('dashboard.html',
+            total_members=total_members,
+            active_sessions=active_sessions,
+            total_plans=total_plans,
+            total_trainers=total_trainers,
+            monthly_revenue=monthly_revenue,
+            recent_members=recent_members,
+            upcoming_sessions=upcoming_sessions
+        )
+    except Exception as e:
+        # Fallback with empty data if database issues
+        return render_template('dashboard.html',
+            total_members=0,
+            active_sessions=0,
+            total_plans=0,
+            total_trainers=0,
+            monthly_revenue=0,
+            recent_members=[],
+            upcoming_sessions=[],
+            error=str(e)
+        )
 
 # Sprint 1: Backend API endpoints returning real database data
 
@@ -605,10 +655,256 @@ if __name__ == '__main__':
     init_database()
 ```
 
+DASHBOARD.HTML TEMPLATE REQUIREMENTS:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Club Dashboard</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-dumbbell text-blue-600 text-2xl mr-3"></i>
+                    <h1 class="text-xl font-bold text-gray-900">Fitness Club Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-home mr-1"></i> Home
+                    </a>
+                    <span class="text-gray-400">|</span>
+                    <span class="text-blue-600 font-medium">
+                        <i class="fas fa-chart-line mr-1"></i> Dashboard
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900">Club Overview</h2>
+            <p class="mt-2 text-gray-600">Real-time statistics from your fitness club database</p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Members Card -->
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+                <div class="p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-users text-blue-600 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Total Members</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ total_members }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Sessions Card -->
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+                <div class="p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-calendar-check text-green-600 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Active Sessions</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ active_sessions }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Trainers Card -->
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+                <div class="p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-user-tie text-purple-600 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Active Trainers</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ total_trainers }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Revenue Card -->
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+                <div class="p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-dollar-sign text-yellow-600 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Monthly Revenue</p>
+                            <p class="text-2xl font-bold text-gray-900">${{ "%.2f"|format(monthly_revenue) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Recent Members -->
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <i class="fas fa-user-plus text-blue-600 mr-2"></i>Recent Members
+                    </h3>
+                </div>
+                <div class="p-6">
+                    {% if recent_members %}
+                        <div class="space-y-4">
+                            {% for member in recent_members %}
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="font-medium text-gray-900">{{ member.name }}</p>
+                                    <p class="text-sm text-gray-600">{{ member.email }}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm text-gray-500">Joined</p>
+                                    <p class="text-sm font-medium text-gray-900">{{ member.join_date.strftime('%m/%d/%Y') if member.join_date else 'N/A' }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-500 text-center py-4">No recent members found</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Upcoming Sessions -->
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <i class="fas fa-calendar-alt text-green-600 mr-2"></i>Upcoming Sessions
+                    </h3>
+                </div>
+                <div class="p-6">
+                    {% if upcoming_sessions %}
+                        <div class="space-y-4">
+                            {% for session in upcoming_sessions %}
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="font-medium text-gray-900">{{ session.title }}</p>
+                                    <p class="text-sm text-gray-600">{{ session.description[:50] }}{% if session.description|length > 50 %}...{% endif %}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm text-gray-500">{{ session.date.strftime('%m/%d') if session.date else 'N/A' }}</p>
+                                    <p class="text-sm font-medium text-gray-900">{{ session.time.strftime('%H:%M') if session.time else 'N/A' }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-500 text-center py-4">No upcoming sessions found</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Plans Overview -->
+        <div class="mt-6">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <i class="fas fa-credit-card text-purple-600 mr-2"></i>Available Plans
+                        <span class="text-sm font-normal text-gray-500 ml-2">({{ total_plans }} plans available)</span>
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <div class="text-center py-4">
+                        <p class="text-gray-600">Sprint 2 will add Members & Plans management interface</p>
+                        <div class="mt-4 space-x-4">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                <i class="fas fa-users mr-1"></i> Members → Sprint 2
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-credit-card mr-1"></i> Plans → Sprint 2
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                                <i class="fas fa-user-tie mr-1"></i> Trainers → Sprint 3
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                <i class="fas fa-calendar-alt mr-1"></i> Sessions → Sprint 3
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Display (if any) -->
+        {% if error %}
+        <div class="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
+            <div class="flex">
+                <i class="fas fa-exclamation-triangle text-red-400 mt-1 mr-3"></i>
+                <div>
+                    <h3 class="text-sm font-medium text-red-800">Database Connection Issue</h3>
+                    <p class="text-sm text-red-700 mt-1">{{ error }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-600">
+                    <i class="fas fa-dumbbell text-blue-600 mr-2"></i>
+                    Fitness Club Management System - Sprint 1: Backend + Dashboard
+                </p>
+                <p class="text-sm text-gray-500 mt-2">
+                    Powered by Flask, SQLAlchemy, Tailwind CSS, Font Awesome & Google Fonts
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+```
+
 SPRINT 1 API ENDPOINTS SUMMARY:
 
 ✅ **Keep Unchanged:**
 - GET / - Welcome page from pre-sprint (HTML)
+
+✅ **Add New Dashboard UI:**
+- GET /dashboard - Dashboard UI displaying real statistics and data visualization (HTML)
 
 ✅ **Add New API Endpoints (Returning Real Database Data):**
 - GET /test - Backend verification with database status (JSON)
@@ -620,10 +916,10 @@ SPRINT 1 API ENDPOINTS SUMMARY:
 - GET /api/sessions - Get workout sessions from database (JSON)
 - POST /api/sessions/schedule - Schedule session in database (JSON)
 
-IMPORTANT: REAL DATABASE IN SPRINT 1
-- Sprint 1 = Backend API endpoints with SQLAlchemy models and real data
-- Sprint 2 = Frontend templates and UI
-- Sprint 3 = Integration and polish
+IMPORTANT: REAL DATABASE + DASHBOARD UI IN SPRINT 1
+- Sprint 1 = Backend API endpoints + Dashboard UI with SQLAlchemy models and real data
+- Sprint 2 = Members & Plans Management UI
+- Sprint 3 = Trainers & Sessions Management UI + Polish
 
 CONFIG.PY REQUIREMENTS:
 ```python
@@ -667,23 +963,25 @@ DATABASE REQUIRED FOR SPRINT 1:
 - Create SQLAlchemy models (Member, Plan, Trainer, Session)
 - Initialize database with realistic seed data
 - API endpoints query real database data
-- Prepare foundation for Sprint 2 frontend
+- Prepare foundation for Sprint 2 (Members & Plans Management)
 
 ## 🎯 **EXPECTED DELIVERABLES**
 
-✅ **Sprint 1 Backend API Deliverables:**
+✅ **Sprint 1 Backend API + Dashboard Deliverables:**
 
-- **A. src\app.py** - Flask app with API endpoints + SQLAlchemy integration (keeps existing welcome page)
+- **A. src\app.py** - Flask app with API endpoints + Dashboard route + SQLAlchemy integration (keeps existing welcome page)
 - **B. src\models.py** - SQLAlchemy models (Member, Plan, Trainer, Session) with relationships
 - **C. src\config.py** - Flask configuration with database path
 - **D. src\init_db.py** - Database initialization script with realistic seed data
-- **E. Database** - SQLite database with tables and seed data (src\instance\fitness_club.db)
-- **F. API Endpoints** - All endpoints return JSON responses with real database data
-- **G. Welcome Page** - Original welcome page unchanged from pre-sprint
+- **E. src\templates\dashboard.html** - Dashboard UI template displaying real statistics and data
+- **F. Database** - SQLite database with tables and seed data (src\instance\fitness_club.db)
+- **G. API Endpoints** - All endpoints return JSON responses with real database data
+- **H. Welcome Page** - Original welcome page unchanged from pre-sprint
 
-✅ **API Endpoints Working (Real Database Data):**
+✅ **Routes Working (Real Database Data):**
 
 - `GET /` - Welcome page (HTML, unchanged from pre-sprint)
+- `GET /dashboard` - Dashboard UI with real statistics and data visualization (HTML)
 - `GET /test` - Backend verification with database status (JSON)
 - `GET /api/members` - Members from database (JSON)
 - `POST /api/members` - Create member in database (JSON)
@@ -727,7 +1025,15 @@ Created 4 sessions
 - ✅ Verify welcome page displays correctly (same as pre-sprint)
 - ✅ Confirm TailwindCSS, Font Awesome, and favicon still work
 
-### **Step 4: Test API Endpoints (Real Database Data)**
+### **Step 4: Test Dashboard UI (NEW for Sprint 1)**
+
+- Open browser to `http://127.0.0.1:5000/dashboard`
+- ✅ Verify dashboard displays with real statistics from database
+- ✅ Check that all stat cards show actual numbers (not zeros)
+- ✅ Confirm recent members and upcoming sessions are displayed
+- ✅ Verify professional styling with Tailwind CSS, Font Awesome icons, and Google Fonts
+
+### **Step 5: Test API Endpoints (Real Database Data)**
 
 Open browser or use curl to test these JSON API endpoints:
 
@@ -738,9 +1044,17 @@ Open browser or use curl to test these JSON API endpoints:
 - `http://127.0.0.1:5000/api/trainers` - Should return 3 real trainers from database
 - `http://127.0.0.1:5000/api/stats` - Should return real statistics from database
 
-### **Step 5: Verify Database Responses**
+### **Step 6: Verify Dashboard Data and API Responses**
 
-Each API endpoint should return JSON with real data like:
+**Dashboard UI should display:**
+- Total Members: 4 (from seed data)
+- Active Sessions: 4 (from seed data)
+- Active Trainers: 3 (from seed data)
+- Monthly Revenue: Real calculated amount
+- Recent Members: List of actual members
+- Upcoming Sessions: List of actual sessions
+
+**API endpoints should return real data like:**
 
 ```json
 {
@@ -775,16 +1089,17 @@ Example /api/members response should include real data:
 
 ## ✅ **SPRINT 1 COMPLETION CRITERIA**
 
-**✅ ALL CHECKS PASSED?** → **Ready for Sprint 2!**
+**✅ ALL CHECKS PASSED?** → **Ready for Sprint 2: Members & Plans Management!**
 **❌ ANY FAILURES?** → **Review API endpoints and fix issues**
 
 **Sprint 1 Success Indicators:**
 - A. Welcome page unchanged from pre-sprint (HTML with styling)
-- B. Database created and populated with seed data (SQLite)
-- C. All API endpoints return JSON responses with real database data
-- D. SQLAlchemy models working with proper relationships
-- E. No HTML templates required (that's Sprint 2)
-- F. Backend structure ready for frontend integration in Sprint 2
+- B. Dashboard UI displays real statistics and data from database
+- C. Database created and populated with seed data (SQLite)
+- D. All API endpoints return JSON responses with real database data
+- E. SQLAlchemy models working with proper relationships
+- F. Professional dashboard styling with Tailwind CSS, Font Awesome icons, and Google Fonts
+- G. Backend structure ready for Sprint 2 (Members & Plans Management UI)
 
 ---
 
@@ -792,24 +1107,24 @@ Example /api/members response should include real data:
 
 Once Sprint 1 verification passes, you're ready for:
 
-**Sprint 2: Frontend Templates** - Create HTML templates that consume these APIs
-**Sprint 3: Integration & Polish** - Connect frontend with backend, add validation
+**Sprint 2: Members & Plans Management UI** - Create full CRUD interfaces for members and membership plans with forms, validation, and data tables
+**Sprint 3: Trainers & Sessions Management UI + Polish** - Add trainer management, session scheduling UI, and final integration polish
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 
 - [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🛠 Environment Setup
-- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
-- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
+- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Members & Plans Management UI
+- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Trainers & Sessions UI + Polish
 - [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 
 - [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🔧 Setup & Environment
-- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
-- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
+- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Members & Plans Management UI
+- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Trainers & Sessions UI + Polish
 - [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 ## 🎯 **NEXT STEP**
 
-After completing Sprint 1, proceed to: **[4_Sprint2-Frontend.md](4_Sprint2-Frontend.md)** - Frontend Templates
+After completing Sprint 1, proceed to: **[4_Sprint2-Frontend.md](4_Sprint2-Frontend.md)** - Members & Plans Management UI
 ````
