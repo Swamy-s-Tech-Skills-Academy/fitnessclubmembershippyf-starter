@@ -612,12 +612,12 @@ SPRINT 1 API ENDPOINTS SUMMARY:
 
 ✅ **Add New API Endpoints (Returning Real Database Data):**
 - GET /test - Backend verification with database status (JSON)
+- GET /api/stats - Get dashboard statistics from database (JSON)
 - GET /api/members - Get all members from database (JSON)
 - POST /api/members - Create new member in database (JSON)
 - GET /api/plans - Get membership plans from database (JSON)
-- GET /api/sessions - Get workout sessions from database (JSON)
 - GET /api/trainers - Get trainers list from database (JSON)
-- GET /api/stats - Get dashboard statistics from database (JSON)
+- GET /api/sessions - Get workout sessions from database (JSON)
 - POST /api/sessions/schedule - Schedule session in database (JSON)
 
 IMPORTANT: REAL DATABASE IN SPRINT 1
