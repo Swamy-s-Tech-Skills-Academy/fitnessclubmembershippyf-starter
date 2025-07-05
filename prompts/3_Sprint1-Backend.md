@@ -743,7 +743,7 @@ def init_database():
                 time=time(8, 0),
                 duration_minutes=60,
                 capacity=15,
-                enrolled=8,
+                enrolled=4,
                 status='active'
             ),
             Session(
@@ -754,7 +754,7 @@ def init_database():
                 time=time(18, 0),
                 duration_minutes=45,
                 capacity=12,
-                enrolled=10,
+                enrolled=4,
                 status='active'
             ),
             Session(
@@ -765,7 +765,7 @@ def init_database():
                 time=time(19, 0),
                 duration_minutes=60,
                 capacity=8,
-                enrolled=5,
+                enrolled=3,
                 status='active'
             ),
             Session(
@@ -776,7 +776,7 @@ def init_database():
                 time=time(17, 30),
                 duration_minutes=60,
                 capacity=10,
-                enrolled=7,
+                enrolled=3,
                 status='active'
             )
         ]
@@ -788,24 +788,24 @@ def init_database():
 
         # Create session enrollments (matching the enrolled counts in sessions)
         enrollments = [
-            # Morning Yoga (session_id=1, enrolled=8)
+            # Morning Yoga (session_id=1, enrolled=4)
             SessionEnrollment(session_id=1, member_id=1, status='enrolled'),
             SessionEnrollment(session_id=1, member_id=2, status='enrolled'),
             SessionEnrollment(session_id=1, member_id=3, status='enrolled'),
             SessionEnrollment(session_id=1, member_id=4, status='enrolled'),
 
-            # HIIT Workout (session_id=2, enrolled=10)
+            # HIIT Workout (session_id=2, enrolled=4)
             SessionEnrollment(session_id=2, member_id=1, status='enrolled'),
             SessionEnrollment(session_id=2, member_id=2, status='enrolled'),
             SessionEnrollment(session_id=2, member_id=3, status='enrolled'),
             SessionEnrollment(session_id=2, member_id=4, status='enrolled'),
 
-            # Strength Training (session_id=3, enrolled=5)
+            # Strength Training (session_id=3, enrolled=3)
             SessionEnrollment(session_id=3, member_id=1, status='enrolled'),
             SessionEnrollment(session_id=3, member_id=2, status='enrolled'),
             SessionEnrollment(session_id=3, member_id=3, status='enrolled'),
 
-            # Evening Pilates (session_id=4, enrolled=7)
+            # Evening Pilates (session_id=4, enrolled=3)
             SessionEnrollment(session_id=4, member_id=1, status='enrolled'),
             SessionEnrollment(session_id=4, member_id=2, status='enrolled'),
             SessionEnrollment(session_id=4, member_id=4, status='enrolled'),
@@ -1082,7 +1082,7 @@ DATABASE REQUIRED FOR SPRINT 1:
 ✅ **Sprint 1 Backend API + Dashboard Deliverables:**
 
 - **A. src\app.py** - Flask app with API endpoints + Dashboard route + SQLAlchemy integration (keeps existing welcome page)
-- **B. src\models.py** - SQLAlchemy models (Member, Plan, Trainer, Session) with relationships
+- **B. src\app.py** - Updated with SQLAlchemy models (Member, Plan, Trainer, Session, SessionEnrollment) with relationships and all API routes
 - **C. src\config.py** - Flask configuration with database path
 - **D. src\init_db.py** - Database initialization script with realistic seed data
 - **E. src\templates\dashboard.html** - Dashboard UI template displaying real statistics and data
