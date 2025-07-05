@@ -5,28 +5,38 @@
 ````text
 Build Flask backend API endpoints + Dashboard UI for a fitness club membership system with the following requirements:
 
+IMPORTANT: Navigation Component Update Required
+Before starting backend development, update the navigation component:
+1. Open src\templates\_navbar.html
+2. Change Dashboard link from href="#" to href="{{ url_for('dashboard') }}"
+3. Add proper active state highlighting for Dashboard page
+This ensures navigation works properly when Dashboard is created.
+
 PYTHON VERSION REQUIREMENT:
 - Python 3.13.5 (ensure compatibility with Flask 3.0.0 and SQLAlchemy 2.0.41 features)
 
 SPRINT 1 FOCUS: BACKEND API + REAL DATABASE + DASHBOARD UI
 - A. Keep the existing welcome page (/) unchanged from pre-sprint setup
-- B. Create database models and initialize with seed data (real database)
-- C. Add JSON API endpoints that return real data from database
-- D. Create Dashboard UI that displays real statistics and data
+- B. Update navigation component to include Dashboard link
+- C. Create database models and initialize with seed data (real database)
+- D. Add JSON API endpoints that return real data from database
+- E. Create Dashboard UI that displays real statistics and data
 - Focus on backend functionality, data structure, and dashboard visualization
 
 APPROACH (FIXED TO AVOID CIRCULAR IMPORTS):
 1. Keep existing src\app.py welcome page route (/) unchanged
-2. Create a simple, single-file approach with all models in app.py to avoid circular imports
-3. Initialize database with realistic seed data (not mock data)
-4. Add API routes that return JSON responses with real database data
-5. Create Dashboard UI template that consumes the API data
-6. Prepare data structure for Sprint 2 (Members & Plans management)
+2. Update _navbar.html component to add active Dashboard link
+3. Create a simple, single-file approach with all models in app.py to avoid circular imports
+4. Initialize database with realistic seed data (not mock data)
+5. Add API routes that return JSON responses with real database data
+6. Create Dashboard UI template that extends base.html
+7. Prepare data structure for Sprint 2 (Members & Plans management)
 
 FILES TO CREATE/UPDATE:
+- src\templates\_navbar.html (UPDATE: Add Dashboard link to navigation)
 - src\init_db.py (NEW: Database initialization with realistic seed data)
 - src\app.py (UPDATE: Add models, API routes + Dashboard route + database setup, keep welcome page unchanged)
-- src\templates\dashboard.html (NEW: Dashboard UI template with real data)
+- src\templates\dashboard.html (NEW: Dashboard UI template extending base.html)
 
 IMPORTANT: SINGLE FILE APPROACH (NO CIRCULAR IMPORTS)
 - All SQLAlchemy models will be defined directly in app.py

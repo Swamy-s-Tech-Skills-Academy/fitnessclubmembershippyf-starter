@@ -23,12 +23,13 @@ TEMPLATES NEEDED:
 8. plans/detail.html - Plan details with member count and revenue analytics
 
 TEMPLATE STRUCTURE:
-- All templates extend the existing dashboard structure from Sprint 1
-- Use consistent navigation and breadcrumb system
+- All templates MUST extend base.html (component-based architecture from Pre-Sprint)
+- Use shared navigation component (_navbar.html) and footer component (_footer.html)
 - Implement professional forms with Flask-WTF integration
 - Include comprehensive error handling and success messages
 - Add data export functionality (CSV) for members and plans
 - Professional styling with existing Tailwind CSS theme
+- DO NOT create monolithic templates - use the established component system
 
 FEATURES TO INCLUDE:
 - Member management: Create, Read, Update, Delete operations
@@ -38,7 +39,7 @@ FEATURES TO INCLUDE:
 - Form validation with real-time feedback
 - Professional data tables with sorting and pagination
 - Mobile-responsive design for all interfaces
-- Integration with existing Sprint 1 dashboard navigation
+- Integration with existing Sprint 1 dashboard navigation using shared _navbar.html component
 
 All forms should connect to Sprint 1 API routes for data operations
 Include proper error handling and user feedback throughout
@@ -112,7 +113,7 @@ python app.py
 - ✅ **Data Tables:** Professional tables with sorting, pagination, and export functionality
 - ✅ **Forms with Validation:** Flask-WTF integration with real-time feedback and error handling
 - ✅ **Responsive Design:** Mobile-first design extending Sprint 1 dashboard theme
-- ✅ **Navigation Integration:** Seamless integration with existing dashboard navigation
+- ✅ **Navigation Integration:** Seamless integration with existing component-based navigation (`_navbar.html`, `_footer.html`)
 - ✅ **Export Functionality:** CSV export capabilities for members and plans data
 - ✅ **Professional Styling:** Consistent Tailwind CSS styling with Font Awesome icons
 

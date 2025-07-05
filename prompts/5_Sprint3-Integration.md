@@ -30,6 +30,13 @@ TEMPLATES TO CREATE:
 9. templates/errors/404.html - Professional 404 error page
 10. templates/errors/500.html - Professional 500 error page
 
+TEMPLATE STRUCTURE REQUIREMENTS:
+- All templates MUST extend base.html (component-based architecture from Pre-Sprint)
+- Use shared navigation component (_navbar.html) and footer component (_footer.html)
+- Error pages should also extend base.html and use the component system
+- DO NOT create monolithic templates - maintain consistency with established component architecture
+- All new templates should seamlessly integrate with existing Sprint 1 & 2 templates
+
 ADVANCED FEATURES TO ADD:
 1. Trainer management: Full CRUD operations with specialization tracking
 2. Session scheduling: Calendar interface with trainer assignments and capacity management
@@ -52,8 +59,8 @@ SERVER-SIDE (app.py updates):
 - Add AJAX endpoints for real-time booking and status updates
 - Enhance dashboard with trainer and session analytics
 - Add context processor for navigation highlighting
-- Add error handlers for 404/500 with custom templates
-- Integrate with existing Sprint 1 API structure
+- Add error handlers for 404/500 with custom templates that extend base.html
+- Integrate with existing Sprint 1 API structure and component-based template system
 
 CLIENT-SIDE (new static/js/app.js):
 - AJAX functions for session booking, trainer assignments, and status updates
