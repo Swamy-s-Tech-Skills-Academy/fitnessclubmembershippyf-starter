@@ -6,11 +6,20 @@
 Complete the fitness club system with trainers & sessions management UI plus advanced features and production polish:
 
 SPRINT 3 FOCUS: TRAINERS & SESSIONS MANAGEMENT + POLISH
-- A. Create comprehensive trainer management interfaces (CRUD operations)
-- B. Build session scheduling and management UI with booking capabilities
-- C. Add advanced features: search, filtering, CSV export, AJAX functionality
-- D. Implement production polish: error handling, validation, mobile optimization
+- A. Expand navigation component to include Trainers and Sessions links
+- B. Create comprehensive trainer management interfaces (CRUD operations)
+- C. Build session scheduling and management UI with booking capabilities
+- D. Add advanced features: search, filtering, CSV export, AJAX functionality
+- E. Implement production polish: error handling, validation, mobile optimization
 - Focus on completing the full management system with professional UX
+
+NAVIGATION COMPONENT EXPANSION REQUIRED:
+Before creating templates, update src\templates\_navbar.html:
+1. Add Trainers link: href="{{ url_for('trainers_list') }}" with icon "fas fa-user-tie"
+2. Add Sessions link: href="{{ url_for('sessions_list') }}" with icon "fas fa-calendar-check"
+3. Update navigation layout to accommodate 6 main links (Home, Dashboard, Members, Plans, Trainers, Sessions)
+4. Add proper active state highlighting for Trainers and Sessions pages
+This completes the full navigation system for all management areas.
 
 PREREQUISITE VERIFICATION:
 - Sprint 1: Backend API + Dashboard UI working with real database data

@@ -6,11 +6,19 @@
 Create Members & Plans Management UI interfaces for the fitness club system using modern responsive design:
 
 SPRINT 2 FOCUS: MEMBERS & PLANS MANAGEMENT UI
-- A. Build comprehensive CRUD interfaces for members management
-- B. Create membership plans management with pricing displays
-- C. Add professional forms with validation and user feedback
-- D. Implement data tables with search, filtering, and export capabilities
+- A. Update navigation component to activate Members and Plans links
+- B. Build comprehensive CRUD interfaces for members management
+- C. Create membership plans management with pricing displays
+- D. Add professional forms with validation and user feedback
+- E. Implement data tables with search, filtering, and export capabilities
 - Focus on user-friendly interfaces for staff to manage members and plans
+
+NAVIGATION COMPONENT UPDATE REQUIRED:
+Before creating templates, update src\templates\_navbar.html:
+1. Change Members link from href="#" to href="{{ url_for('members_list') }}"
+2. Change Plans link from href="#" to href="{{ url_for('plans_list') }}"
+3. Add proper active state highlighting for Members and Plans pages
+This ensures navigation works properly when Members/Plans pages are created.
 
 TEMPLATES NEEDED:
 1. members/list.html - Member list with search, filters, pagination, and export

@@ -178,6 +178,14 @@ if __name__ == '__main__':
                 <a href=`"#`" class=`"text-gray-600 hover:text-blue-600 transition-colors`">
                     <i class=`"fas fa-calendar-alt mr-1`"></i> Plans
                 </a>
+                <span class=`"text-gray-400`">|</span>
+                <a href=`"#`" class=`"text-gray-600 hover:text-blue-600 transition-colors`">
+                    <i class=`"fas fa-user-tie mr-1`"></i> Trainers
+                </a>
+                <span class=`"text-gray-400`">|</span>
+                <a href=`"#`" class=`"text-gray-600 hover:text-blue-600 transition-colors`">
+                    <i class=`"fas fa-calendar-check mr-1`"></i> Sessions
+                </a>
             </div>
         </div>
     </div>
