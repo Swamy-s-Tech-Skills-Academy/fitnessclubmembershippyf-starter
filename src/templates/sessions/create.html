@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Schedule New Session - Fitness Club{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header Section -->
+    <div class="mb-8">
+        <div class="flex items-center mb-4">
+            <a href="{{ url_for('sessions_list') }}" class="text-gray-600 hover:text-blue-600 transition-colors mr-4">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </a>
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Schedule New Session</h1>
+                <p class="text-gray-600 mt-2">Create a new fitness session with trainer assignment</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">Session Details</h3>
+            <p class="text-sm text-gray-600 mt-1">Fill in the session information and schedule</p>
+        </div>
+
+        <form method="POST" class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Session Information -->
+                <div class="space-y-6">
+                    <h4 class="text-md font-medium text-gray-900 border-b border-gray-200 pb-2">Session Information</h4>
+
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+                            Session Title <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="title" id="title" required
+                            placeholder="e.g., Morning Yoga, HIIT Training"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="trainer_id" class="block text-sm font-medium text-gray-700 mb-2">
+                            Trainer <span class="text-red-500">*</span>
+                        </label>
+                        <select name="trainer_id" id="trainer_id" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select a trainer</option>
+                            {% for trainer in trainers %}
+                            <option value="{{ trainer.id }}">
+                                {{ trainer.name }}
+                                {% if trainer.specialization %}
+                                - {{ trainer.specialization }}
+                                {% endif %}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700 mb-2">
+                            Location
+                        </label>
+                        <input type="text" name="location" id="location"
+                            placeholder="e.g., Studio A, Gym Floor, Outdoor Area"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                            Status
+                        </label>
+                        <select name="status" id="status"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="scheduled">Scheduled</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Schedule & Settings -->
+                <div class="space-y-6">
+                    <h4 class="text-md font-medium text-gray-900 border-b border-gray-200 pb-2">Schedule & Settings</h4>
+
+                    <div>
+                        <label for="date" class="block text-sm font-medium text-gray-700 mb-2">
+                            Date <span class="text-red-500">*</span>
+                        </label>
+                        <input type="date" name="date" id="date" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="time" class="block text-sm font-medium text-gray-700 mb-2">
+                            Time <span class="text-red-500">*</span>
+                        </label>
+                        <input type="time" name="time" id="time" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="duration_minutes" class="block text-sm font-medium text-gray-700 mb-2">
+                            Duration (minutes)
+                        </label>
+                        <input type="number" name="duration_minutes" id="duration_minutes" min="15" max="300" value="60"
+                            placeholder="60"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-gray-500 mt-1">Duration of the session in minutes</p>
+                    </div>
+
+                    <div>
+                        <label for="capacity" class="block text-sm font-medium text-gray-700 mb-2">
+                            Maximum Capacity
+                        </label>
+                        <input type="number" name="capacity" id="capacity" min="1" max="100" value="10" placeholder="10"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-gray-500 mt-1">Maximum number of participants</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description Section -->
+            <div class="mt-8">
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                    Session Description
+                </label>
+                <textarea name="description" id="description" rows="4"
+                    placeholder="Describe the session content, goals, and what participants can expect..."
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                <p class="text-sm text-gray-500 mt-1">This will help participants understand what to expect</p>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-gray-200">
+                <a href="{{ url_for('sessions_list') }}"
+                    class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
+                    Cancel
+                </a>
+                <button type="submit"
+                    class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-calendar-plus mr-2"></i>
+                    Schedule Session
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Help Section -->
+    <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <div class="flex items-start">
+            <i class="fas fa-info-circle text-blue-600 mt-1 mr-3"></i>
+            <div>
+                <h4 class="text-md font-medium text-blue-900 mb-2">Session Scheduling Tips</h4>
+                <ul class="text-sm text-blue-800 space-y-1">
+                    <li>• Check trainer availability before scheduling to avoid conflicts</li>
+                    <li>• Set realistic capacity limits based on space and equipment</li>
+                    <li>• Include clear descriptions to help members choose appropriate sessions</li>
+                    <li>• Schedule sessions at least 24 hours in advance for proper planning</li>
+                    <li>• Consider member preferences and peak hours for better attendance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set minimum date to today
+    document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').min = today;
+    });
+
+    // Form validation
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const title = document.getElementById('title').value.trim();
+        const trainerId = document.getElementById('trainer_id').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+
+        if (!title) {
+            e.preventDefault();
+            alert('Please enter a session title');
+            document.getElementById('title').focus();
+            return;
+        }
+
+        if (!trainerId) {
+            e.preventDefault();
+            alert('Please select a trainer');
+            document.getElementById('trainer_id').focus();
+            return;
+        }
+
+        if (!date || !time) {
+            e.preventDefault();
+            alert('Please set both date and time');
+            return;
+        }
+
+        // Validate that session is not in the past
+        const sessionDateTime = new Date(date + 'T' + time);
+        if (sessionDateTime < new Date()) {
+            e.preventDefault();
+            alert('Session cannot be scheduled in the past');
+            document.getElementById('date').focus();
+            return;
+        }
+    });
+</script>
+{% endblock %}

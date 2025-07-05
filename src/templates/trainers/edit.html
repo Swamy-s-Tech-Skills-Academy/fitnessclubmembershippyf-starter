@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}Edit {{ trainer.name }} - Fitness Club{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header Section -->
+    <div class="mb-8">
+        <div class="flex items-center mb-4">
+            <a href="{{ url_for('trainers_detail', id=trainer.id) }}"
+                class="text-gray-600 hover:text-blue-600 transition-colors mr-4">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </a>
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Edit Trainer</h1>
+                <p class="text-gray-600 mt-2">Update {{ trainer.name }}'s profile information</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">Trainer Information</h3>
+            <p class="text-sm text-gray-600 mt-1">Update the trainer's profile details</p>
+        </div>
+
+        <form method="POST" class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Basic Information -->
+                <div class="space-y-6">
+                    <h4 class="text-md font-medium text-gray-900 border-b border-gray-200 pb-2">Basic Information</h4>
+
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                            Full Name <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="name" id="name" required value="{{ trainer.name }}"
+                            placeholder="Enter trainer's full name"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email Address <span class="text-red-500">*</span>
+                        </label>
+                        <input type="email" name="email" id="email" required value="{{ trainer.email }}"
+                            placeholder="trainer@example.com"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                            Phone Number
+                        </label>
+                        <input type="tel" name="phone" id="phone" value="{{ trainer.phone or '' }}"
+                            placeholder="+1 (555) 123-4567"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                            Status
+                        </label>
+                        <select name="status" id="status"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="active" {{ 'selected' if trainer.status=='active' else '' }}>Active</option>
+                            <option value="inactive" {{ 'selected' if trainer.status=='inactive' else '' }}>Inactive
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Professional Information -->
+                <div class="space-y-6">
+                    <h4 class="text-md font-medium text-gray-900 border-b border-gray-200 pb-2">Professional Information
+                    </h4>
+
+                    <div>
+                        <label for="specialization" class="block text-sm font-medium text-gray-700 mb-2">
+                            Specialization
+                        </label>
+                        <input type="text" name="specialization" id="specialization"
+                            value="{{ trainer.specialization or '' }}"
+                            placeholder="e.g., Personal Training, Yoga, Pilates"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-gray-500 mt-1">Primary area of expertise</p>
+                    </div>
+
+                    <div>
+                        <label for="experience_years" class="block text-sm font-medium text-gray-700 mb-2">
+                            Years of Experience
+                        </label>
+                        <input type="number" name="experience_years" id="experience_years" min="0" max="50"
+                            value="{{ trainer.experience_years or 0 }}" placeholder="0"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="certification" class="block text-sm font-medium text-gray-700 mb-2">
+                            Certification/Credentials
+                        </label>
+                        <input type="text" name="certification" id="certification"
+                            value="{{ trainer.certification or '' }}" placeholder="e.g., NASM-CPT, ACSM, RYT-200"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <p class="text-sm text-gray-500 mt-1">Professional certifications and credentials</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bio Section -->
+            <div class="mt-8">
+                <label for="bio" class="block text-sm font-medium text-gray-700 mb-2">
+                    Professional Bio
+                </label>
+                <textarea name="bio" id="bio" rows="4"
+                    placeholder="Tell us about the trainer's background, experience, and training philosophy..."
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ trainer.bio or '' }}</textarea>
+                <p class="text-sm text-gray-500 mt-1">This will be displayed on the trainer's profile page</p>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-gray-200">
+                <a href="{{ url_for('trainers_detail', id=trainer.id) }}"
+                    class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
+                    Cancel
+                </a>
+                <button type="submit"
+                    class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-save mr-2"></i>
+                    Update Trainer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="mt-8 bg-red-50 border border-red-200 rounded-lg p-6">
+        <div class="flex items-start">
+            <i class="fas fa-exclamation-triangle text-red-600 mt-1 mr-3"></i>
+            <div>
+                <h4 class="text-md font-medium text-red-900 mb-2">Danger Zone</h4>
+                <p class="text-sm text-red-800 mb-4">
+                    Be careful when modifying trainer information. Changes to email addresses may affect trainer access
+                    and assigned sessions.
+                </p>
+
+                {% if trainer.status == 'active' %}
+                <div class="text-sm text-red-800">
+                    <strong>Note:</strong> This trainer is currently active and may have scheduled sessions.
+                    Setting status to inactive will prevent new session assignments.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Form validation
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        if (!name) {
+            e.preventDefault();
+            alert('Please enter the trainer\'s name');
+            document.getElementById('name').focus();
+            return;
+        }
+
+        if (!email) {
+            e.preventDefault();
+            alert('Please enter the trainer\'s email address');
+            document.getElementById('email').focus();
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            e.preventDefault();
+            alert('Please enter a valid email address');
+            document.getElementById('email').focus();
+            return;
+        }
+    });
+
+    // Real-time email validation
+    document.getElementById('email').addEventListener('blur', function () {
+        const email = this.value.trim();
+        if (email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                this.classList.add('border-red-500');
+                this.classList.remove('border-gray-300');
+            } else {
+                this.classList.remove('border-red-500');
+                this.classList.add('border-gray-300');
+            }
+        }
+    });
+
+    // Confirm status change if trainer has active sessions
+    document.getElementById('status').addEventListener('change', function () {
+        if (this.value === 'inactive') {
+            // Simple confirmation without complex template logic
+            if (!confirm('Setting status to inactive may affect scheduled sessions. Continue?')) {
+                this.value = 'active';
+            }
+        }
+    });
+</script>
+{% endblock %}

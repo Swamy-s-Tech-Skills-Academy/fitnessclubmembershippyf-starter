@@ -842,6 +842,495 @@ def export_plans():
 
 # Sprint 1: Backend API endpoints returning real database data
 
+# SPRINT 3: TRAINERS MANAGEMENT UI ROUTES
+
+@app.route('/trainers')
+def trainers_list():
+    """Trainers list page"""
+    try:
+        search_query = request.args.get('search', '')
+        specialization_filter = request.args.get('specialization', '')
+
+        query = Trainer.query
+
+        if search_query:
+            query = query.filter(Trainer.name.contains(search_query))
+
+        if specialization_filter:
+            query = query.filter(
+                Trainer.specialization.contains(specialization_filter))
+
+        trainers = query.all()
+
+        # Get unique specializations for filter dropdown
+        specializations = db.session.query(Trainer.specialization).filter(
+            Trainer.specialization.isnot(None)).distinct().all()
+        specializations = [s[0] for s in specializations if s[0]]
+
+        return render_template('trainers/list.html',
+                               trainers=trainers,
+                               search_query=search_query,
+                               specialization_filter=specialization_filter,
+                               specializations=specializations)
+    except Exception as e:
+        flash(f'Error loading trainers: {str(e)}', 'error')
+        return redirect(url_for('dashboard'))
+
+
+@app.route('/trainers/create', methods=['GET', 'POST'])
+def trainers_create():
+    """Trainer creation form"""
+    if request.method == 'POST':
+        try:
+            name = request.form.get('name', '').strip()
+            email = request.form.get('email', '').strip()
+            phone = request.form.get('phone', '').strip()
+            specialization = request.form.get('specialization', '').strip()
+            experience_years = request.form.get('experience_years', 0)
+            bio = request.form.get('bio', '').strip()
+            certification = request.form.get('certification', '').strip()
+            status = request.form.get('status', 'active')
+
+            # Validation
+            if not name:
+                flash('Trainer name is required', 'error')
+                return render_template('trainers/create.html')
+
+            if not email:
+                flash('Email is required', 'error')
+                return render_template('trainers/create.html')
+
+            # Check for duplicate email
+            existing_trainer = Trainer.query.filter_by(email=email).first()
+            if existing_trainer:
+                flash('A trainer with this email already exists', 'error')
+                return render_template('trainers/create.html')
+
+            # Create new trainer
+            trainer = Trainer(
+                name=name,
+                email=email,
+                phone=phone,
+                specialization=specialization,
+                experience_years=int(
+                    experience_years) if experience_years else 0,
+                bio=bio,
+                certification=certification,
+                status=status
+            )
+
+            db.session.add(trainer)
+            db.session.commit()
+
+            flash(f'Trainer {name} created successfully!', 'success')
+            return redirect(url_for('trainers_list'))
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error creating trainer: {str(e)}', 'error')
+
+    # GET request - show form
+    return render_template('trainers/create.html')
+
+
+@app.route('/trainers/<int:id>')
+def trainers_detail(id):
+    """Trainer detail page"""
+    try:
+        trainer = Trainer.query.get_or_404(id)
+        # Get assigned sessions for this trainer
+        assigned_sessions = Session.query.filter_by(trainer_id=id).all()
+
+        return render_template('trainers/detail.html',
+                               trainer=trainer,
+                               assigned_sessions=assigned_sessions)
+    except Exception as e:
+        flash(f'Error loading trainer details: {str(e)}', 'error')
+        return redirect(url_for('trainers_list'))
+
+
+@app.route('/trainers/<int:id>/edit', methods=['GET', 'POST'])
+def edit_trainer(id):
+    """Trainer edit form"""
+    try:
+        trainer = Trainer.query.get_or_404(id)
+
+        if request.method == 'POST':
+            name = request.form.get('name', '').strip()
+            email = request.form.get('email', '').strip()
+            phone = request.form.get('phone', '').strip()
+            specialization = request.form.get('specialization', '').strip()
+            experience_years = request.form.get('experience_years', 0)
+            bio = request.form.get('bio', '').strip()
+            certification = request.form.get('certification', '').strip()
+            status = request.form.get('status', 'active')
+
+            # Validation
+            if not name:
+                flash('Trainer name is required', 'error')
+                return render_template('trainers/edit.html', trainer=trainer)
+
+            if not email:
+                flash('Email is required', 'error')
+                return render_template('trainers/edit.html', trainer=trainer)
+
+            # Check for duplicate email (excluding current trainer)
+            existing_trainer = Trainer.query.filter(
+                Trainer.email == email,
+                Trainer.id != id
+            ).first()
+            if existing_trainer:
+                flash('A trainer with this email already exists', 'error')
+                return render_template('trainers/edit.html', trainer=trainer)
+
+            # Update trainer
+            trainer.name = name
+            trainer.email = email
+            trainer.phone = phone
+            trainer.specialization = specialization
+            trainer.experience_years = int(
+                experience_years) if experience_years else 0
+            trainer.bio = bio
+            trainer.certification = certification
+            trainer.status = status
+
+            db.session.commit()
+
+            flash(f'Trainer {name} updated successfully!', 'success')
+            return redirect(url_for('trainers_detail', id=id))
+
+        # GET request - show form
+        return render_template('trainers/edit.html', trainer=trainer)
+
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error updating trainer: {str(e)}', 'error')
+        return redirect(url_for('trainers_list'))
+
+
+@app.route('/trainers/export')
+def export_trainers():
+    """Export trainers data to CSV"""
+    try:
+        trainers = Trainer.query.all()
+
+        # Create CSV content
+        output = io.StringIO()
+        writer = csv.writer(output)
+
+        # Write header
+        writer.writerow(['ID', 'Name', 'Email', 'Phone', 'Specialization',
+                        'Experience (Years)', 'Bio', 'Certification', 'Status',
+                         'Sessions Count'])
+
+        # Write trainer data
+        for trainer in trainers:
+            sessions_count = Session.query.filter_by(
+                trainer_id=trainer.id).count()
+            writer.writerow([
+                trainer.id,
+                trainer.name,
+                trainer.email,
+                trainer.phone or '',
+                trainer.specialization or '',
+                trainer.experience_years,
+                trainer.bio or '',
+                trainer.certification or '',
+                trainer.status,
+                sessions_count
+            ])
+
+        # Create response
+        output.seek(0)
+        response = make_response(output.getvalue())
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers[
+            'Content-Disposition'] = f'attachment; filename=trainers_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
+
+        return response
+
+    except Exception as e:
+        flash(f'Error exporting trainers: {str(e)}', 'error')
+        return redirect(url_for('trainers_list'))
+
+
+# SPRINT 3: SESSIONS MANAGEMENT UI ROUTES
+
+@app.route('/sessions')
+def sessions_list():
+    """Sessions list page"""
+    try:
+        search_query = request.args.get('search', '')
+        trainer_filter = request.args.get('trainer', '')
+        status_filter = request.args.get('status', '')
+
+        query = Session.query
+
+        if search_query:
+            query = query.filter(Session.title.contains(search_query))
+
+        if trainer_filter:
+            query = query.filter_by(trainer_id=trainer_filter)
+
+        if status_filter:
+            query = query.filter_by(status=status_filter)
+
+        sessions = query.order_by(
+            Session.date.desc(), Session.time.desc()).all()
+
+        # Get trainers for filter dropdown
+        trainers = Trainer.query.filter_by(status='active').all()
+
+        return render_template('sessions/list.html',
+                               sessions=sessions,
+                               search_query=search_query,
+                               trainer_filter=trainer_filter,
+                               status_filter=status_filter,
+                               trainers=trainers)
+    except Exception as e:
+        flash(f'Error loading sessions: {str(e)}', 'error')
+        return redirect(url_for('dashboard'))
+
+
+@app.route('/sessions/create', methods=['GET', 'POST'])
+def sessions_create():
+    """Session creation form"""
+    if request.method == 'POST':
+        try:
+            title = request.form.get('title', '').strip()
+            description = request.form.get('description', '').strip()
+            trainer_id = request.form.get('trainer_id')
+            session_date = request.form.get('date')
+            session_time = request.form.get('time')
+            duration_minutes = request.form.get('duration_minutes', 60)
+            capacity = request.form.get('capacity', 10)
+            status = request.form.get('status', 'active')
+
+            # Validation
+            if not title:
+                flash('Session title is required', 'error')
+                return render_template('sessions/create.html', trainers=Trainer.query.filter_by(status='active').all())
+
+            if not trainer_id:
+                flash('Trainer is required', 'error')
+                return render_template('sessions/create.html', trainers=Trainer.query.filter_by(status='active').all())
+
+            if not session_date or not session_time:
+                flash('Date and time are required', 'error')
+                return render_template('sessions/create.html', trainers=Trainer.query.filter_by(status='active').all())
+
+            # Parse date and time
+            try:
+                parsed_date = datetime.strptime(
+                    session_date, '%Y-%m-%d').date()
+                parsed_time = datetime.strptime(session_time, '%H:%M').time()
+            except ValueError:
+                flash('Invalid date or time format', 'error')
+                return render_template('sessions/create.html', trainers=Trainer.query.filter_by(status='active').all())
+
+            # Validate session is not in the past
+            session_datetime = datetime.combine(parsed_date, parsed_time)
+            if session_datetime < datetime.now():
+                flash('Session cannot be scheduled in the past', 'error')
+                return render_template('sessions/create.html', trainers=Trainer.query.filter_by(status='active').all())
+
+            # Check trainer availability (basic check - same date and time)
+            overlapping = Session.query.filter(
+                Session.trainer_id == trainer_id,
+                Session.date == parsed_date,
+                Session.time == parsed_time,
+                Session.status == 'active'
+            ).first()
+
+            if overlapping:
+                flash('Trainer already has a session at this time', 'error')
+                return render_template('sessions/create.html', trainers=Trainer.query.filter_by(status='active').all())
+
+            # Create new session
+            session = Session(
+                title=title,
+                description=description,
+                trainer_id=trainer_id,
+                date=parsed_date,
+                time=parsed_time,
+                duration_minutes=int(
+                    duration_minutes) if duration_minutes else 60,
+                capacity=int(capacity) if capacity else 10,
+                status=status
+            )
+
+            db.session.add(session)
+            db.session.commit()
+
+            flash(f'Session "{title}" created successfully!', 'success')
+            return redirect(url_for('sessions_list'))
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error creating session: {str(e)}', 'error')
+
+    # GET request - show form
+    trainers = Trainer.query.filter_by(status='active').all()
+    return render_template('sessions/create.html', trainers=trainers)
+
+
+@app.route('/sessions/<int:id>')
+def sessions_detail(id):
+    """Session detail page"""
+    try:
+        session = Session.query.get_or_404(id)
+        # Get enrolled members for this session (if enrollment system exists)
+        # For now, we'll just show the session details
+
+        return render_template('sessions/detail.html', session=session)
+    except Exception as e:
+        flash(f'Error loading session details: {str(e)}', 'error')
+        return redirect(url_for('sessions_list'))
+
+
+@app.route('/sessions/<int:id>/edit', methods=['GET', 'POST'])
+def edit_session(id):
+    """Session edit form"""
+    try:
+        session = Session.query.get_or_404(id)
+
+        if request.method == 'POST':
+            title = request.form.get('title', '').strip()
+            description = request.form.get('description', '').strip()
+            trainer_id = request.form.get('trainer_id')
+            session_date = request.form.get('date')
+            session_time = request.form.get('time')
+            duration_minutes = request.form.get('duration_minutes', 60)
+            capacity = request.form.get('capacity', 10)
+            status = request.form.get('status', 'active')
+
+            # Validation
+            if not title:
+                flash('Session title is required', 'error')
+                return render_template('sessions/edit.html', session=session, trainers=Trainer.query.filter_by(status='active').all())
+
+            if not trainer_id:
+                flash('Trainer is required', 'error')
+                return render_template('sessions/edit.html', session=session, trainers=Trainer.query.filter_by(status='active').all())
+
+            if not session_date or not session_time:
+                flash('Date and time are required', 'error')
+                return render_template('sessions/edit.html', session=session, trainers=Trainer.query.filter_by(status='active').all())
+
+            # Parse date and time
+            try:
+                parsed_date = datetime.strptime(
+                    session_date, '%Y-%m-%d').date()
+                parsed_time = datetime.strptime(session_time, '%H:%M').time()
+            except ValueError:
+                flash('Invalid date or time format', 'error')
+                return render_template('sessions/edit.html', session=session, trainers=Trainer.query.filter_by(status='active').all())
+
+            # Check trainer availability (excluding current session)
+            overlapping = Session.query.filter(
+                Session.trainer_id == trainer_id,
+                Session.id != id,
+                Session.date == parsed_date,
+                Session.time == parsed_time,
+                Session.status == 'active'
+            ).first()
+
+            if overlapping:
+                flash('Trainer already has a session at this time', 'error')
+                return render_template('sessions/edit.html', session=session, trainers=Trainer.query.filter_by(status='active').all())
+
+            # Update session
+            session.title = title
+            session.description = description
+            session.trainer_id = trainer_id
+            session.date = parsed_date
+            session.time = parsed_time
+            session.duration_minutes = int(
+                duration_minutes) if duration_minutes else 60
+            session.capacity = int(capacity) if capacity else 10
+            session.status = status
+
+            db.session.commit()
+
+            flash(f'Session "{title}" updated successfully!', 'success')
+            return redirect(url_for('sessions_detail', id=id))
+
+        # GET request - show form
+        trainers = Trainer.query.filter_by(status='active').all()
+        return render_template('sessions/edit.html', session=session, trainers=trainers)
+
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error updating session: {str(e)}', 'error')
+        return redirect(url_for('sessions_list'))
+
+
+@app.route('/sessions/export')
+def export_sessions():
+    """Export sessions data to CSV"""
+    try:
+        sessions = Session.query.all()
+
+        # Create CSV content
+        output = io.StringIO()
+        writer = csv.writer(output)
+
+        # Write header
+        writer.writerow(['ID', 'Name', 'Description', 'Trainer', 'Start Time',
+                        'End Time', 'Duration (Minutes)', 'Capacity', 'Price',
+                         'Location', 'Status'])
+
+        # Write session data
+        for session in sessions:
+            trainer_name = session.trainer.name if session.trainer else 'N/A'
+            duration = int((session.end_time - session.start_time).total_seconds() /
+                           60) if session.start_time and session.end_time else 0
+
+            writer.writerow([
+                session.id,
+                session.name,
+                session.description or '',
+                trainer_name,
+                session.start_time.strftime(
+                    '%Y-%m-%d %H:%M') if session.start_time else '',
+                session.end_time.strftime(
+                    '%Y-%m-%d %H:%M') if session.end_time else '',
+                duration,
+                session.capacity,
+                float(session.price),
+                session.location or '',
+                session.status
+            ])
+
+        # Create response
+        output.seek(0)
+        response = make_response(output.getvalue())
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers[
+            'Content-Disposition'] = f'attachment; filename=sessions_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
+
+        return response
+
+    except Exception as e:
+        flash(f'Error exporting sessions: {str(e)}', 'error')
+        return redirect(url_for('sessions_list'))
+
+
+# SPRINT 3: ERROR HANDLERS
+
+@app.errorhandler(404)
+def not_found_error(error):
+    """Handle 404 errors with custom template"""
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    """Handle 500 errors with custom template"""
+    db.session.rollback()
+    return render_template('errors/500.html'), 500
+
+
 if __name__ == '__main__':
     # Ensure instance directory exists
     instance_dir = os.path.join(os.path.abspath(

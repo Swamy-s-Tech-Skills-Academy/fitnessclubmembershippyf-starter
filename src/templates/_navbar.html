@@ -27,12 +27,12 @@
                     <i class="fas fa-calendar-alt mr-1"></i> Plans
                 </a>
                 <span class="text-gray-400">|</span>
-                <a href="#"
+                <a href="{{ url_for('trainers_list') }}"
                     class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'trainers_list' else '' }}">
                     <i class="fas fa-user-tie mr-1"></i> Trainers
                 </a>
                 <span class="text-gray-400">|</span>
-                <a href="#"
+                <a href="{{ url_for('sessions_list') }}"
                     class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'sessions_list' else '' }}">
                     <i class="fas fa-calendar-check mr-1"></i> Sessions
                 </a>
