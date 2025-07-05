@@ -94,7 +94,7 @@ if __name__ == '__main__':
     app.run(debug=True)
 "@ | Out-File -FilePath "src\app.py" -Encoding UTF8
 
-# ✅ Create welcome template (src\templates\index.html)
+# ✅ Create welcome template with consistent header/footer (src\templates\index.html)
 @"
 <!DOCTYPE html>
 <html lang=`"en`">
@@ -113,36 +113,91 @@ if __name__ == '__main__':
     <link href=`"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap`" rel=`"stylesheet`">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body class=`"bg-gray-100 min-h-screen flex items-center justify-center`">
-    <div class=`"text-center`">
-        <div class=`"mb-6`">
-            <i class=`"fas fa-dumbbell text-6xl text-blue-600 mb-4`"></i>
+<body class=`"bg-gray-50 min-h-screen`">
+    <!-- Navigation Header (consistent with dashboard) -->
+    <nav class=`"bg-white shadow-sm border-b border-gray-200`">
+        <div class=`"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`">
+            <div class=`"flex justify-between h-16`">
+                <div class=`"flex items-center`">
+                    <i class=`"fas fa-dumbbell text-blue-600 text-2xl mr-3`"></i>
+                    <h1 class=`"text-xl font-bold text-gray-900`">Fitness Club</h1>
+                </div>
+                <div class=`"flex items-center space-x-4`">
+                    <span class=`"text-blue-600 font-medium`">
+                        <i class=`"fas fa-home mr-1`"></i> Home
+                    </span>
+                    <span class=`"text-gray-400`">|</span>
+                    <a href=`"/dashboard`" class=`"text-gray-600 hover:text-blue-600 transition-colors`">
+                        <i class=`"fas fa-chart-line mr-1`"></i> Dashboard
+                    </a>
+                </div>
+            </div>
         </div>
-        <h1 class=`"text-6xl font-bold text-blue-600 mb-4 font-poppins`">Welcome to Fitness Club</h1>
-        <p class=`"text-xl text-gray-600 mb-6`">Your fitness journey starts here!</p>
-        <div class=`"flex justify-center gap-4 mb-8`">
-            <div class=`"flex items-center gap-2 text-gray-700`">
-                <i class=`"fas fa-users text-blue-500`"></i>
-                <span>Members</span>
+    </nav>
+
+    <!-- Main Content -->
+    <div class=`"flex-1 flex items-center justify-center py-12`">
+        <div class=`"text-center max-w-4xl mx-auto px-4`">
+            <div class=`"mb-8`">
+                <i class=`"fas fa-dumbbell text-8xl text-blue-600 mb-6`"></i>
             </div>
-            <div class=`"flex items-center gap-2 text-gray-700`">
-                <i class=`"fas fa-calendar-alt text-green-500`"></i>
-                <span>Bookings</span>
+            <h1 class=`"text-6xl font-bold text-blue-600 mb-6 font-poppins`">Welcome to Fitness Club</h1>
+            <p class=`"text-2xl text-gray-600 mb-12`">Your fitness journey starts here!</p>
+            
+            <!-- Feature Cards -->
+            <div class=`"grid grid-cols-1 md:grid-cols-3 gap-8 mb-12`">
+                <div class=`"bg-white p-6 rounded-lg shadow-sm border border-gray-200`">
+                    <i class=`"fas fa-users text-blue-500 text-3xl mb-4`"></i>
+                    <h3 class=`"text-lg font-semibold text-gray-900 mb-2`">Member Management</h3>
+                    <p class=`"text-gray-600`">Comprehensive member registration and profile management</p>
+                </div>
+                <div class=`"bg-white p-6 rounded-lg shadow-sm border border-gray-200`">
+                    <i class=`"fas fa-calendar-alt text-green-500 text-3xl mb-4`"></i>
+                    <h3 class=`"text-lg font-semibold text-gray-900 mb-2`">Session Booking</h3>
+                    <p class=`"text-gray-600`">Easy scheduling and booking of fitness sessions</p>
+                </div>
+                <div class=`"bg-white p-6 rounded-lg shadow-sm border border-gray-200`">
+                    <i class=`"fas fa-chart-line text-purple-500 text-3xl mb-4`"></i>
+                    <h3 class=`"text-lg font-semibold text-gray-900 mb-2`">Analytics Dashboard</h3>
+                    <p class=`"text-gray-600`">Real-time insights and business analytics</p>
+                </div>
             </div>
-            <div class=`"flex items-center gap-2 text-gray-700`">
-                <i class=`"fas fa-chart-line text-purple-500`"></i>
-                <span>Analytics</span>
+
+            <!-- Call to Action -->
+            <div class=`"bg-blue-50 border border-blue-200 rounded-lg p-8 mb-8`">
+                <h2 class=`"text-2xl font-semibold text-blue-900 mb-4`">Get Started Today</h2>
+                <p class=`"text-blue-700 mb-6`">Explore our comprehensive fitness club management system</p>
+                <a href=`"/dashboard`" class=`"inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors`">
+                    <i class=`"fas fa-chart-line mr-2`"></i>
+                    View Dashboard
+                </a>
             </div>
-        </div>
-        <div class=`"mt-8`">
-            <span class=`"inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium`">
-                <i class=`"fas fa-check-circle mr-2`"></i>Flask App Running Successfully
-            </span>
+
+            <!-- Status Indicator -->
+            <div class=`"inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium`">
+                <i class=`"fas fa-check-circle mr-2`"></i>
+                Flask Application Running Successfully
+            </div>
         </div>
     </div>
+
+    <!-- Footer (consistent with dashboard) -->
+    <footer class=`"bg-white border-t border-gray-200 mt-12`">
+        <div class=`"max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8`">
+            <div class=`"text-center`">
+                <p class=`"text-gray-600`">
+                    <i class=`"fas fa-dumbbell text-blue-600 mr-2`"></i>
+                    Fitness Club Membership System
+                </p>
+                <p class=`"text-sm text-gray-500 mt-2`">
+                    Powered by Flask, SQLAlchemy, Tailwind CSS, Font Awesome & Google Fonts
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 "@ | Out-File -FilePath "src\templates\index.html" -Encoding UTF8

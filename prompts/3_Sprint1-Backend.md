@@ -15,20 +15,23 @@ SPRINT 1 FOCUS: BACKEND API + REAL DATABASE + DASHBOARD UI
 - D. Create Dashboard UI that displays real statistics and data
 - Focus on backend functionality, data structure, and dashboard visualization
 
-APPROACH:
+APPROACH (FIXED TO AVOID CIRCULAR IMPORTS):
 1. Keep existing src\app.py welcome page route (/) unchanged
-2. Create SQLAlchemy models for all entities with relationships
+2. Create a simple, single-file approach with all models in app.py to avoid circular imports
 3. Initialize database with realistic seed data (not mock data)
 4. Add API routes that return JSON responses with real database data
 5. Create Dashboard UI template that consumes the API data
 6. Prepare data structure for Sprint 2 (Members & Plans management)
 
 FILES TO CREATE/UPDATE:
-- src\models.py (NEW: SQLAlchemy models with relationships)
-- src\config.py (NEW: Flask configuration with database path)
 - src\init_db.py (NEW: Database initialization with realistic seed data)
-- src\app.py (UPDATE: Add API routes + Dashboard route + database imports, keep welcome page unchanged)
+- src\app.py (UPDATE: Add models, API routes + Dashboard route + database setup, keep welcome page unchanged)
 - src\templates\dashboard.html (NEW: Dashboard UI template with real data)
+
+IMPORTANT: SINGLE FILE APPROACH (NO CIRCULAR IMPORTS)
+- All SQLAlchemy models will be defined directly in app.py
+- No separate models.py or config.py files to avoid import issues
+- Clean, simple structure that works reliably
 
 REQUIRED ROUTES:
 - GET / - Keep existing welcome page (pre-sprint, unchanged)
@@ -42,22 +45,88 @@ REQUIRED ROUTES:
 - GET /api/stats - Get dashboard statistics (JSON)
 - POST /api/sessions/schedule - Schedule session (JSON)
 
-REQUIRED APP.PY STRUCTURE:
+REQUIRED APP.PY STRUCTURE (SINGLE FILE, NO CIRCULAR IMPORTS):
 ```python
 from flask import Flask, render_template, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-import config
-from datetime import datetime
+from datetime import datetime, date, time
+from decimal import Decimal
 import os
 
 app = Flask(__name__)
-app.config.from_object(config.Config)
+
+# Configuration (inline to avoid separate config file)
+app.config['SECRET_KEY'] = 'fitness-club-secret-key-2025'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(os.path.abspath(os.path.dirname(__file__)), "instance", "fitness_club.db")}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy with app
 db = SQLAlchemy(app)
 
-# Import models after db initialization
-from models import Member, Plan, Trainer, Session
+# SQLAlchemy Models (defined in same file to avoid circular imports)
+class Member(db.Model):
+    __tablename__ = 'members'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.String(20), nullable=True)
+    join_date = db.Column(db.Date, default=datetime.utcnow)
+    plan_id = db.Column(db.Integer, db.ForeignKey('plans.id'), nullable=True)
+    status = db.Column(db.String(20), default='active')
+    
+    # Relationship
+    plan = db.relationship('Plan', backref='members')
+    
+    def __repr__(self):
+        return f'<Member {self.name}>'
+
+class Plan(db.Model):
+    __tablename__ = 'plans'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    price = db.Column(db.Numeric(10, 2), nullable=False)
+    duration_months = db.Column(db.Integer, nullable=False)
+    features = db.Column(db.Text, nullable=True)  # Comma-separated features
+    
+    def __repr__(self):
+        return f'<Plan {self.name}>'
+
+class Trainer(db.Model):
+    __tablename__ = 'trainers'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.String(20), nullable=True)
+    specialization = db.Column(db.String(100), nullable=True)
+    experience_years = db.Column(db.Integer, nullable=True)
+    bio = db.Column(db.Text, nullable=True)
+    status = db.Column(db.String(20), default='active')
+    
+    def __repr__(self):
+        return f'<Trainer {self.name}>'
+
+class Session(db.Model):
+    __tablename__ = 'sessions'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    trainer_id = db.Column(db.Integer, db.ForeignKey('trainers.id'), nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
+    capacity = db.Column(db.Integer, default=10)
+    enrolled = db.Column(db.Integer, default=0)
+    status = db.Column(db.String(20), default='active')
+    
+    # Relationship
+    trainer = db.relationship('Trainer', backref='sessions')
+    
+    def __repr__(self):
+        return f'<Session {self.title}>'
 
 # Create database tables if they don't exist
 with app.app_context():
@@ -397,7 +466,11 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-MODELS.PY REQUIREMENTS:
+MODELS ARE INCLUDED IN APP.PY (NO SEPARATE MODELS.PY FILE):
+All SQLAlchemy models are defined directly in app.py to avoid circular import issues.
+This is the recommended approach for this sprint.
+
+The models (Member, Plan, Trainer, Session) are already included in the app.py structure above.
 ```python
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -470,10 +543,15 @@ class Session(db.Model):
         return f'<Session {self.title}>'
 ```
 
-INIT_DB.PY REQUIREMENTS:
+INIT_DB.PY REQUIREMENTS (SIMPLIFIED - NO CIRCULAR IMPORTS):
 ```python
-from app import app, db
-from models import Member, Plan, Trainer, Session
+import sys
+import os
+
+# Add the current directory to the Python path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from app import app, db, Member, Plan, Trainer, Session
 from datetime import datetime, date, time
 from decimal import Decimal
 
