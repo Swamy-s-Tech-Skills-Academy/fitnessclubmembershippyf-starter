@@ -84,6 +84,13 @@ FRONTEND STYLING:
 ### **PowerShell File Creation Commands:**
 
 ```powershell
+# ✅ Create necessary directories first
+New-Item -ItemType Directory -Path "src" -Force
+New-Item -ItemType Directory -Path "src\templates" -Force
+New-Item -ItemType Directory -Path "src\static" -Force
+New-Item -ItemType Directory -Path "src\instance" -Force
+Write-Host "✅ Directory structure created" -ForegroundColor Green
+
 # ✅ Copy favicon to static folder (must be done first)
 Copy-Item "assets\icons\favicon.ico" -Destination "src\static\favicon.ico" -Force
 Write-Host "✅ Favicon copied to src\static\" -ForegroundColor Green
@@ -408,11 +415,11 @@ foreach ($dir in $directories) {
 
 # Copy favicon to static folder if it doesn't exist
 if (-not (Test-Path "src\static\favicon.ico")) {
-    if (Test-Path "docs\icons\favicon.ico") {
-        Copy-Item "docs\icons\favicon.ico" -Destination "src\static\favicon.ico" -Force
+    if (Test-Path "assets\icons\favicon.ico") {
+        Copy-Item "assets\icons\favicon.ico" -Destination "src\static\favicon.ico" -Force
         Write-Host "✅ Favicon copied to src\static\" -ForegroundColor Green
     } else {
-        Write-Host "⚠️  Favicon not found in docs\icons\" -ForegroundColor Yellow
+        Write-Host "⚠️  Favicon not found in assets\icons\" -ForegroundColor Yellow
     }
 } else {
     Write-Host "✅ Favicon already exists in src\static\" -ForegroundColor Gray

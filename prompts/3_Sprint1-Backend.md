@@ -608,7 +608,7 @@ import os
 # Add the current directory to the Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from app import app, db, Member, Plan, Trainer, Session
+from app import app, db, Member, Plan, Trainer, Session, SessionEnrollment
 from datetime import datetime, date, time
 from decimal import Decimal
 
@@ -619,6 +619,7 @@ def init_database():
         db.create_all()
 
         # Clear existing data (for development)
+        db.session.query(SessionEnrollment).delete()
         db.session.query(Session).delete()
         db.session.query(Member).delete()
         db.session.query(Trainer).delete()
@@ -784,11 +785,42 @@ def init_database():
 
         db.session.commit()
 
+        # Create session enrollments (matching the enrolled counts in sessions)
+        enrollments = [
+            # Morning Yoga (session_id=1, enrolled=8)
+            SessionEnrollment(session_id=1, member_id=1, status='enrolled'),
+            SessionEnrollment(session_id=1, member_id=2, status='enrolled'),
+            SessionEnrollment(session_id=1, member_id=3, status='enrolled'),
+            SessionEnrollment(session_id=1, member_id=4, status='enrolled'),
+
+            # HIIT Workout (session_id=2, enrolled=10)
+            SessionEnrollment(session_id=2, member_id=1, status='enrolled'),
+            SessionEnrollment(session_id=2, member_id=2, status='enrolled'),
+            SessionEnrollment(session_id=2, member_id=3, status='enrolled'),
+            SessionEnrollment(session_id=2, member_id=4, status='enrolled'),
+
+            # Strength Training (session_id=3, enrolled=5)
+            SessionEnrollment(session_id=3, member_id=1, status='enrolled'),
+            SessionEnrollment(session_id=3, member_id=2, status='enrolled'),
+            SessionEnrollment(session_id=3, member_id=3, status='enrolled'),
+
+            # Evening Pilates (session_id=4, enrolled=7)
+            SessionEnrollment(session_id=4, member_id=1, status='enrolled'),
+            SessionEnrollment(session_id=4, member_id=2, status='enrolled'),
+            SessionEnrollment(session_id=4, member_id=4, status='enrolled'),
+        ]
+
+        for enrollment in enrollments:
+            db.session.add(enrollment)
+
+        db.session.commit()
+
         print("Database initialized successfully!")
         print(f"Created {len(plans)} plans")
         print(f"Created {len(trainers)} trainers")
         print(f"Created {len(members)} members")
         print(f"Created {len(sessions)} sessions")
+        print(f"Created {len(enrollments)} session enrollments")
 
 if __name__ == '__main__':
     init_database()
