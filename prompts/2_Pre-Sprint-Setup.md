@@ -6,7 +6,7 @@
 Set up the development environment for a Flask fitness club membership system:
 
 PYTHON VERSION REQUIREMENT:
-✅ Python 3.13.5 - Required for optimal compatibility with Flask 3.0.0 and SQLAlchemy 2.0.23
+✅ Python 3.13.5 - Required for optimal compatibility with Flask 3.0.0 and SQLAlchemy 2.0.41
 
 STARTER PROJECT INCLUDES:
 ✅ requirements.txt - All Python dependencies with specific versions
