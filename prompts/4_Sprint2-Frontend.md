@@ -51,6 +51,17 @@ FEATURES TO INCLUDE:
 
 All forms should connect to Sprint 1 API routes for data operations
 Include proper error handling and user feedback throughout
+
+REQUIRED ROUTE ENDPOINTS TO CREATE:
+- /members (members_list) - Member list page
+- /members/create (members_create) - Member creation form
+- /members/<int:id> (members_detail) - Member detail page
+- /members/<int:id>/edit (edit_member) - Member edit form
+- /plans (plans_list) - Plans list page
+- /plans/create (plans_create) - Plan creation form
+- /plans/<int:id> (plans_detail) - Plan detail page
+- /plans/<int:id>/edit (edit_plan) - Plan edit form
+These route names must match the url_for() references in templates and navigation
 ```
 
 ## 📋 **ADDITIONAL STYLING REQUIREMENTS**

@@ -21,6 +21,17 @@ Before creating templates, update src\templates\_navbar.html:
 4. Add proper active state highlighting for Trainers and Sessions pages
 This completes the full navigation system for all management areas.
 
+REQUIRED ROUTE ENDPOINTS TO CREATE:
+- /trainers (trainers_list) - Trainer list page
+- /trainers/create (trainers_create) - Trainer creation form
+- /trainers/<int:id> (trainers_detail) - Trainer detail page
+- /trainers/<int:id>/edit (edit_trainer) - Trainer edit form
+- /sessions (sessions_list) - Sessions list page
+- /sessions/create (sessions_create) - Session creation form
+- /sessions/<int:id> (sessions_detail) - Session detail page
+- /sessions/<int:id>/edit (edit_session) - Session edit form
+These route names must match the url_for() references in templates and navigation
+
 PREREQUISITE VERIFICATION:
 - Sprint 1: Backend API + Dashboard UI working with real database data
 - Sprint 2: Members & Plans Management UI completed and functional

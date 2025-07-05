@@ -88,6 +88,15 @@ class Member(db.Model):
     # Relationship
     plan = db.relationship('Plan', backref='members')
 
+    @property
+    def full_name(self):
+        return self.name
+
+    @property
+    def member_count(self):
+        """For template compatibility - returns 1 for individual member"""
+        return 1
+
     def __repr__(self):
         return f'<Member {self.name}>'
 
@@ -100,6 +109,11 @@ class Plan(db.Model):
     price = db.Column(db.Numeric(10, 2), nullable=False)
     duration_months = db.Column(db.Integer, nullable=False)
     features = db.Column(db.Text, nullable=True)  # Comma-separated features
+
+    @property
+    def member_count(self):
+        """Count of active members with this plan"""
+        return len([m for m in self.members if m.status == 'active'])
 
     def __repr__(self):
         return f'<Plan {self.name}>'
@@ -128,6 +142,7 @@ class Session(db.Model):
     trainer_id = db.Column(db.Integer, db.ForeignKey('trainers.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
     time = db.Column(db.Time, nullable=False)
+    duration_minutes = db.Column(db.Integer, default=60)  # Session duration in minutes
     capacity = db.Column(db.Integer, default=10)
     enrolled = db.Column(db.Integer, default=0)
     status = db.Column(db.String(20), default='active')
@@ -137,6 +152,25 @@ class Session(db.Model):
 
     def __repr__(self):
         return f'<Session {self.title}>'
+
+class SessionEnrollment(db.Model):
+    __tablename__ = 'session_enrollments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    session_id = db.Column(db.Integer, db.ForeignKey('sessions.id'), nullable=False)
+    member_id = db.Column(db.Integer, db.ForeignKey('members.id'), nullable=False)
+    enrollment_date = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(20), default='enrolled')  # enrolled, cancelled, completed
+
+    # Relationships
+    session = db.relationship('Session', backref='enrollments')
+    member = db.relationship('Member', backref='session_enrollments')
+
+    # Unique constraint to prevent duplicate enrollments
+    __table_args__ = (db.UniqueConstraint('session_id', 'member_id', name='unique_session_member'),)
+
+    def __repr__(self):
+        return f'<SessionEnrollment {self.member_id} -> {self.session_id}>'
 
 # Create database tables if they don't exist
 with app.app_context():
@@ -327,6 +361,7 @@ def api_sessions():
                 'trainer_id': session.trainer_id,
                 'date': session.date.isoformat() if session.date else None,
                 'time': session.time.strftime('%H:%M') if session.time else None,
+                'duration_minutes': session.duration_minutes,
                 'capacity': session.capacity,
                 'enrolled': session.enrolled,
                 'status': session.status
@@ -443,6 +478,7 @@ def api_schedule_session():
             trainer_id=data.get('trainer_id'),
             date=datetime.fromisoformat(data.get('date')) if data.get('date') else None,
             time=datetime.strptime(data.get('time'), '%H:%M').time() if data.get('time') else None,
+            duration_minutes=data.get('duration_minutes', 60),
             capacity=data.get('capacity', 10),
             enrolled=0,
             status='active'
@@ -461,6 +497,7 @@ def api_schedule_session():
                 'trainer_id': new_session.trainer_id,
                 'date': new_session.date.isoformat() if new_session.date else None,
                 'time': new_session.time.strftime('%H:%M') if new_session.time else None,
+                'duration_minutes': new_session.duration_minutes,
                 'capacity': new_session.capacity,
                 'status': new_session.status
             }
@@ -502,6 +539,15 @@ class Member(db.Model):
     # Relationship
     plan = db.relationship('Plan', backref='members')
 
+    @property
+    def full_name(self):
+        return self.name
+
+    @property
+    def member_count(self):
+        """For template compatibility - returns 1 for individual member"""
+        return 1
+
     def __repr__(self):
         return f'<Member {self.name}>'
 
@@ -542,6 +588,7 @@ class Session(db.Model):
     trainer_id = db.Column(db.Integer, db.ForeignKey('trainers.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
     time = db.Column(db.Time, nullable=False)
+    duration_minutes = db.Column(db.Integer, default=60)  # Session duration in minutes
     capacity = db.Column(db.Integer, default=10)
     enrolled = db.Column(db.Integer, default=0)
     status = db.Column(db.String(20), default='active')
@@ -692,6 +739,7 @@ def init_database():
                 trainer_id=2,  # Sarah Johnson
                 date=date(2025, 1, 20),
                 time=time(8, 0),
+                duration_minutes=60,
                 capacity=15,
                 enrolled=8,
                 status='active'
@@ -702,6 +750,7 @@ def init_database():
                 trainer_id=3,  # Mike Wilson
                 date=date(2025, 1, 20),
                 time=time(18, 0),
+                duration_minutes=45,
                 capacity=12,
                 enrolled=10,
                 status='active'
@@ -712,6 +761,7 @@ def init_database():
                 trainer_id=1,  # John Smith
                 date=date(2025, 1, 21),
                 time=time(19, 0),
+                duration_minutes=60,
                 capacity=8,
                 enrolled=5,
                 status='active'
@@ -722,6 +772,7 @@ def init_database():
                 trainer_id=2,  # Sarah Johnson
                 date=date(2025, 1, 22),
                 time=time(17, 30),
+                duration_minutes=60,
                 capacity=10,
                 enrolled=7,
                 status='active'
@@ -1207,7 +1258,7 @@ Once Sprint 1 verification passes, you're ready for:
 
 ## 📚 **QUICK ACCESS TO OTHER PROMPTS**
 
-- [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🔧 Setup & Environment
+- [2_Pre-Sprint-Setup.md](2_Pre_Sprint-Setup.md) - 🔧 Setup & Environment
 - [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Members & Plans Management UI
 - [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Trainers & Sessions UI + Polish
 - [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide

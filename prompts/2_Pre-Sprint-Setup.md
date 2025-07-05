@@ -17,15 +17,14 @@ STARTER PROJECT INCLUDES:
 ✅ prompts/ folder - All sprint .md files with copy-paste prompts
 ✅ LICENSE - Project license
 ✅ README.md - Project documentation
-✅ src/ folder - Complete Flask application with professional welcome page
 
 SETUP TASKS:
 1. Create virtual environment (.venv)
 2. Install dependencies from provided requirements.txt
-3. Verify src/ folder structure (already included)
-4. Test the included Flask app with welcome page
+3. Create src/ folder structure and Flask application files
+4. Test the Flask app with professional welcome page
 
-INCLUDED FLASK APPLICATION:
+FLASK APPLICATION TO CREATE:
 - src\app.py (Flask app with template rendering)
 - src\templates\base.html (Base template with navigation and footer components)
 - src\templates\_navbar.html (Reusable navigation component)
@@ -36,7 +35,7 @@ INCLUDED FLASK APPLICATION:
 
 COMPONENT ARCHITECTURE:
 - Base template system using Jinja2 template inheritance
-- Shared navigation component with 4-item menu structure
+- Shared navigation component with 6-item menu structure (Home, Dashboard, Members, Plans, Trainers, Sessions)
 - Shared footer component with company info and links
 - All pages extend base.html for consistency
 
@@ -215,6 +214,8 @@ if __name__ == '__main__':
                     <li><a href=`"#`" class=`"text-gray-600 hover:text-blue-600 text-sm transition-colors`">Dashboard</a></li>
                     <li><a href=`"#`" class=`"text-gray-600 hover:text-blue-600 text-sm transition-colors`">Members</a></li>
                     <li><a href=`"#`" class=`"text-gray-600 hover:text-blue-600 text-sm transition-colors`">Plans</a></li>
+                    <li><a href=`"#`" class=`"text-gray-600 hover:text-blue-600 text-sm transition-colors`">Trainers</a></li>
+                    <li><a href=`"#`" class=`"text-gray-600 hover:text-blue-600 text-sm transition-colors`">Sessions</a></li>
                 </ul>
             </div>
 
