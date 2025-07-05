@@ -1,0 +1,42 @@
+<!-- Navigation Component -->
+<nav class="bg-white shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <i class="fas fa-dumbbell text-blue-600 text-2xl mr-3"></i>
+                <h1 class="text-xl font-bold text-gray-900">Fitness Club</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="{{ url_for('home') }}"
+                    class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'home' else '' }}">
+                    <i class="fas fa-home mr-1"></i> Home
+                </a>
+                <span class="text-gray-400">|</span>
+                <a href="#"
+                    class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'dashboard' else '' }}">
+                    <i class="fas fa-chart-line mr-1"></i> Dashboard
+                </a>
+                <span class="text-gray-400">|</span>
+                <a href="#"
+                    class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'members_list' else '' }}">
+                    <i class="fas fa-users mr-1"></i> Members
+                </a>
+                <span class="text-gray-400">|</span>
+                <a href="#"
+                    class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'plans_list' else '' }}">
+                    <i class="fas fa-calendar-alt mr-1"></i> Plans
+                </a>
+                <span class="text-gray-400">|</span>
+                <a href="#"
+                    class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'trainers_list' else '' }}">
+                    <i class="fas fa-user-tie mr-1"></i> Trainers
+                </a>
+                <span class="text-gray-400">|</span>
+                <a href="#"
+                    class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'sessions_list' else '' }}">
+                    <i class="fas fa-calendar-check mr-1"></i> Sessions
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

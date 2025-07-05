@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Fitness Club{% endblock %}
+
+{% block content %}
+<div class="text-center max-w-4xl mx-auto px-4">
+    <div class="mb-8">
+        <i class="fas fa-dumbbell text-8xl text-blue-600 mb-6"></i>
+    </div>
+    <h1 class="text-6xl font-bold text-blue-600 mb-6">Welcome to Fitness Club</h1>
+    <p class="text-2xl text-gray-600 mb-12">Your fitness journey starts here!</p>
+
+    <!-- Feature Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <i class="fas fa-users text-blue-500 text-3xl mb-4"></i>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Member Management</h3>
+            <p class="text-gray-600">Comprehensive member registration and profile management</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <i class="fas fa-calendar-alt text-green-500 text-3xl mb-4"></i>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Session Booking</h3>
+            <p class="text-gray-600">Easy scheduling and booking of fitness sessions</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <i class="fas fa-chart-line text-purple-500 text-3xl mb-4"></i>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Analytics Dashboard</h3>
+            <p class="text-gray-600">Real-time insights and business analytics</p>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold text-blue-900 mb-4">Get Started Today</h2>
+        <p class="text-blue-700 mb-6">Explore our comprehensive fitness club management system</p>
+        <a href="#"
+            class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+            <i class="fas fa-chart-line mr-2"></i>
+            View Dashboard
+        </a>
+    </div>
+
+    <!-- Status Indicator -->
+    <div class="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+        <i class="fas fa-check-circle mr-2"></i>
+        Flask Application Running Successfully
+    </div>
+</div>
+{% endblock %}
