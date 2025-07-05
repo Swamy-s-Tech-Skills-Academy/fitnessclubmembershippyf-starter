@@ -146,7 +146,7 @@ if __name__ == '__main__':
             </div>
             <h1 class=`"text-6xl font-bold text-blue-600 mb-6 font-poppins`">Welcome to Fitness Club</h1>
             <p class=`"text-2xl text-gray-600 mb-12`">Your fitness journey starts here!</p>
-            
+
             <!-- Feature Cards -->
             <div class=`"grid grid-cols-1 md:grid-cols-3 gap-8 mb-12`">
                 <div class=`"bg-white p-6 rounded-lg shadow-sm border border-gray-200`">

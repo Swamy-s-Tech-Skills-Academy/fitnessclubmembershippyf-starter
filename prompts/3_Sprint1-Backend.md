@@ -66,7 +66,7 @@ db = SQLAlchemy(app)
 # SQLAlchemy Models (defined in same file to avoid circular imports)
 class Member(db.Model):
     __tablename__ = 'members'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -74,29 +74,29 @@ class Member(db.Model):
     join_date = db.Column(db.Date, default=datetime.utcnow)
     plan_id = db.Column(db.Integer, db.ForeignKey('plans.id'), nullable=True)
     status = db.Column(db.String(20), default='active')
-    
+
     # Relationship
     plan = db.relationship('Plan', backref='members')
-    
+
     def __repr__(self):
         return f'<Member {self.name}>'
 
 class Plan(db.Model):
     __tablename__ = 'plans'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=True)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     duration_months = db.Column(db.Integer, nullable=False)
     features = db.Column(db.Text, nullable=True)  # Comma-separated features
-    
+
     def __repr__(self):
         return f'<Plan {self.name}>'
 
 class Trainer(db.Model):
     __tablename__ = 'trainers'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -105,13 +105,13 @@ class Trainer(db.Model):
     experience_years = db.Column(db.Integer, nullable=True)
     bio = db.Column(db.Text, nullable=True)
     status = db.Column(db.String(20), default='active')
-    
+
     def __repr__(self):
         return f'<Trainer {self.name}>'
 
 class Session(db.Model):
     __tablename__ = 'sessions'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
@@ -121,10 +121,10 @@ class Session(db.Model):
     capacity = db.Column(db.Integer, default=10)
     enrolled = db.Column(db.Integer, default=0)
     status = db.Column(db.String(20), default='active')
-    
+
     # Relationship
     trainer = db.relationship('Trainer', backref='sessions')
-    
+
     def __repr__(self):
         return f'<Session {self.title}>'
 
