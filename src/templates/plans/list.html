@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Membership Plans - Fitness Club{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header Section -->
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Membership Plans</h1>
+            <p class="text-gray-600 mt-2">Manage your fitness club membership plans</p>
+        </div>
+        <div class="flex space-x-3">
+            <a href="{{ url_for('export_plans') }}"
+                class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                <i class="fas fa-download mr-2"></i>
+                Export CSV
+            </a>
+            <a href="{{ url_for('plans_create') }}"
+                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <i class="fas fa-plus mr-2"></i>
+                Add Plan
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-calendar-alt text-blue-600 text-2xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-500">Total Plans</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ plans|length }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-users text-green-600 text-2xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-500">Active Members</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ plans|sum(attribute='member_count') or 0 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-dollar-sign text-purple-600 text-2xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-500">Avg. Price</p>
+                    <p class="text-2xl font-bold text-gray-900">
+                        {% if plans %}
+                        ${{ "%.0f"|format((plans|sum(attribute='price')|float / plans|length)) }}
+                        {% else %}
+                        $0
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-chart-line text-orange-600 text-2xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-500">Revenue Potential</p>
+                    <p class="text-2xl font-bold text-gray-900">
+                        ${{ "%.0f"|format(plans|sum(attribute='price')|float) }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plans Grid -->
+    {% if plans %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for plan in plans %}
+        <div
+            class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+            <!-- Plan Header -->
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+                <h3 class="text-xl font-bold">{{ plan.name }}</h3>
+                <div class="mt-2">
+                    <span class="text-3xl font-bold">${{ plan.price }}</span>
+                    <span class="text-blue-100">/ {{ plan.duration_months }} months</span>
+                </div>
+            </div>
+
+            <!-- Plan Content -->
+            <div class="p-6">
+                <!-- Description -->
+                {% if plan.description %}
+                <p class="text-gray-600 mb-4">{{ plan.description }}</p>
+                {% endif %}
+
+                <!-- Features -->
+                {% if plan.features %}
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-900 mb-3">Features:</h4>
+                    <ul class="space-y-2">
+                        {% for feature in plan.features.split(',') %}
+                        <li class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-check text-green-500 mr-2 flex-shrink-0"></i>
+                            {{ feature.strip() }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 gap-4 mb-6 pt-4 border-t border-gray-200">
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-blue-600">{{ plan.member_count }}</p>
+                        <p class="text-xs text-gray-500">Active Members</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-green-600">${{ "%.0f"|format(plan.price * plan.member_count)
+                            }}</p>
+                        <p class="text-xs text-gray-500">Monthly Revenue</p>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex space-x-2">
+                    <a href="{{ url_for('plans_detail', id=plan.id) }}"
+                        class="flex-1 bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-eye mr-1"></i>
+                        View
+                    </a>
+                    <a href="{{ url_for('edit_plan', id=plan.id) }}"
+                        class="flex-1 bg-gray-600 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-edit mr-1"></i>
+                        Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <!-- Empty State -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 text-center py-12">
+        <i class="fas fa-calendar-alt text-gray-400 text-6xl mb-4"></i>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No membership plans found</h3>
+        <p class="text-gray-500 mb-6">Get started by creating your first membership plan.</p>
+        <a href="{{ url_for('plans_create') }}"
+            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <i class="fas fa-plus mr-2"></i>
+            Create First Plan
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Quick Actions -->
+    <div class="mt-8 bg-gray-50 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="{{ url_for('plans_create') }}"
+                class="flex items-center p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-sm transition-all">
+                <i class="fas fa-plus text-blue-600 text-xl mr-3"></i>
+                <div>
+                    <p class="font-medium text-gray-900">Create New Plan</p>
+                    <p class="text-sm text-gray-500">Add a new membership plan</p>
+                </div>
+            </a>
+            <a href="{{ url_for('export_plans') }}"
+                class="flex items-center p-4 bg-white rounded-lg border border-gray-200 hover:border-green-300 hover:shadow-sm transition-all">
+                <i class="fas fa-download text-green-600 text-xl mr-3"></i>
+                <div>
+                    <p class="font-medium text-gray-900">Export Plans</p>
+                    <p class="text-sm text-gray-500">Download plans as CSV</p>
+                </div>
+            </a>
+            <a href="{{ url_for('members_list') }}"
+                class="flex items-center p-4 bg-white rounded-lg border border-gray-200 hover:border-purple-300 hover:shadow-sm transition-all">
+                <i class="fas fa-users text-purple-600 text-xl mr-3"></i>
+                <div>
+                    <p class="font-medium text-gray-900">View Members</p>
+                    <p class="text-sm text-gray-500">Manage member assignments</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for enhanced interactions -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add hover effects for plan cards
+        const planCards = document.querySelectorAll('.grid .bg-white');
+
+        planCards.forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-2px)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+{% endblock %}

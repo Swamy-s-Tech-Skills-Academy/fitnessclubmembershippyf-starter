@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Add Member - Fitness Club{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header Section -->
+    <div class="mb-8">
+        <div class="flex items-center mb-4">
+            <a href="{{ url_for('members_list') }}" class="text-blue-600 hover:text-blue-800 mr-4">
+                <i class="fas fa-arrow-left text-lg"></i>
+            </a>
+            <h1 class="text-3xl font-bold text-gray-900">Add New Member</h1>
+        </div>
+        <p class="text-gray-600">Create a new member profile for your fitness club</p>
+    </div>
+
+    <!-- Form Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <form method="POST" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Name Field -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="name" id="name" required placeholder="Enter member's full name"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" name="email" id="email" required placeholder="member@email.com"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+
+                <!-- Phone Field -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
+                    </label>
+                    <input type="tel" name="phone" id="phone" placeholder="+1 (555) 123-4567"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+
+                <!-- Plan Selection -->
+                <div>
+                    <label for="plan_id" class="block text-sm font-medium text-gray-700 mb-2">
+                        Membership Plan
+                    </label>
+                    <select name="plan_id" id="plan_id"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="">Select a plan (optional)</option>
+                        {% for plan in plans %}
+                        <option value="{{ plan.id }}">{{ plan.name }} - ${{ plan.price }}/{{ plan.duration_months }}
+                            months</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Status Field -->
+                <div>
+                    <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                        Status
+                    </label>
+                    <select name="status" id="status"
+                        class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a href="{{ url_for('members_list') }}"
+                    class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                    Cancel
+                </a>
+                <button type="submit"
+                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-save mr-2"></i>
+                    Create Member
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Plan Preview Section -->
+    <div id="planPreview" class="mt-8 bg-blue-50 rounded-lg p-6 hidden">
+        <h3 class="text-lg font-semibold text-blue-900 mb-4">Selected Plan Details</h3>
+        <div id="planDetails" class="text-blue-800">
+            <!-- Plan details will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Plan Preview -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const planSelect = document.getElementById('plan_id');
+        const planPreview = document.getElementById('planPreview');
+        const planDetails = document.getElementById('planDetails');
+
+        const plans = {
+        {% for plan in plans %}
+        "{{ plan.id }}": {
+            name: "{{ plan.name }}",
+                description: "{{ plan.description or '' }}",
+                    price: "{{ plan.price }}",
+                        duration: "{{ plan.duration_months }}",
+                            features: "{{ plan.features or '' }}"
+        } {% if not loop.last %}, {% endif %}
+        {% endfor %}
+    };
+
+    planSelect.addEventListener('change', function () {
+        const selectedPlanId = this.value;
+
+        if (selectedPlanId && plans[selectedPlanId]) {
+            const plan = plans[selectedPlanId];
+            const features = plan.features ? plan.features.split(',') : [];
+
+            planDetails.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="font-medium">${plan.name}</p>
+                        <p class="text-sm">${plan.description}</p>
+                    </div>
+                    <div>
+                        <p class="font-medium">$${plan.price} for ${plan.duration} months</p>
+                        ${features.length > 0 ? `<p class="text-sm">Features: ${features.join(', ')}</p>` : ''}
+                    </div>
+                </div>
+            `;
+            planPreview.classList.remove('hidden');
+        } else {
+            planPreview.classList.add('hidden');
+        }
+    });
+
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        if (!name || !email) {
+            e.preventDefault();
+            alert('Please fill in all required fields (Name and Email).');
+        }
+    });
+});
+</script>
+{% endblock %}

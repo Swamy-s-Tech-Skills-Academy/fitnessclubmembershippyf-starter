@@ -1,8 +1,10 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash, make_response
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date, time
 from decimal import Decimal
 import os
+import csv
+import io
 
 app = Flask(__name__)
 
@@ -478,5 +480,374 @@ def api_schedule_session():
         }), 500
 
 
+# SPRINT 2: MEMBERS MANAGEMENT UI ROUTES
+
+@app.route('/members')
+def members_list():
+    """Members list page with search and filter capabilities"""
+    try:
+        # Get search and filter parameters
+        search = request.args.get('search', '').strip()
+        status_filter = request.args.get('status', '')
+        plan_filter = request.args.get('plan_id', '')
+
+        # Base query
+        query = Member.query
+
+        # Apply search filter
+        if search:
+            query = query.filter(
+                db.or_(
+                    Member.name.contains(search),
+                    Member.email.contains(search),
+                    Member.phone.contains(search)
+                )
+            )
+
+        # Apply status filter
+        if status_filter:
+            query = query.filter(Member.status == status_filter)
+
+        # Apply plan filter
+        if plan_filter:
+            query = query.filter(Member.plan_id == plan_filter)
+
+        # Get members with pagination support
+        members = query.order_by(Member.join_date.desc()).all()
+
+        # Get all plans for filter dropdown
+        plans = Plan.query.all()
+
+        return render_template('members/list.html',
+                               members=members,
+                               plans=plans,
+                               search=search,
+                               status_filter=status_filter,
+                               plan_filter=plan_filter)
+
+    except Exception as e:
+        flash(f'Error loading members: {str(e)}', 'error')
+        return render_template('members/list.html', members=[], plans=[])
+
+
+@app.route('/members/create', methods=['GET', 'POST'])
+def members_create():
+    """Member creation form"""
+    if request.method == 'POST':
+        try:
+            # Get form data
+            name = request.form.get('name', '').strip()
+            email = request.form.get('email', '').strip()
+            phone = request.form.get('phone', '').strip()
+            plan_id = request.form.get('plan_id')
+            status = request.form.get('status', 'active')
+
+            # Basic validation
+            if not name or not email:
+                flash('Name and email are required', 'error')
+                return redirect(url_for('members_create'))
+
+            # Check if email already exists
+            existing_member = Member.query.filter_by(email=email).first()
+            if existing_member:
+                flash('A member with this email already exists', 'error')
+                return redirect(url_for('members_create'))
+
+            # Create new member
+            new_member = Member(
+                name=name,
+                email=email,
+                phone=phone if phone else None,
+                plan_id=int(plan_id) if plan_id else None,
+                status=status,
+                join_date=datetime.now().date()
+            )
+
+            db.session.add(new_member)
+            db.session.commit()
+
+            flash(f'Member {name} created successfully!', 'success')
+            return redirect(url_for('members_detail', id=new_member.id))
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error creating member: {str(e)}', 'error')
+            return redirect(url_for('members_create'))
+
+    # GET request - show form
+    plans = Plan.query.all()
+    return render_template('members/create.html', plans=plans)
+
+
+@app.route('/members/<int:id>')
+def members_detail(id):
+    """Member detail page"""
+    try:
+        member = Member.query.get_or_404(id)
+        return render_template('members/detail.html', member=member)
+    except Exception as e:
+        flash(f'Error loading member details: {str(e)}', 'error')
+        return redirect(url_for('members_list'))
+
+
+@app.route('/members/<int:id>/edit', methods=['GET', 'POST'])
+def edit_member(id):
+    """Member edit form"""
+    try:
+        member = Member.query.get_or_404(id)
+
+        if request.method == 'POST':
+            # Get form data
+            name = request.form.get('name', '').strip()
+            email = request.form.get('email', '').strip()
+            phone = request.form.get('phone', '').strip()
+            plan_id = request.form.get('plan_id')
+            status = request.form.get('status', 'active')
+
+            # Basic validation
+            if not name or not email:
+                flash('Name and email are required', 'error')
+                return redirect(url_for('edit_member', id=id))
+
+            # Check if email already exists (excluding current member)
+            existing_member = Member.query.filter(
+                Member.email == email,
+                Member.id != id
+            ).first()
+            if existing_member:
+                flash('A member with this email already exists', 'error')
+                return redirect(url_for('edit_member', id=id))
+
+            # Update member
+            member.name = name
+            member.email = email
+            member.phone = phone if phone else None
+            member.plan_id = int(plan_id) if plan_id else None
+            member.status = status
+
+            db.session.commit()
+
+            flash(f'Member {name} updated successfully!', 'success')
+            return redirect(url_for('members_detail', id=id))
+
+        # GET request - show form
+        plans = Plan.query.all()
+        return render_template('members/edit.html', member=member, plans=plans)
+
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error updating member: {str(e)}', 'error')
+        return redirect(url_for('members_list'))
+
+
+@app.route('/members/export')
+def export_members():
+    """Export members data to CSV"""
+    try:
+        members = Member.query.all()
+
+        # Create CSV content
+        output = io.StringIO()
+        writer = csv.writer(output)
+
+        # Write header
+        writer.writerow(['ID', 'Name', 'Email', 'Phone',
+                        'Join Date', 'Plan', 'Status'])
+
+        # Write member data
+        for member in members:
+            writer.writerow([
+                member.id,
+                member.name,
+                member.email,
+                member.phone or '',
+                member.join_date.strftime(
+                    '%Y-%m-%d') if member.join_date else '',
+                member.plan.name if member.plan else '',
+                member.status
+            ])
+
+        # Create response
+        output.seek(0)
+        response = make_response(output.getvalue())
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers[
+            'Content-Disposition'] = f'attachment; filename=members_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
+
+        return response
+
+    except Exception as e:
+        flash(f'Error exporting members: {str(e)}', 'error')
+        return redirect(url_for('members_list'))
+
+
+# SPRINT 2: PLANS MANAGEMENT UI ROUTES
+
+@app.route('/plans')
+def plans_list():
+    """Plans list page"""
+    try:
+        plans = Plan.query.all()
+        return render_template('plans/list.html', plans=plans)
+    except Exception as e:
+        flash(f'Error loading plans: {str(e)}', 'error')
+        return render_template('plans/list.html', plans=[])
+
+
+@app.route('/plans/create', methods=['GET', 'POST'])
+def plans_create():
+    """Plan creation form"""
+    if request.method == 'POST':
+        try:
+            # Get form data
+            name = request.form.get('name', '').strip()
+            description = request.form.get('description', '').strip()
+            price = request.form.get('price', '').strip()
+            duration_months = request.form.get('duration_months', '').strip()
+            features = request.form.get('features', '').strip()
+
+            # Basic validation
+            if not name or not price or not duration_months:
+                flash('Name, price, and duration are required', 'error')
+                return redirect(url_for('plans_create'))
+
+            try:
+                price = float(price)
+                duration_months = int(duration_months)
+            except ValueError:
+                flash('Invalid price or duration format', 'error')
+                return redirect(url_for('plans_create'))
+
+            # Create new plan
+            new_plan = Plan(
+                name=name,
+                description=description if description else None,
+                price=Decimal(str(price)),
+                duration_months=duration_months,
+                features=features if features else None
+            )
+
+            db.session.add(new_plan)
+            db.session.commit()
+
+            flash(f'Plan "{name}" created successfully!', 'success')
+            return redirect(url_for('plans_detail', id=new_plan.id))
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error creating plan: {str(e)}', 'error')
+            return redirect(url_for('plans_create'))
+
+    # GET request - show form
+    return render_template('plans/create.html')
+
+
+@app.route('/plans/<int:id>')
+def plans_detail(id):
+    """Plan detail page"""
+    try:
+        plan = Plan.query.get_or_404(id)
+        return render_template('plans/detail.html', plan=plan)
+    except Exception as e:
+        flash(f'Error loading plan details: {str(e)}', 'error')
+        return redirect(url_for('plans_list'))
+
+
+@app.route('/plans/<int:id>/edit', methods=['GET', 'POST'])
+def edit_plan(id):
+    """Plan edit form"""
+    try:
+        plan = Plan.query.get_or_404(id)
+
+        if request.method == 'POST':
+            # Get form data
+            name = request.form.get('name', '').strip()
+            description = request.form.get('description', '').strip()
+            price = request.form.get('price', '').strip()
+            duration_months = request.form.get('duration_months', '').strip()
+            features = request.form.get('features', '').strip()
+
+            # Basic validation
+            if not name or not price or not duration_months:
+                flash('Name, price, and duration are required', 'error')
+                return redirect(url_for('edit_plan', id=id))
+
+            try:
+                price = float(price)
+                duration_months = int(duration_months)
+            except ValueError:
+                flash('Invalid price or duration format', 'error')
+                return redirect(url_for('edit_plan', id=id))
+
+            # Update plan
+            plan.name = name
+            plan.description = description if description else None
+            plan.price = Decimal(str(price))
+            plan.duration_months = duration_months
+            plan.features = features if features else None
+
+            db.session.commit()
+
+            flash(f'Plan "{name}" updated successfully!', 'success')
+            return redirect(url_for('plans_detail', id=id))
+
+        # GET request - show form
+        return render_template('plans/edit.html', plan=plan)
+
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error updating plan: {str(e)}', 'error')
+        return redirect(url_for('plans_list'))
+
+
+@app.route('/plans/export')
+def export_plans():
+    """Export plans data to CSV"""
+    try:
+        plans = Plan.query.all()
+
+        # Create CSV content
+        output = io.StringIO()
+        writer = csv.writer(output)
+
+        # Write header
+        writer.writerow(['ID', 'Name', 'Description', 'Price',
+                        'Duration (Months)', 'Features', 'Member Count'])
+
+        # Write plan data
+        for plan in plans:
+            writer.writerow([
+                plan.id,
+                plan.name,
+                plan.description or '',
+                float(plan.price),
+                plan.duration_months,
+                plan.features or '',
+                plan.member_count
+            ])
+
+        # Create response
+        output.seek(0)
+        response = make_response(output.getvalue())
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers[
+            'Content-Disposition'] = f'attachment; filename=plans_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
+
+        return response
+
+    except Exception as e:
+        flash(f'Error exporting plans: {str(e)}', 'error')
+        return redirect(url_for('plans_list'))
+
+
+# Sprint 1: Backend API endpoints returning real database data
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Ensure instance directory exists
+    instance_dir = os.path.join(os.path.abspath(
+        os.path.dirname(__file__)), 'instance')
+    if not os.path.exists(instance_dir):
+        os.makedirs(instance_dir)
+
+    # Run the Flask app
+    app.run(debug=True, host='127.0.0.1', port=5000)

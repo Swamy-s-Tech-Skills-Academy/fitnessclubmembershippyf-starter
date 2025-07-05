@@ -17,12 +17,12 @@
                     <i class="fas fa-chart-line mr-1"></i> Dashboard
                 </a>
                 <span class="text-gray-400">|</span>
-                <a href="#"
+                <a href="{{ url_for('members_list') }}"
                     class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'members_list' else '' }}">
                     <i class="fas fa-users mr-1"></i> Members
                 </a>
                 <span class="text-gray-400">|</span>
-                <a href="#"
+                <a href="{{ url_for('plans_list') }}"
                     class="text-gray-600 hover:text-blue-600 transition-colors {{ 'text-blue-600 font-medium' if request.endpoint == 'plans_list' else '' }}">
                     <i class="fas fa-calendar-alt mr-1"></i> Plans
                 </a>
