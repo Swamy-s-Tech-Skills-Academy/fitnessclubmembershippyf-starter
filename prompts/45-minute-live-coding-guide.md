@@ -72,23 +72,23 @@ with member management, session booking, and analytics dashboard."
 
 ---
 
-### **Phase 2: Sprint 1 - Backend (15 minutes) - Total: 22 min**
+### **Phase 2: Sprint 1 - Backend API + Dashboard UI (15 minutes) - Total: 22 min**
 
 **Presenter Actions:**
 
 1. **Show Sprint 1 prompt** from `3_Sprint1-Backend.md` (30 seconds)
 
-   - "This single prompt creates our entire backend"
+   - "This single prompt creates our entire backend API plus a dashboard UI"
 
 2. **Copy-paste the complete prompt** to AI assistant (1 minute)
 
 3. **Monitor AI development** (10 minutes)
 
-   - **Models creation** (3 min): Point out the 6 tables and relationships
-   - **Flask app routes** (4 min): Highlight REST API patterns
-   - **Database initialization** (3 min): Show sample data strategy
+   - **Models creation** (3 min): Point out the 4 models (Member, Plan, Trainer, Session) and relationships
+   - **Flask app routes** (4 min): Highlight API endpoints returning real database data
+   - **Dashboard UI** (3 min): Show real-time statistics and data visualization
 
-4. **Test the backend** (3 minutes)
+4. **Test the backend + dashboard** (3 minutes)
 
    ```powershell
    Set-Location src
@@ -96,8 +96,9 @@ with member management, session booking, and analytics dashboard."
    python app.py
    ```
 
-   - Open <http://localhost:5000>
-   - Test /members, /plans endpoints
+   - Open <http://localhost:5000> (welcome page)
+   - Visit <http://localhost:5000/dashboard> (new dashboard UI)
+   - Test API endpoints: /api/members, /api/plans, /api/stats
 
 5. **Quick validation** (30 seconds)
    - Show database file created
@@ -106,9 +107,10 @@ with member management, session booking, and analytics dashboard."
 **Key Talking Points:**
 
 - "SQLAlchemy relationships handle the foreign keys automatically"
-- "We're getting REST APIs for free with Flask"
-- "Sample data makes testing immediate"
-- "Notice how the prompt specifies exact field names and relationships"
+- "We're getting real API endpoints returning database data"
+- "Dashboard provides immediate business insights with real statistics"
+- "Sample data makes testing immediate and demonstrates real functionality"
+- "Notice how Sprint 1 delivers both backend API and dashboard UI in one sprint"
 
 **Common Issues & Solutions:**
 
@@ -117,81 +119,83 @@ with member management, session booking, and analytics dashboard."
 
 ---
 
-### **Phase 3: Sprint 2 - Frontend (15 minutes) - Total: 37 min**
+### **Phase 3: Sprint 2 - Members & Plans Management UI (15 minutes) - Total: 37 min**
 
 **Presenter Actions:**
 
 1. **Show Sprint 2 prompt** from `4_Sprint2-Frontend.md` (30 seconds)
 
-2. **Copy-paste frontend prompt** (1 minute)
+2. **Copy-paste Members & Plans UI prompt** (1 minute)
 
-3. **Monitor template creation** (10 minutes)
+3. **Monitor CRUD interface creation** (10 minutes)
 
-   - **Base template** (2 min): Point out CDN integrations (Tailwind, Font Awesome, Google Fonts) and navigation
-   - **Dashboard** (3 min): Highlight analytics cards and responsive design
-   - **Member templates** (3 min: Show form validation and mobile layout
-   - **Session templates** (2 min): Demonstrate booking interface
+   - **Members management** (5 min): Show CRUD forms, search, filtering, and data tables
+   - **Plans management** (3 min): Highlight pricing displays and member assignments
+   - **Professional forms** (2 min): Point out validation and user feedback
 
-4. **Test the frontend** (3 minutes)
+4. **Test the Members & Plans interfaces** (3 minutes)
 
-   - Refresh browser
-   - Navigate through all pages
-   - Test responsive design (resize browser)
-   - Try form submissions
+   - Navigate to members management
+   - Create, edit, and view member profiles
+   - Test plans management interface
+   - Try search and filtering functionality
 
-5. **Mobile demonstration** (30 seconds)
-   - Show hamburger menu
-   - Demonstrate mobile-first design
+5. **Data management demonstration** (30 seconds)
+   - Show CSV export capabilities
+   - Demonstrate form validation
 
 **Key Talking Points:**
 
-- "Our frontend stack gives us professional design instantly: Tailwind for styling, Font Awesome for icons, and Google Fonts for typography"
-- "Mobile-first approach ensures accessibility"
-- "Notice the consistent color scheme and typography"
-- "Forms have built-in validation styling"
+- "Sprint 2 focuses on the core business operations: managing members and plans"
+- "Professional CRUD interfaces with search and filtering give staff the tools they need"
+- "Forms have comprehensive validation for data integrity"
+- "Export functionality provides business intelligence capabilities"
 
 **Demo Highlights:**
 
-- Resize browser to show responsiveness
-- Point out hover effects and transitions
-- Highlight the dashboard analytics
+- Show member creation and editing workflows
+- Demonstrate search and filtering across member lists
+- Point out professional styling and validation feedback
+- Highlight plans management with pricing displays
 
 ---
 
-### **Phase 4: Sprint 3 - Integration (15 minutes) - Total: 52 min**
+### **Phase 4: Sprint 3 - Trainers & Sessions Management + Polish (15 minutes) - Total: 52 min**
 
 **Presenter Actions:**
 
 1. **Show Sprint 3 prompt** from `5_Sprint3-Integration.md` (30 seconds)
 
-2. **Copy-paste integration prompt** (1 minute)
+2. **Copy-paste trainers & sessions + polish prompt** (1 minute)
 
 3. **Monitor advanced features** (10 minutes)
 
-   - **Form validation** (3 min): Show server-side and client-side
-   - **CSV exports** (2 min): Demonstrate data export functionality
-   - **AJAX endpoints** (3 min): Show real-time status updates
-   - **Analytics enhancement** (2 min): Revenue calculations and growth metrics
+   - **Trainer management** (3 min): Show trainer profiles, specializations, and assignments
+   - **Session scheduling** (3 min): Demonstrate calendar interface and booking system
+   - **Advanced features** (2 min): AJAX functionality, CSV exports, and search
+   - **Production polish** (2 min): Error handling, validation, and mobile optimization
 
 4. **Full system demonstration** (3 minutes)
 
-   - Create a new member
-   - Export member data to CSV
-   - Book a session
-   - Toggle member status
-   - Show dashboard updates
+   - Create and manage trainer profiles
+   - Schedule sessions with trainer assignments
+   - Book sessions with capacity management
+   - Export data to CSV for all entities
+   - Show real-time booking updates
 
 5. **Production readiness check** (30 seconds)
-   - Form validation working
-   - Error handling in place
+   - Complete trainer and session management
+   - Advanced features working (AJAX, exports, search)
+   - Error handling and validation in place
    - Mobile optimization complete
 
 **Key Talking Points:**
 
-- "This is production-ready code with proper validation"
-- "CSV exports give real business value"
-- "AJAX makes the interface feel modern and responsive"
-- "Dashboard provides actionable business insights"
+- "Sprint 3 completes the management system with trainers and sessions"
+- "Session booking with capacity management prevents overbooking"
+- "Real-time AJAX updates provide modern user experience"
+- "CSV exports for all data types give comprehensive business intelligence"
+- "Professional error handling makes this production-ready"
 
 ---
 
