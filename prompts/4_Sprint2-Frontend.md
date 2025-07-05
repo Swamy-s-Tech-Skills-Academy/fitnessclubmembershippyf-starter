@@ -1,63 +1,5 @@
 # 🎨 Sprint 2: Members & Plans Management UI (15 minutes)
 
-Include comprehensive favicon support in base.html:
-
-```html
-<!-- Favicon -->
-<link
-  rel="icon"
-  type="image/x-icon"
-  href="{{ url_for('static', filename='favicon.ico') }}"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="32x32"
-  href="{{ url_for('static', filename='favicon-32x32.png') }}"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="16x16"
-  href="{{ url_for('static', filename='favicon-16x16.png') }}"
-/>
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="{{ url_for('static', filename='apple-touch-icon.png') }}"
-/>
-```
-
-FAVICON FILE CREATION:
-Create a fitness-themed favicon for the application:
-
-1. Generate a fitness club favicon (dumbbell, gym, or fitness icon)
-2. Create multiple sizes: 16x16, 32x32, and 180x180 pixels
-3. Save as both ICO and PNG formats in src\static\ folder:
-
-```powershell
-# PowerShell commands to create favicon files in src\static\
-# Note: Use actual favicon generation tool or copy existing fitness-themed favicons
-
-# Create a simple fitness-themed favicon using Font Awesome dumbbell icon concept
-# Place these files in src\static\ folder:
-# - favicon.ico (standard ICO format with multiple sizes)
-# - favicon-32x32.png (32x32 PNG version)
-# - favicon-16x16.png (16x16 PNG version)
-# - apple-touch-icon.png (180x180 for iOS devices)
-
-# If favicon already exists in docs\icons\, copy it:
-Copy-Item "..\..\docs\icons\favicon.ico" "src\static\favicon.ico"
-```
-
-REQUIRED FAVICON SPECIFICATIONS:
-
-- Theme: Fitness/gym related (dumbbell, barbell, gym equipment)
-- Colors: Blue (#2563eb) and gray (#6b7280) to match site theme
-- Formats: ICO (primary) and PNG (modern browsers)
-- Sizes: 16x16, 32x32, 48x48 (in ICO), plus 180x180 (Apple Touch)
-- Background: Transparent or white
-
 ## 🎯 **COPY-PASTE PROMPT FOR SPRINT 2**
 
 ```text
@@ -102,34 +44,54 @@ All forms should connect to Sprint 1 API routes for data operations
 Include proper error handling and user feedback throughout
 ```
 
-STYLING RESOURCES:
+## 📋 **ADDITIONAL STYLING REQUIREMENTS**
 
-- TailwindCSS: https://cdn.tailwindcss.com
-- Font Awesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
-- Google Fonts: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
+**STYLING RESOURCES:**
 
-FEATURES TO INCLUDE:
+- TailwindCSS: <https://cdn.tailwindcss.com>
+- Font Awesome: <https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css>
+- Google Fonts: <https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap>
 
-- Mobile-responsive navigation with hamburger menu
-- Professional Tailwind CSS styling (blue/gray theme)
-- Font Awesome icons for UI elements
-- Google Fonts typography (Inter for body, Poppins for headings)
-- Form validation with error messages
-- Data tables with hover effects
-- Button styling (primary, secondary, danger)
-- Card layouts for plans and statistics
-- Export functionality (CSV buttons)
-- Progress bars for analytics
-- Professional footer with contact info
+**FAVICON IMPLEMENTATION:**
+Include comprehensive favicon support in base templates:
 
-All forms should connect to existing Flask routes
-Include proper error handling and success messages
+```html
+<!-- Favicon -->
+<link
+  rel="icon"
+  type="image/x-icon"
+  href="{{ url_for('static', filename='favicon.ico') }}"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="{{ url_for('static', filename='favicon-32x32.png') }}"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="{{ url_for('static', filename='favicon-16x16.png') }}"
+/>
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="{{ url_for('static', filename='apple-touch-icon.png') }}"
+/>
+```
 
-````
+**FAVICON SPECIFICATIONS:**
+
+- Theme: Fitness/gym related (dumbbell, barbell, gym equipment)
+- Colors: Blue (#2563eb) and gray (#6b7280) to match site theme
+- Formats: ICO (primary) and PNG (modern browsers)
+- Sizes: 16x16, 32x32, 48x48 (in ICO), plus 180x180 (Apple Touch)
+- Background: Transparent or white
 
 ## ✅ **POST-DEVELOPMENT VERIFICATION**
 
-After Copilot completes the frontend templates, manually verify:
+After Copilot completes the Members & Plans Management interfaces, manually verify:
 
 ```powershell
 # Activate virtual environment (if not already active)
@@ -141,7 +103,7 @@ python app.py
 # Visit <http://localhost:5000> - verify all pages
 # Check responsive design on different screen sizes
 # Verify forms are styled properly
-````
+```
 
 ## 🎯 **EXPECTED DELIVERABLES**
 

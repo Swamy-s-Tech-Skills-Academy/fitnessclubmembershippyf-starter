@@ -49,7 +49,7 @@ This starter project provides everything needed to begin development:
 - **Python:** 3.13.5 (recommended for optimal compatibility)
 - **Backend:** Flask 3.0.0 + SQLAlchemy + Flask-WTF
 - **Frontend:** Tailwind CSS + Jinja2 + JavaScript
-- **Icons:** Font Awesome 6.4.0 + Custom Favicon
+- **Icons:** Font Awesome 6.5.1 + Custom Favicon
 - **Typography:** Google Fonts (Inter + Poppins)
 - **Database:** SQLite
 - **Development:** Live coding optimized (CDN-based, no build process)

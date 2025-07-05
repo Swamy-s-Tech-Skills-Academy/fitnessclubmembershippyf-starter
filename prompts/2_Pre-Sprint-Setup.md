@@ -64,7 +64,7 @@ FRONTEND STYLING:
 - TailwindCSS via CDN (no installation required)
 - CDN URL: https://cdn.tailwindcss.com
 - Font Awesome via CDN (icons and graphics)
-- CDN URL: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
+- CDN URL: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
 - Google Fonts (Inter & Poppins)
 - CDN URL: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap
 
@@ -108,7 +108,7 @@ if __name__ == '__main__':
     <!-- TailwindCSS CDN -->
     <script src=`"https://cdn.tailwindcss.com`"></script>
     <!-- Font Awesome CDN -->
-    <link rel=`"stylesheet`" href=`"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css`">
+    <link rel=`"stylesheet`" href=`"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css`">
     <!-- Google Fonts -->
     <link href=`"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap`" rel=`"stylesheet`">
     <style>

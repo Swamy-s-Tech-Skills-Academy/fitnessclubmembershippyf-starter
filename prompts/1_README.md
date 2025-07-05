@@ -13,9 +13,9 @@ Build a complete fitness club membership system using **Flask**, **SQLAlchemy**,
 ### **Start Here:** 👆
 
 1. **[2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md)** - Environment setup (5 minutes)
-2. **[3_Sprint1-Backend.md](3_Sprint1-Backend.md)** - Backend & database (15 minutes)
-3. **[4_Sprint2-Frontend.md](4_Sprint2-Frontend.md)** - Frontend templates (15 minutes)
-4. **[5_Sprint3-Integration.md](5_Sprint3-Integration.md)** - Integration & polish (15 minutes)
+2. **[3_Sprint1-Backend.md](3_Sprint1-Backend.md)** - Backend API + Dashboard UI (15 minutes)
+3. **[4_Sprint2-Frontend.md](4_Sprint2-Frontend.md)** - Members & Plans Management UI (15 minutes)
+4. **[5_Sprint3-Integration.md](5_Sprint3-Integration.md)** - Trainers & Sessions Management UI + Polish (15 minutes)
 
 ### **Additional Resources:**
 
@@ -24,9 +24,9 @@ Build a complete fitness club membership system using **Flask**, **SQLAlchemy**,
 ## 📚 **QUICK ACCESS**
 
 - [2_Pre-Sprint-Setup.md](2_Pre-Sprint-Setup.md) - 🔧 Setup & Environment
-- [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🛠 Backend Development
-- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Frontend Templates
-- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Integration & Polish
+- [3_Sprint1-Backend.md](3_Sprint1-Backend.md) - 🏗️ Backend API + Dashboard UI
+- [4_Sprint2-Frontend.md](4_Sprint2-Frontend.md) - 🎨 Members & Plans Management UI
+- [5_Sprint3-Integration.md](5_Sprint3-Integration.md) - 🔗 Trainers & Sessions UI + Polish
 - [45-minute-live-coding-guide.md](45-minute-live-coding-guide.md) - 🎬 Live Demo Guide
 
 ## 🌐 **LIVE DEMO**
@@ -36,9 +36,9 @@ Coming soon: [Deployed App Link](https://your-deployment-url.com)
 ## ⏰ **TIMING BREAKDOWN**
 
 - **Pre-Sprint Setup**: 5 minutes (environment)
-- **Sprint 1**: 15 minutes (backend/database)
-- **Sprint 2**: 15 minutes (frontend/templates)
-- **Sprint 3**: 15 minutes (integration/polish)
+- **Sprint 1**: 15 minutes (Backend API + Dashboard UI)
+- **Sprint 2**: 15 minutes (Members & Plans Management UI)
+- **Sprint 3**: 15 minutes (Trainers & Sessions Management UI + Polish)
 - **Total**: **50 minutes**
 
 ## 🎯 **WHAT YOU'LL BUILD**
